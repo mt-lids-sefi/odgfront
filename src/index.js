@@ -20,7 +20,7 @@ const reader = (
 );
 
 ReactDOM.render(
-  //<App />,
-  reader,
+  <App />,
+//  reader,
   document.getElementById('root')
 );
