@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
 import File from "./Component/File/index";
 import Home from "./Component/Home/index"
 import About from "./Component/About/index"
@@ -13,6 +13,31 @@ class App extends Component {
 
 
       <Router>
+        <div>
+          <h2>Welcome to ODG</h2>
+         
+          <ul className="header">
+            <li><NavLink exact to={'/'}> Home </NavLink></li>
+            <li><NavLink to={'/Files'}>Files</NavLink></li>
+            <li><NavLink to={'/about'}>About</NavLink></li>
+          </ul>
+          
+          <hr />
+          <Switch>
+              <Route exact path='/' component={Home} />
+              <Route path='/about' component={About} />
+              <Route path="/files" exact component={File} />
+          </Switch>
+        </div>
+      </Router>
+   );
+  }
+}
+
+export default App;
+
+
+/*<Router>
         <div>
           <h2>Welcome to ODG</h2>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,9 +54,4 @@ class App extends Component {
               <Route path="/files" exact component={File} />
           </Switch>
         </div>
-      </Router>
-   );
-  }
-}
-
-export default App;
+      </Router>*/
