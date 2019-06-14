@@ -3,9 +3,10 @@ import './App.css';
 
 
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
-import File from "./Component/File/index";
-import Home from "./Component/Home/index"
-import About from "./Component/About/index"
+import File from "./Component/File/File";
+import Home from "./Component/Home/Home"
+import About from "./Component/About/About"
+import SimpleMap from './Component/SimpleMap/SimpleMap';
 
 class App extends Component {
   render() {
@@ -27,6 +28,7 @@ class App extends Component {
               <Route exact path='/' component={Home} />
               <Route path='/about' component={About} />
               <Route path="/files" exact component={File} />
+              <Route path="/map" exact component={SimpleMap} />
           </Switch>
         </div>
       </Router>
@@ -35,23 +37,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-/*<Router>
-        <div>
-          <h2>Welcome to ODG</h2>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <ul className="navbar-nav mr-auto">
-            <li><Link to={'/'} className="nav-link"> Home </Link></li>
-            <li><Link to={'/Files'} className="nav-link">Files</Link></li>
-            <li><Link to={'/about'} className="nav-link">About</Link></li>
-          </ul>
-          </nav>
-          <hr />
-          <Switch>
-              <Route exact path='/' component={Home} />
-              <Route path='/about' component={About} />
-              <Route path="/files" exact component={File} />
-          </Switch>
-        </div>
-      </Router>*/
