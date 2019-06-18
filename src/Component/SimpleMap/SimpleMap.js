@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import L from 'leaflet';
+
 
 class SimpleMap extends Component {
     constructor(props) {
@@ -14,6 +16,18 @@ class SimpleMap extends Component {
     componentWillMount() {
         this.loadFile();
         }
+    componentDidMount() {
+        // create map
+        this.map = L.map('map', {
+            center:[-34.6131500, -58.3772300],
+            zoom: 16,
+            layers: [
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            }),
+            ]
+        });
+        }
 
     async loadFile()
     {
@@ -23,17 +37,18 @@ class SimpleMap extends Component {
         if(status===200)
         {
             const data = promise.data;
-            this.setState({dataMap:data});
+            this.setState({dataMap:data.coords});
         }
     }
 
   render() {
-    //en this.props.location.mapProps traigo el map_id
+    const position = [-34.6131500, -58.3772300]
     return (
         <div>
-          <h2>Map</h2>
+          <h2>Mapa</h2>
+          <div id="map"></div>
         </div>
-    );
+      );
   }
 }
 
