@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import L from 'leaflet';
+import { Map, TileLayer } from "react-leaflet";
 
 
 class SimpleMap extends Component {
+    state = {
+        center: [51.505, -0.091],
+        zoom: 13
+      };
     constructor(props) {
             super(props);
             this.state = {
@@ -16,18 +20,7 @@ class SimpleMap extends Component {
     componentWillMount() {
         this.loadFile();
         }
-    componentDidMount() {
-        // create map
-        this.map = L.map('map', {
-            center:[-34.6131500, -58.3772300],
-            zoom: 16,
-            layers: [
-            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            }),
-            ]
-        });
-        }
+
 
     async loadFile()
     {
@@ -42,11 +35,16 @@ class SimpleMap extends Component {
     }
 
   render() {
-    const position = [-34.6131500, -58.3772300]
+    const center = [-34.6131500, -58.3772300]
+    const zoom = 13
     return (
         <div>
-          <h2>Mapa</h2>
-          <div id="map"></div>
+          <Map center={center} zoom={zoom}>
+            <TileLayer
+              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+            />
+          </Map>
         </div>
       );
   }
