@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { Map, TileLayer } from "react-leaflet";
+import { Map, TileLayer, Marker } from "react-leaflet";
+import MarkerClusterGroup from 'react-leaflet-markercluster';
+import 'react-leaflet-markercluster/dist/styles.min.css';
+import ReactLoading from "react-loading";
+import Cylon from "../LoadingComponents/Cylon"
+
 
 
 class SimpleMap extends Component {
-    state = {
-        center: [51.505, -0.091],
-        zoom: 13
-      };
     constructor(props) {
             super(props);
             this.state = {
-             doc_id : this.props.location.mapProps.doc_id,
-             files:[],
+             doc_id : this.props.location.mapProps.doc_id
             };
             this.loadFile = this.loadFile.bind(this);
         }
 
-    componentWillMount() {
+    async componentDidMount() {
         this.loadFile();
         }
 
@@ -25,29 +25,47 @@ class SimpleMap extends Component {
     async loadFile()
     {
         let doc_id = this.state.doc_id
-        const promise = await axios.get("http://localhost:8000/map/"+doc_id);
+        const promise = await axios.get("http://localhost:8000/map/"+doc_id)
         const status = promise.status;
         if(status===200)
         {
             const data = promise.data;
-            this.setState({dataMap:data.coords});
+            this.setState({dataMap:data.coords}); 
         }
     }
 
+
+
   render() {
-    const center = [-34.6131500, -58.3772300]
-    const zoom = 13
-    return (
-        <div>
-          <Map center={center} zoom={zoom}>
-            <TileLayer
-              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
-            />
-          </Map>
-        </div>
-      );
-  }
+    
+    if (this.state.dataMap == null) {
+      return <Cylon/>
+    }
+    else{
+      const center = [-34.6131500, -58.3772300]
+      const zoom = 13
+      let markers = []
+      for (let element in Object.keys(this.state.dataMap) ) {
+        let lat = this.state.dataMap[element]['latitude']
+        let lon = this.state.dataMap[element]['longitude']
+        markers.push(<Marker  key={element} position={[lat, lon]}/>) 
+      }
+     
+
+      return (
+          <div>
+            <Map className="markercluster-map" center={center} zoom={zoom} maxZoom={18}>
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              />
+              <MarkerClusterGroup>
+                {markers}
+            </MarkerClusterGroup>
+            </Map>
+          </div>
+        );
+  }}
 }
 
 export default SimpleMap;
