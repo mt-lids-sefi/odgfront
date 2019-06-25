@@ -6,8 +6,6 @@ import CSVReader from "react-csv-reader";
 
 
 
-
-const  sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
  
 class FileUploader extends Component {
     constructor(props) {
@@ -21,8 +19,7 @@ class FileUploader extends Component {
       }
    
       onSubmit = async values => {
-        await sleep(300)
-        window.alert(JSON.stringify(values, 0, 2))
+        console.log("submit")
       }
      changeHandler = event => {
         this.setState({
@@ -56,7 +53,7 @@ class FileUploader extends Component {
          
             <div>
               <label>Notes</label>
-              <Field name="notes" component="textarea" placeholder="Notes" />
+              <Field name="description" component="textarea" placeholder="Description" />
             </div>
             <div>
               <CSVReader
