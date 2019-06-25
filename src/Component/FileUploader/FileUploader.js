@@ -14,13 +14,23 @@ class FileUploader extends Component {
           name: '',
           email: '',
           description: '',
-          csvCols: ['lat', 'lon']
+          csvCols: ['lat', 'lon'],
+          latCol: '',
+          lonCol: ''
         }
+        this.onSubmit = this.onSubmit.bind(this);
       }
-   
-      onSubmit = async values => {
-        console.log("submit")
+
+      onSubmit(event) {
+        //event.preventDefault();
+        const data = new FormData(event.target);
+        
+        fetch('http://localhost:8000/upload', {
+          method: 'POST',
+          body: data,
+        });
       }
+
      changeHandler = event => {
         this.setState({
             email: event.target.value
@@ -48,9 +58,6 @@ class FileUploader extends Component {
                 placeholder="Name"
               />
             </div>
-            
-            
-         
             <div>
               <label>Notes</label>
               <Field name="description" component="textarea" placeholder="Description" />
