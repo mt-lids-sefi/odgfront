@@ -16,19 +16,36 @@ class FileUploader extends Component {
           description: '',
           csvCols: ['lat', 'lon'],
           latCol: '',
-          lonCol: ''
+          lonCol: '',
+          file: null
         }
         this.onSubmit = this.onSubmit.bind(this);
       }
 
       onSubmit(event) {
         //event.preventDefault();
-        const data = new FormData(event.target);
+        const data = new FormData();
         
-        fetch('http://localhost:8000/upload', {
+        data.append('name', "marci")
+        data.append('doc', this.state.file)
+        data.append('description', "descripi342o")
+        console.log(data)
+        fetch( 'http://localhost:8000/upload/', {
           method: 'POST',
-          body: data,
-        });
+          headers: {
+            'Accept': 'application/json'
+          },
+          body: data
+         })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          // Perform success response.
+          console.log(responseJson);
+         }   
+        )
+        .catch((error) => {
+            console.log(error)
+        })
       }
 
      changeHandler = event => {
@@ -39,7 +56,10 @@ class FileUploader extends Component {
       handleCSV = data => {
         this.setState({"csvCols": data[0]})
       };
-
+      handleUploadFile = event => {
+        console.log(event.target.files[0])
+        this.setState({"file":event.target.files[0]})
+      }
 
   render() {
     return (
@@ -80,6 +100,9 @@ class FileUploader extends Component {
             <select>
                   {this.state.csvCols.map((col) => <option key={col} value={col}>{col}</option>)}
              </select>
+          </div>
+          <div>
+            <input type="file" onChange={this.handleUploadFile} />
           </div>
             <div className="buttons">
               <button type="submit" disabled={submitting || pristine}>
