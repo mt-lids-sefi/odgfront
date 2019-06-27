@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import Styles from './Styles';
-import { Form, Field } from 'react-final-form';
-import CSVReader from "react-csv-reader";
-
-
-
+import Papa from 'papaparse';
 
  
 class FileUploader extends Component {
@@ -12,23 +8,22 @@ class FileUploader extends Component {
         super(props);        
         this.state = {
           name: '',
-          email: '',
           description: '',
           csvCols: ['lat', 'lon'],
           latCol: '',
           lonCol: '',
           file: null
         }
-        this.onSubmit = this.onSubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
       }
 
-      onSubmit(event) {
-        //event.preventDefault();
+      handleSubmit(event) {
+        event.preventDefault();
         const data = new FormData();
         
-        data.append('name', "marci")
+        data.append('name', this.state.name)
         data.append('doc', this.state.file)
-        data.append('description', "descripi342o")
+        data.append('description', this.state.description)
         console.log(data)
         fetch( 'http://localhost:8000/upload/', {
           method: 'POST',
@@ -48,47 +43,37 @@ class FileUploader extends Component {
         })
       }
 
-     changeHandler = event => {
-        this.setState({
-            email: event.target.value
-        });
+  
+      onChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
       }
-      handleCSV = data => {
-        this.setState({"csvCols": data[0]})
-      };
+
       handleUploadFile = event => {
         console.log(event.target.files[0])
+        let data = Papa.parse(event.target.files[0], {})
+        console.log(data)
         this.setState({"file":event.target.files[0]})
+
       }
 
   render() {
+    const { name, description } = this.state;
     return (
       <Styles>
       <h1>Upload File</h1>
-      <Form
-        onSubmit={this.onSubmit}
-        render={({ handleSubmit, form, submitting, pristine, values }) => (
-        <form onSubmit={handleSubmit}>
+      
+        <form onSubmit={this.handleSubmit}>
             <div>
               <label>Name</label>
-              <Field
-                name="name"
-                component="input"
-                type="text"
-                placeholder="Name"
-              />
+              <input name="name" component="input"  type="text" placeholder="Name" value={name} onChange={this.onChange} />
             </div>
             <div>
-              <label>Notes</label>
-              <Field name="description" component="textarea" placeholder="Description" />
+              <label>Description</label>
+              <input name="description" component="textarea" placeholder="Description"  value={description} onChange={this.onChange} />
             </div>
             <div>
-              <CSVReader
-                cssClass="react-csv-input"
-                label="Select CSV"
-                onFileLoaded={this.handleCSV}
-              />
-            </div>
+            <input type="file" onChange={this.handleUploadFile} />
+          </div>
             <div>
             <label>Lat col</label>
             <select>
@@ -101,25 +86,16 @@ class FileUploader extends Component {
                   {this.state.csvCols.map((col) => <option key={col} value={col}>{col}</option>)}
              </select>
           </div>
-          <div>
-            <input type="file" onChange={this.handleUploadFile} />
-          </div>
+          
             <div className="buttons">
-              <button type="submit" disabled={submitting || pristine}>
+              <button type="submit" >
                 Submit
               </button>
-              <button
-                type="button"
-                onClick={form.reset}
-                disabled={submitting || pristine}
-              >
-                Reset
-              </button>
+             
             </div>
-            <pre>{JSON.stringify(values, 0, 2)}</pre>
+            
           </form>
-        )}
-      />
+     
     </Styles>
     );
   }
