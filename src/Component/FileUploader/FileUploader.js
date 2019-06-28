@@ -15,6 +15,7 @@ class FileUploader extends Component {
           file: null
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.getCols = this.getCols.bind(this);
       }
 
       handleSubmit(event) {
@@ -24,6 +25,8 @@ class FileUploader extends Component {
         data.append('name', this.state.name)
         data.append('doc', this.state.file)
         data.append('description', this.state.description)
+        data.append('lat_col', this.state.latCol)
+        data.append('lon_col', this.state.lonCol)
         console.log(data)
         fetch( 'http://localhost:8000/upload/', {
           method: 'POST',
@@ -50,11 +53,31 @@ class FileUploader extends Component {
 
       handleUploadFile = event => {
         console.log(event.target.files[0])
-        let data = Papa.parse(event.target.files[0], {})
-        console.log(data)
+        
+        this.parseData(event.target.files[0], this.getCols);
         this.setState({"file":event.target.files[0]})
 
       }
+
+    getCols(data) {
+        //Data is usable here
+        console.log(data[0]);
+        this.setState({"csvCols": data[0]})
+    }
+    
+    parseData(url, callBack) {
+        Papa.parse(url, {
+            download: true,
+            dynamicTyping: true,
+            complete: function(results) {
+                callBack(results.data);
+            }
+        });
+    }
+    
+    
+
+
 
   render() {
     const { name, description } = this.state;
@@ -76,13 +99,13 @@ class FileUploader extends Component {
           </div>
             <div>
             <label>Lat col</label>
-            <select>
+            <select name="latCol" onChange={this.onChange}>
                   {this.state.csvCols.map((col) => <option key={col} value={col}>{col}</option>)}
              </select>
           </div>
           <div>
             <label>Lon col</label>
-            <select>
+            <select name="lonCol" onChange={this.onChange}>
                   {this.state.csvCols.map((col) => <option key={col} value={col}>{col}</option>)}
              </select>
           </div>
