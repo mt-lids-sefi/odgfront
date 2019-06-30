@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Styles from './Styles';
 import Papa from 'papaparse';
-
+import { Redirect } from 'react-router-dom'
  
 class FileUploader extends Component {
     constructor(props) {
@@ -12,7 +12,9 @@ class FileUploader extends Component {
           csvCols: ['lat', 'lon'],
           latCol: '',
           lonCol: '',
-          file: null
+          file: null,
+          redirectToReferrer: false,
+          savedDocID: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.getCols = this.getCols.bind(this);
@@ -39,6 +41,8 @@ class FileUploader extends Component {
         .then((responseJson) => {
           // Perform success response.
           console.log(responseJson);
+          this.setState({redirectToReferrer: true})
+          this.setState({savedDocID: responseJson.document_id})
          }   
         )
         .catch((error) => {
@@ -81,6 +85,10 @@ class FileUploader extends Component {
 
   render() {
     const { name, description } = this.state;
+    if (this.state.redirectToReferrer){
+      let doc_id= this.state.savedDocID
+      return <Redirect to="/files" />
+    }
     return (
       <Styles>
       <h1>Upload File</h1>
