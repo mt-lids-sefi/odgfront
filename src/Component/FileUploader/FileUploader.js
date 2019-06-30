@@ -9,7 +9,7 @@ class FileUploader extends Component {
         this.state = {
           name: '',
           description: '',
-          csvCols: ['lat', 'lon'],
+          csvCols: [],
           latCol: '',
           lonCol: '',
           file: null,
@@ -29,7 +29,7 @@ class FileUploader extends Component {
         data.append('description', this.state.description)
         data.append('lat_col', this.state.latCol)
         data.append('lon_col', this.state.lonCol)
-        console.log(data)
+        
         fetch( 'http://localhost:8000/upload/', {
           method: 'POST',
           headers: {
@@ -42,7 +42,6 @@ class FileUploader extends Component {
           // Perform success response.
           console.log(responseJson);
           this.setState({redirectToReferrer: true})
-          this.setState({savedDocID: responseJson.document_id})
          }   
         )
         .catch((error) => {
@@ -56,7 +55,6 @@ class FileUploader extends Component {
       }
 
       handleUploadFile = event => {
-        console.log(event.target.files[0])
         
         this.parseData(event.target.files[0], this.getCols);
         this.setState({"file":event.target.files[0]})
@@ -65,7 +63,7 @@ class FileUploader extends Component {
 
     getCols(data) {
         //Data is usable here
-        console.log(data[0]);
+        
         this.setState({"csvCols": data[0]})
     }
     
@@ -86,7 +84,6 @@ class FileUploader extends Component {
   render() {
     const { name, description } = this.state;
     if (this.state.redirectToReferrer){
-      let doc_id= this.state.savedDocID
       return <Redirect to="/files" />
     }
     return (

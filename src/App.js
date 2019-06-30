@@ -8,6 +8,7 @@ import Home from "./Component/Home/Home"
 import About from "./Component/About/About"
 import SimpleMap from './Component/SimpleMap/SimpleMap';
 import FileUploader from './Component/FileUploader/FileUploader';
+import Merge from './Component/Merge/Merge';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
             <li><NavLink to={'/files'}>Files</NavLink></li>
             <li><NavLink to={'/about'}>About</NavLink></li>
             <li><NavLink to={'/fileuploader'}>Upload</NavLink></li>
+            <li><NavLink to={'/combine'}>Merge</NavLink></li>
           </ul>
           
           <hr />
@@ -32,6 +34,7 @@ class App extends Component {
               <Route path="/files" exact component={File} />
               <Route path="/map" exact component={SimpleMap} />
               <Route path="/fileuploader" exact component={FileUploader} />
+              <Route path="/combine" exact component={Merge} />
           </Switch>
         </div>
       </Router>

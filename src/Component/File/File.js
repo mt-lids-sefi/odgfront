@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import SimpleMap from '../SimpleMap/SimpleMap'
 import { BrowserRouter as  Route, Link } from 'react-router-dom';
 export default class File extends Component {
   constructor(props) {
