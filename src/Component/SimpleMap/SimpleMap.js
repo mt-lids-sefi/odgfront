@@ -30,7 +30,7 @@ class SimpleMap extends Component {
         if(status===200)
         {
             const data = promise.data;
-            this.setState({dataMap:data.coords}); 
+            this.setState({dataMap:data.coords, lat_col: data.lat_col, lon_col: data.lon_col}); 
         }
     }
 
@@ -46,8 +46,8 @@ class SimpleMap extends Component {
       const zoom = 13
       let markers = []
       for (let element in Object.keys(this.state.dataMap) ) {
-        let lat = this.state.dataMap[element]['latitude']
-        let lon = this.state.dataMap[element]['longitude']
+        let lat = this.state.dataMap[element][this.state.lat_col]
+        let lon = this.state.dataMap[element][this.state.lon_col]
         markers.push(<Marker  key={element} position={[lat, lon]}/>) 
       }
      
