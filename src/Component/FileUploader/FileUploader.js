@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Styles from './Styles';
 import Papa from 'papaparse';
 import { Redirect } from 'react-router-dom'
- 
+import Input from '@material-ui/core/Input'; 
+import Button from '@material-ui/core/Button';
+
 class FileUploader extends Component {
     constructor(props) {
         super(props);        
@@ -93,14 +95,14 @@ class FileUploader extends Component {
         <form onSubmit={this.handleSubmit}>
             <div>
               <label>Name</label>
-              <input name="name" component="input"  type="text" placeholder="Name" value={name} onChange={this.onChange} />
+              <Input name="name" component="input"  type="text" placeholder="Name" value={name} onChange={this.onChange} />
             </div>
             <div>
               <label>Description</label>
-              <input name="description" component="textarea" placeholder="Description"  value={description} onChange={this.onChange} />
+              <Input name="description" component="textarea" placeholder="Description"  value={description} onChange={this.onChange} />
             </div>
             <div>
-            <input type="file" onChange={this.handleUploadFile} />
+            <Input type="file" onChange={this.handleUploadFile} />
           </div>
             <div>
             <label>Lat col</label>
@@ -116,9 +118,9 @@ class FileUploader extends Component {
           </div>
           
             <div className="buttons">
-              <button type="submit" >
+              <Button variant="contained" color="primary" type="submit" >
                 Submit
-              </button>
+              </Button>
              
             </div>
             
