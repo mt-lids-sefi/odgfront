@@ -24,7 +24,7 @@ class App extends Component {
             <li><NavLink to={'/files'}>Files</NavLink></li>
             <li><NavLink to={'/about'}>About</NavLink></li>
             <li><NavLink to={'/fileuploader'}>Upload</NavLink></li>
-            <li><NavLink to={'/combine'}>Merge</NavLink></li>
+            <li><NavLink to={'/merge'}>Merge</NavLink></li>
           </ul>
           
           <hr />
@@ -34,7 +34,7 @@ class App extends Component {
               <Route path="/files" exact component={File} />
               <Route path="/map" exact component={SimpleMap} />
               <Route path="/fileuploader" exact component={FileUploader} />
-              <Route path="/combine" exact component={Merge} />
+              <Route path="/merge" exact component={Merge} />
           </Switch>
         </div>
       </Router>
