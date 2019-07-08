@@ -15,8 +15,6 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import axios from "axios";
@@ -48,11 +46,10 @@ function getSorting(order, orderBy) {
 }
 
 const headRows = [
+  { id: 'fst', numeric: false, disablePadding: true, label: ''},
   { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
   { id: 'description', numeric: false, disablePadding: false, label: 'Description' },
   { id: 'cols', numeric: false, disablePadding: false, label: 'Lat/lon' }
-  /*{ id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },*/
 ];
 
 function EnhancedTableHead(props) {
@@ -61,19 +58,11 @@ function EnhancedTableHead(props) {
     onRequestSort(event, property);
   };
 
- 
   return (
 
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'Select all desserts' }}
-          />
-        </TableCell>
+
         {headRows.map(row => (
           <TableCell
             key={row.id}
@@ -132,7 +121,7 @@ const useToolbarStyles = makeStyles(theme => ({
 
 const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, selectedMessage } = props;
 
   return (
     <Toolbar
@@ -142,8 +131,8 @@ const EnhancedTableToolbar = props => {
     >
       <div className={classes.title}>
         {numSelected > 0 ? (
-          <Typography color="inherit" variant="subtitle1">
-            {numSelected} selected
+          <Typography id="tableTitle" variant="subtitle1">
+            {selectedMessage} 
           </Typography>
         ) : (
           <Typography variant="h6" id="tableTitle">
@@ -173,6 +162,7 @@ const EnhancedTableToolbar = props => {
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
+  selectedMessage: PropTypes.string.isRequired
 };
 
 const useStyles = makeStyles(theme => ({
@@ -195,13 +185,14 @@ const useStyles = makeStyles(theme => ({
 export default function Merge() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('name');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [rows, setRows] = React.useState({ files: [] });
-  const [loading, setLoading] = React.useState(true)
+  const [loading, setLoading] = React.useState(true);
+  const [selectedMessage, setSelectedMessage] = React.useState('No ítems selected')
 
 
 
@@ -230,30 +221,39 @@ export default function Merge() {
 
   function handleSelectAllClick(event) {
     if (event.target.checked) {
-      const newSelecteds = rows.map(n => n.name);
+      const newSelecteds = rows.map(n => n.document_id);
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   }
 
-  function handleClick(event, name) {
-    const selectedIndex = selected.indexOf(name);
+  function handleClick(event, id) {
+    const selectedIndex = selected.indexOf(id);
     let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
+    //si no estaba seleccionado
+    if (selectedIndex === -1 && selected.length < 2) {
+      newSelected = newSelected.concat(selected, id);
+      setSelectedMessage(newSelected.length + ' item(s) selected')
+    }
+    //si no estaba seleccionado pero ya hay 2 selec
+    else if (selectedIndex === -1 && selected.length >= 2){
+      setSelectedMessage('You can only select two items')
+      return
+    }
+     else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
+      setSelectedMessage(newSelected.length + ' item(s) selected')
     } else if (selectedIndex === selected.length - 1) {
       newSelected = newSelected.concat(selected.slice(0, -1));
+      setSelectedMessage(newSelected.length + ' item(s) selected')
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
         selected.slice(selectedIndex + 1),
       );
+      setSelectedMessage(newSelected.length + ' item(s) selected')
     }
-
     setSelected(newSelected);
   }
 
@@ -265,9 +265,7 @@ export default function Merge() {
     setRowsPerPage(+event.target.value);
   }
 
-  function handleChangeDense(event) {
-    setDense(event.target.checked);
-  }
+
 
   const isSelected = name => selected.indexOf(name) !== -1;
 
@@ -280,7 +278,7 @@ export default function Merge() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} selectedMessage={selectedMessage} />
         <div className={classes.tableWrapper}>
           <Table
             className={classes.table}
@@ -299,13 +297,13 @@ export default function Merge() {
               {stableSort(rows, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.document_id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.name)}
+                      onClick={event => handleClick(event, row.document_id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -350,10 +348,7 @@ export default function Merge() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
+      
     </div>
   );
 }
