@@ -101,18 +101,18 @@ const useToolbarStyles = makeStyles(theme => ({
   highlight:
     theme.palette.type === 'light'
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+          color: theme.palette.primary.main,
+          backgroundColor: lighten(theme.palette.primary.light, 0.85),
         }
       : {
           color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
+          backgroundColor: theme.palette.primary.dark,
         },
   spacer: {
     flex: '1 1 100%',
   },
   actions: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
   },
   title: {
     flex: '0 0 auto',
@@ -131,7 +131,7 @@ const EnhancedTableToolbar = props => {
     >
       <div className={classes.title}>
         {numSelected > 0 ? (
-          <Typography id="tableTitle" variant="subtitle1">
+          <Typography variant="h6" id="tableTitle">
             {selectedMessage} 
           </Typography>
         ) : (
@@ -142,18 +142,14 @@ const EnhancedTableToolbar = props => {
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
-        {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton aria-label="Delete">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
+        {numSelected == 2 ? (
+           <Tooltip title="Merge">
+           <IconButton aria-label="Merge">
+             <FilterListIcon />
+           </IconButton>
+         </Tooltip>
         ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
+          <br/>
         )}
       </div>
     </Toolbar>
@@ -312,6 +308,7 @@ export default function Merge() {
                     >
                       <TableCell padding="checkbox">
                         <Checkbox
+                          color="primary"
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
