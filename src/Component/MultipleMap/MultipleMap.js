@@ -9,7 +9,7 @@ class MutipleMap extends Component {
     constructor(props) {
             super(props);
             this.state = {
-             
+              files : this.props.location.mapProps.files
             };
             this.loadFiles = this.loadFiles.bind(this);
         }
@@ -21,6 +21,7 @@ class MutipleMap extends Component {
 
     async loadFiles()
     {
+        let doc_ids = this.state.files
         
     }
 

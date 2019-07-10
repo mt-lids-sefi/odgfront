@@ -201,39 +201,39 @@ const message = `opciones de merg `;
 
 const MergeMenu = props => {
   const classes = useMenuStyles();
+  const { handleRedirect} = props;
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-          <Checkbox
-              color="primary"
-            />
+          
+          <Grid item xs>
+            <Typography>Visualizar ambas fuentes en el mapa</Typography>
           </Grid>
-          <Grid item xs zeroMinWidth>
-            <Typography noWrap>{message}</Typography>
+          <Grid item>
+          <IconButton onClick={handleRedirect} aria-label="Merge" >
+             <MapIcon />
+              
+             Merge
+           </IconButton>
           </Grid>
         </Grid>
       </Paper>
       <Paper className={classes.paper}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
-          <Checkbox
-              color="primary"
-            />
+          <Checkbox color="primary" />
           </Grid>
           <Grid item xs>
-            <Typography noWrap>{message}</Typography>
+            <Typography>{message}</Typography>
           </Grid>
         </Grid>
       </Paper>
       <Paper className={classes.paper}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
-          <Checkbox
-              color="primary"
-            />
+          <Checkbox color="primary" />
           </Grid>
           <Grid item xs>
             <Typography>{message}</Typography>
@@ -354,7 +354,13 @@ export default function Merge() {
   //agregar boton BACK para volver al listado
   //acá también iría el renderRedirect   {renderRedirect()}
   if(merging){
-    return <MergeMenu />
+    return (
+    
+      <div className={classes.root}>
+        {renderRedirect()}
+        <MergeMenu handleRedirect={handleRedirect}  />
+      </div>
+    )
   }
   else{
   return (
