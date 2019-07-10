@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import axios from "axios";
-import { Map, TileLayer, Marker } from "react-leaflet";
-import MarkerClusterGroup from 'react-leaflet-markercluster';
 import 'react-leaflet-markercluster/dist/styles.min.css';
 
 import Cylon from "../LoadingComponents/Cylon"

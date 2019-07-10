@@ -15,11 +15,12 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
+import MapIcon from '@material-ui/icons/Map'
 import axios from "axios";
 import Cylon from '../LoadingComponents/Cylon';
-
+import { Redirect } from 'react-router-dom'
+import Grid from '@material-ui/core/Grid';
+import Avatar from '@material-ui/core/Avatar';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -121,7 +122,8 @@ const useToolbarStyles = makeStyles(theme => ({
 
 const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
-  const { numSelected, selectedMessage } = props;
+  const { numSelected, selectedMessage,  redirect} = props;
+
 
   return (
     <Toolbar
@@ -131,7 +133,7 @@ const EnhancedTableToolbar = props => {
     >
       <div className={classes.title}>
         {numSelected > 0 ? (
-          <Typography variant="h6" id="tableTitle">
+          <Typography variant="subtitle2" id="tableTitle">
             {selectedMessage} 
           </Typography>
         ) : (
@@ -144,8 +146,10 @@ const EnhancedTableToolbar = props => {
       <div className={classes.actions}>
         {numSelected == 2 ? (
            <Tooltip title="Merge">
-           <IconButton aria-label="Merge">
-             <FilterListIcon />
+           <IconButton onClick={redirect} aria-label="Merge" >
+             <MapIcon />
+              
+             Merge
            </IconButton>
          </Tooltip>
         ) : (
@@ -178,6 +182,68 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
+const useMenuStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: theme.spacing(0, 3),
+  },
+  paper: {
+    maxWidth: 400,
+    margin: `${theme.spacing(1)}px auto`,
+    padding: theme.spacing(2),
+  },
+}));
+
+const message = `opciones de merg `;
+
+
+const MergeMenu = props => {
+  const classes = useMenuStyles();
+
+  return (
+    <div className={classes.root}>
+      <Paper className={classes.paper}>
+        <Grid container wrap="nowrap" spacing={2}>
+          <Grid item>
+          <Checkbox
+              color="primary"
+            />
+          </Grid>
+          <Grid item xs zeroMinWidth>
+            <Typography noWrap>{message}</Typography>
+          </Grid>
+        </Grid>
+      </Paper>
+      <Paper className={classes.paper}>
+        <Grid container wrap="nowrap" spacing={2}>
+          <Grid item>
+          <Checkbox
+              color="primary"
+            />
+          </Grid>
+          <Grid item xs>
+            <Typography noWrap>{message}</Typography>
+          </Grid>
+        </Grid>
+      </Paper>
+      <Paper className={classes.paper}>
+        <Grid container wrap="nowrap" spacing={2}>
+          <Grid item>
+          <Checkbox
+              color="primary"
+            />
+          </Grid>
+          <Grid item xs>
+            <Typography>{message}</Typography>
+          </Grid>
+        </Grid>
+      </Paper>
+    </div>
+  );
+}
+
 export default function Merge() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
@@ -188,8 +254,17 @@ export default function Merge() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [rows, setRows] = React.useState({ files: [] });
   const [loading, setLoading] = React.useState(true);
-  const [selectedMessage, setSelectedMessage] = React.useState('No ítems selected')
+  const [selectedMessage, setSelectedMessage] = React.useState('No items selected')
+  const [redirect, setRedirect] = React.useState(false)
+  const [merging, setMerging] = React.useState(false)
 
+  function handleRedirect(){  
+    setRedirect(true)
+  }
+
+  function handleMerge(){
+    setMerging(true)
+  }
 
 
   useEffect(() => {
@@ -261,20 +336,36 @@ export default function Merge() {
     setRowsPerPage(+event.target.value);
   }
 
-
+  function renderRedirect ()  {
+    if (redirect) {
+      return <Redirect to={{pathname: '/multmap', mapProps:{files: selected}}} />
+    }
+  }
 
   const isSelected = name => selected.indexOf(name) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
+
+
   if (loading){
     return <Cylon/>
+  }
+  //agregar boton BACK para volver al listado
+  //acá también iría el renderRedirect   {renderRedirect()}
+  if(merging){
+    return <MergeMenu />
   }
   else{
   return (
     <div className={classes.root}>
+     
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} selectedMessage={selectedMessage} />
+        <EnhancedTableToolbar 
+              redirect={handleMerge} 
+              numSelected={selected.length} 
+              selectedMessage={selectedMessage}  
+            />
         <div className={classes.tableWrapper}>
           <Table
             className={classes.table}

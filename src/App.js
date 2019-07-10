@@ -9,6 +9,7 @@ import About from "./Component/About/About"
 import SimpleMap from './Component/SimpleMap/SimpleMap';
 import FileUploader from './Component/FileUploader/FileUploader';
 import Merge from './Component/Merge/Merge';
+import MutipleMap from './Component/MultipleMap/MultipleMap';
 
 class App extends Component {
   render() {
@@ -35,6 +36,7 @@ class App extends Component {
               <Route path="/map" exact component={SimpleMap} />
               <Route path="/fileuploader" exact component={FileUploader} />
               <Route path="/merge" exact component={Merge} />
+              <Route path="/multmap" exact component={MutipleMap} />
           </Switch>
         </div>
       </Router>
