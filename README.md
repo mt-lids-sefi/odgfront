@@ -1,6 +1,7 @@
 # ODG Front
-Front end de la aplicación "ODG".
-Consume directamente de la ODGApi, desarrollada con DJango REST Framework.
+Front end de la aplicación "ODG", desarrollado con REACTJS.
+
+Consume servicios de la ODGApi (https://github.com/mt-lids-sefi/odgapi), desarrollada con DJango REST Framework.
 
 ## Requerimientos
 `npm >= 3.5.2`
@@ -10,6 +11,8 @@ Consume directamente de la ODGApi, desarrollada con DJango REST Framework.
 ## Ejecución
 
 `npm install`
+
+`Iniciar ODGApi`
 
 `npm start`
 

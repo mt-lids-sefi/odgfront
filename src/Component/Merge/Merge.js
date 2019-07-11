@@ -20,7 +20,7 @@ import axios from "axios";
 import Cylon from '../LoadingComponents/Cylon';
 import { Redirect } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -194,6 +194,12 @@ const useMenuStyles = makeStyles(theme => ({
     margin: `${theme.spacing(1)}px auto`,
     padding: theme.spacing(2),
   },
+  button: {
+    margin: theme.spacing(1),
+  },
+  input: {
+    display: 'none',
+  }
 }));
 
 const message = `opciones de merg `;
@@ -212,11 +218,9 @@ const MergeMenu = props => {
             <Typography>Visualizar ambas fuentes en el mapa</Typography>
           </Grid>
           <Grid item>
-          <IconButton onClick={handleRedirect} aria-label="Merge" >
-             <MapIcon />
-              
-             Merge
-           </IconButton>
+          <Button variant="contained" className={classes.button} onClick={handleRedirect}>
+              View map
+          </Button>
           </Grid>
         </Grid>
       </Paper>

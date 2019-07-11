@@ -4,7 +4,7 @@ import Papa from 'papaparse';
 import { Redirect } from 'react-router-dom'
 import Input from '@material-ui/core/Input'; 
 import Button from '@material-ui/core/Button';
-
+import { lighten, makeStyles } from '@material-ui/core/styles';
 
 class FileUploader extends Component {
     constructor(props) {
@@ -80,9 +80,6 @@ class FileUploader extends Component {
         });
     }
     
-    
-
-
 
   render() {
     const { name, description } = this.state;
@@ -104,7 +101,10 @@ class FileUploader extends Component {
               <Input name="description" component="textarea" placeholder="Description"  value={description} onChange={this.onChange} />
             </div>
             <div>
+            
             <Input type="file" onChange={this.handleUploadFile} />
+            
+
           </div>
             <div>
             <label>Lat col</label>
