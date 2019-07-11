@@ -4,7 +4,8 @@ import axios from "axios";
 import Cylon from "../LoadingComponents/Cylon"
 import { Map, TileLayer, Marker } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import * as L from 'leaflet'
+import  {getIcon} from  '../../MapUtils/utils' 
+
 
 class MutipleMap extends Component {
     constructor(props) {
@@ -18,7 +19,6 @@ class MutipleMap extends Component {
     async componentDidMount() {
         this.loadFiles();
         }
-
 
     async loadFiles()
     {
@@ -37,14 +37,7 @@ class MutipleMap extends Component {
             const data = promise.data;
             this.setState({dataMapB:data})
         }
-        
-        
-        
-
     }
-
-  
-    
 
     makeMarkers(dataMap, icon){
       let markers = []
@@ -57,24 +50,8 @@ class MutipleMap extends Component {
     }
 
   render() {
-    const greenIcon = new L.Icon({
-      iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-    
-    const violetIcon = new L.Icon({
-      iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-
+    const greenIcon = getIcon('green')
+    const violetIcon = getIcon('violet')
 
     if (this.state.dataMapA == null || this.state.dataMapB == null) {
       return <Cylon/>
