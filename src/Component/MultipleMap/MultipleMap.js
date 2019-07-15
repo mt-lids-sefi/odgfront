@@ -53,7 +53,7 @@ class MutipleMap extends Component {
     const greenIcon = getIcon('green')
     const violetIcon = getIcon('violet')
 
-    if (this.state.dataMapA == null || this.state.dataMapB == null) {
+    if (this.state.dataMapA == null || this.state.dataMapB == null){
       return <Cylon/>
     }
     else{
@@ -69,12 +69,12 @@ class MutipleMap extends Component {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
-              <LayersControl position="topright">
+              <LayersControl collapsed position="topright">
 
-              <Overlay name={this.state.dataMapA.name+" (green colour)"}>
+              <Overlay checked name={this.state.dataMapA.name+" (green colour)"}>
                 <MarkerClusterGroup> {markersA} </MarkerClusterGroup>  
               </Overlay>
-              <Overlay name={this.state.dataMapB.name+ " (purple colour)"}>
+              <Overlay checked name={this.state.dataMapB.name+ " (purple colour)"}>
                 <MarkerClusterGroup> {markersB} </MarkerClusterGroup>  
               </Overlay>
               </LayersControl>

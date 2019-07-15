@@ -146,11 +146,10 @@ const EnhancedTableToolbar = props => {
       <div className={classes.actions}>
         {numSelected == 2 ? (
            <Tooltip title="Merge">
-           <IconButton onClick={redirect} aria-label="Merge" >
-             <MapIcon />
-              
-             Merge
-           </IconButton>
+           
+           <Button variant="contained" className={classes.button} onClick={redirect}>
+              Merge
+          </Button>
          </Tooltip>
         ) : (
           <br/>
@@ -159,6 +158,12 @@ const EnhancedTableToolbar = props => {
     </Toolbar>
   );
 };
+
+/**<IconButton onClick={redirect} aria-label="Merge" >
+             <MapIcon />
+              
+             Merge
+           </IconButton> */
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
