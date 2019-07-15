@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import 'react-leaflet-markercluster/dist/styles.min.css';
 import axios from "axios";
 import Cylon from "../LoadingComponents/Cylon"
-import { Map, TileLayer, Marker } from "react-leaflet";
+import { Map, TileLayer, Marker, LayerGroup, LayersControl } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import  {getIcon} from  '../../MapUtils/utils' 
-
+const { BaseLayer, Overlay } = LayersControl
 
 class MutipleMap extends Component {
     constructor(props) {
@@ -41,9 +41,9 @@ class MutipleMap extends Component {
 
     makeMarkers(dataMap, icon){
       let markers = []
-      for (let element in Object.keys(dataMap.coords) ) {
-        let lat = dataMap.coords[element][dataMap.lat_col]
-        let lon = dataMap.coords[element][dataMap.lon_col]
+      for (let element in Object.keys(dataMap.rows) ) {
+        let lat = dataMap.rows[element][dataMap.lat_col]
+        let lon = dataMap.rows[element][dataMap.lon_col]
         markers.push(<Marker  key={element} position={[lat, lon]} icon={icon} />) 
       }
       return markers
@@ -69,10 +69,16 @@ class MutipleMap extends Component {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
-            <MarkerClusterGroup>
-              {markersA}
-              {markersB}
-          </MarkerClusterGroup>
+              <LayersControl position="topright">
+
+              <Overlay name={this.state.dataMapA.name+" (green colour)"}>
+                <MarkerClusterGroup> {markersA} </MarkerClusterGroup>  
+              </Overlay>
+              <Overlay name={this.state.dataMapB.name+ " (purple colour)"}>
+                <MarkerClusterGroup> {markersB} </MarkerClusterGroup>  
+              </Overlay>
+              </LayersControl>
+          
           </Map>
         </div>
       );

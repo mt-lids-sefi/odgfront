@@ -30,7 +30,7 @@ class SimpleMap extends Component {
         if(status===200)
         {
             const data = promise.data;
-            this.setState({dataMap:data.coords, lat_col: data.lat_col, lon_col: data.lon_col}); 
+            this.setState({dataMap:data.rows, lat_col: data.lat_col, lon_col: data.lon_col}); 
         }
     }
 
