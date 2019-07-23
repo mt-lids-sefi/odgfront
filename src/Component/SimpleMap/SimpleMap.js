@@ -3,8 +3,9 @@ import axios from "axios";
 import { Map, TileLayer, Marker } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import 'react-leaflet-markercluster/dist/styles.min.css';
-
+import DataTable from '../DataTable/DataTable'
 import Cylon from "../LoadingComponents/Cylon"
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -30,7 +31,7 @@ class SimpleMap extends Component {
         if(status===200)
         {
             const data = promise.data;
-            this.setState({dataMap:data.rows, lat_col: data.lat_col, lon_col: data.lon_col}); 
+            this.setState({dataMap:data.rows, lat_col: data.lat_col, lon_col: data.lon_col, cols: data.cols}); 
         }
     }
 
@@ -63,6 +64,7 @@ class SimpleMap extends Component {
                 {markers}
             </MarkerClusterGroup>
             </Map>
+            <DataTable data={this.state.dataMap} header={this.state.cols}/>
           </div>
         );
   }}
