@@ -4,7 +4,7 @@ import axios from "axios";
 import Cylon from "../LoadingComponents/Cylon"
 import { Map, TileLayer, Marker, LayerGroup, LayersControl } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import  {getIcon} from  '../../MapUtils/utils' 
+import  {getIcon} from  '../../Utils/utils' 
 const { BaseLayer, Overlay } = LayersControl
 
 class MutipleMap extends Component {

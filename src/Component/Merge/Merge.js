@@ -235,8 +235,11 @@ const MergeMenu = props => {
           <Checkbox color="primary" />
           </Grid>
           <Grid item xs>
-            <Typography>{message}</Typography>
+            <Typography>Agregar las filas del archivo A al archivo B</Typography>
           </Grid>
+          <Button variant="contained" className={classes.button} onClick={handleRedirect}>
+              View map
+          </Button>
         </Grid>
       </Paper>
       <Paper className={classes.paper}>
@@ -245,8 +248,11 @@ const MergeMenu = props => {
           <Checkbox color="primary" />
           </Grid>
           <Grid item xs>
-            <Typography>{message}</Typography>
+            <Typography>Agregar las filas deol archivo B al archivo A</Typography>
           </Grid>
+          <Button variant="contained" className={classes.button} onClick={handleRedirect}>
+              View map
+          </Button>
         </Grid>
       </Paper>
     </div>
