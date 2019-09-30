@@ -49,12 +49,12 @@ export default class File extends Component {
         </TableHead>
         <TableBody>
           {this.state.files.map(row => (
-            <TableRow key={row.document_id}>
+            <TableRow key={row.id}>
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
               <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right"><Link to={{pathname: '/map', mapProps:{doc_id: row.document_id}}}>View Map</Link></TableCell>
+              <TableCell align="right"><Link to={{pathname: '/map', mapProps:{doc_id: row.id}}}>View Map</Link></TableCell>
             </TableRow>
           ))}
         </TableBody>
