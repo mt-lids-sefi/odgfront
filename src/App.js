@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+//import './App.css';
 
 
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
@@ -10,25 +10,31 @@ import SimpleMap from './Component/SimpleMap/SimpleMap';
 import FileUploader from './Component/FileUploader/FileUploader';
 import Merge from './Component/Merge/Merge';
 import MutipleMap from './Component/MultipleMap/MultipleMap';
+import {Navbar,  Nav} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class App extends Component {
   render() {
     return (
 
 
-      <Router>
+    
         <div>
-          <h2>Welcome to ODG</h2>
-         
-          <ul className="header">
-            <li><NavLink exact to={'/'}> Home </NavLink></li>
-            <li><NavLink to={'/files'}>Files</NavLink></li>
-            <li><NavLink to={'/about'}>About</NavLink></li>
-            <li><NavLink to={'/fileuploader'}>Upload</NavLink></li>
-            <li><NavLink to={'/merge'}>Merge</NavLink></li>
-          </ul>
+         <Router>
+        <Navbar bg="light" variant="light">
+          <Navbar.Brand href="/">Navbar</Navbar.Brand>
+          <Nav className="mr-auto">
+            <Nav.Link href="/files">Files</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
+            <Nav.Link href="/merge">Merge</Nav.Link>
+            <Nav.Link href="/fileuploader">Upload</Nav.Link>
+          </Nav>
+        </Navbar>
+     
           
           <hr />
+
           <Switch>
               <Route exact path='/' component={Home} />
               <Route path='/about' component={About} />
@@ -38,10 +44,33 @@ class App extends Component {
               <Route path="/merge" exact component={Merge} />
               <Route path="/multmap" exact component={MutipleMap} />
           </Switch>
+        </Router>      
         </div>
-      </Router>
+    
    );
   }
 }
 
 export default App;
+/**     <ul className="header">
+            <li><NavLink exact to={'/'}> Home </NavLink></li>
+            <li><NavLink to={'/files'}>Files</NavLink></li>
+            <li><NavLink to={'/about'}>About</NavLink></li>
+            <li><NavLink to={'/fileuploader'}>Upload</NavLink></li>
+            <li><NavLink to={'/merge'}>Merge</NavLink></li>
+          </ul> */
+
+
+          /*
+            <Router>
+          <Switch>
+              <Route exact path='/' component={Home} />
+              <Route path='/about' component={About} />
+              <Route path="/files" exact component={File} />
+              <Route path="/map" exact component={SimpleMap} />
+              <Route path="/fileuploader" exact component={FileUploader} />
+              <Route path="/merge" exact component={Merge} />
+              <Route path="/multmap" exact component={MutipleMap} />
+          </Switch>
+            </Router>
+          */ 
