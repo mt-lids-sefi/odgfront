@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import './App.css';
+import './App.css';
 
 
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
@@ -22,19 +22,18 @@ class App extends Component {
     
         <div>
          <Router>
-        <Navbar bg="light" variant="light">
-          <Navbar.Brand href="/">Navbar</Navbar.Brand>
+         <Navbar bg="dark" variant="dark">
+          <Navbar.Brand href="/">ODG</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/files">Files</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="/merge">Merge</Nav.Link>
             <Nav.Link href="/fileuploader">Upload</Nav.Link>
           </Nav>
+          </Navbar.Collapse>
         </Navbar>
-     
-          
-          <hr />
-
           <Switch>
               <Route exact path='/' component={Home} />
               <Route path='/about' component={About} />
@@ -73,4 +72,35 @@ export default App;
               <Route path="/multmap" exact component={MutipleMap} />
           </Switch>
             </Router>
+
+
+
+
+             <Router>
+        <Navbar bg="dark" variant="dark">
+          <Navbar.Brand href="/">ODG</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link href="/files">Files</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
+            <Nav.Link href="/merge">Merge</Nav.Link>
+            <Nav.Link href="/fileuploader">Upload</Nav.Link>
+          </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+     
+          
+          <hr />
+
+          <Switch>
+              <Route exact path='/' component={Home} />
+              <Route path='/about' component={About} />
+              <Route path="/files" exact component={File} />
+              <Route path="/map" exact component={SimpleMap} />
+              <Route path="/fileuploader" exact component={FileUploader} />
+              <Route path="/merge" exact component={Merge} />
+              <Route path="/multmap" exact component={MutipleMap} />
+          </Switch>
+        </Router>     
           */ 

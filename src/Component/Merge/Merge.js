@@ -220,7 +220,7 @@ const MergeMenu = props => {
         <Grid container wrap="nowrap" spacing={2}>
           
           <Grid item xs>
-            <Typography>Visualizar ambas fuentes en el mapa</Typography>
+            <Typography>CAPAS: Visualizar ambas fuentes en el mapa</Typography>
           </Grid>
           <Grid item>
           <Button variant="contained" className={classes.button} onClick={handleRedirect}>
@@ -231,30 +231,15 @@ const MergeMenu = props => {
       </Paper>
       <Paper className={classes.paper}>
         <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-          <Checkbox color="primary" />
-          </Grid>
           <Grid item xs>
-            <Typography>Agregar las filas del archivo A al archivo B</Typography>
+            <Typography>Unir ambos archivos según criterios a definir</Typography>
           </Grid>
           <Button variant="contained" className={classes.button} onClick={handleRedirect}>
-              View map
+              Link
           </Button>
         </Grid>
       </Paper>
-      <Paper className={classes.paper}>
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-          <Checkbox color="primary" />
-          </Grid>
-          <Grid item xs>
-            <Typography>Agregar las filas deol archivo B al archivo A</Typography>
-          </Grid>
-          <Button variant="contained" className={classes.button} onClick={handleRedirect}>
-              View map
-          </Button>
-        </Grid>
-      </Paper>
+      
     </div>
   );
 }
