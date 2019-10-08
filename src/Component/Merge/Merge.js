@@ -13,14 +13,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import MapIcon from '@material-ui/icons/Map'
 import axios from "axios";
 import Cylon from '../LoadingComponents/Cylon';
-import { Redirect } from 'react-router-dom'
-import Grid from '@material-ui/core/Grid';
+import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import MergeMenu from './MergeMenu';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -210,39 +208,7 @@ const useMenuStyles = makeStyles(theme => ({
 const message = `opciones de merg `;
 
 
-const MergeMenu = props => {
-  const classes = useMenuStyles();
-  const { handleRedirect} = props;
 
-  return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <Grid container wrap="nowrap" spacing={2}>
-          
-          <Grid item xs>
-            <Typography>CAPAS: Visualizar ambas fuentes en el mapa</Typography>
-          </Grid>
-          <Grid item>
-          <Button variant="contained" className={classes.button} onClick={handleRedirect}>
-              View map
-          </Button>
-          </Grid>
-        </Grid>
-      </Paper>
-      <Paper className={classes.paper}>
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item xs>
-            <Typography>Unir ambos archivos según criterios a definir</Typography>
-          </Grid>
-          <Button variant="contained" className={classes.button} onClick={handleRedirect}>
-              Link
-          </Button>
-        </Grid>
-      </Paper>
-      
-    </div>
-  );
-}
 
 export default function Merge() {
   const classes = useStyles();
@@ -336,11 +302,6 @@ export default function Merge() {
     setRowsPerPage(+event.target.value);
   }
 
-  function renderRedirect ()  {
-    if (redirect) {
-      return <Redirect to={{pathname: '/multmap', mapProps:{files: selected}}} />
-    }
-  }
 
   const isSelected = name => selected.indexOf(name) !== -1;
 
@@ -355,10 +316,10 @@ export default function Merge() {
   //acá también iría el renderRedirect   {renderRedirect()}
   if(merging){
     return (
-    
+    /**{renderRedirect()} */
       <div className={classes.root}>
-        {renderRedirect()}
-        <MergeMenu handleRedirect={handleRedirect}  />
+        
+        <MergeMenu handleRedirect={handleRedirect} selected={selected} />
       </div>
     )
   }

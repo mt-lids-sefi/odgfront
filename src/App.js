@@ -12,7 +12,7 @@ import Merge from './Component/Merge/Merge';
 import MutipleMap from './Component/MultipleMap/MultipleMap';
 import {Navbar,  Nav} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import MergeMenu from './Component/Merge/MergeMenu';
 
 class App extends Component {
   render() {
@@ -41,6 +41,7 @@ class App extends Component {
               <Route path="/map" exact component={SimpleMap} />
               <Route path="/fileuploader" exact component={FileUploader} />
               <Route path="/merge" exact component={Merge} />
+              <Route path="/mergemenu" exact component={MergeMenu} />
               <Route path="/multmap" exact component={MutipleMap} />
           </Switch>
         </Router>      
