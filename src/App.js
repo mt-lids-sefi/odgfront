@@ -13,6 +13,7 @@ import MutipleMap from './Component/MultipleMap/MultipleMap';
 import {Navbar,  Nav} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MergeMenu from './Component/Merge/MergeMenu';
+import LinkFiles from './Component/LinkFiles/LinkFIles';
 
 class App extends Component {
   render() {
@@ -43,6 +44,7 @@ class App extends Component {
               <Route path="/merge" exact component={Merge} />
               <Route path="/mergemenu" exact component={MergeMenu} />
               <Route path="/multmap" exact component={MutipleMap} />
+              <Route path="/linkfiles" exact component={LinkFiles} />
           </Switch>
         </Router>      
         </div>

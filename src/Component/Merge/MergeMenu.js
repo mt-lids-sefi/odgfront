@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-
+import { Redirect } from 'react-router-dom';
 
 const useMenuStyles = makeStyles(theme => ({
     root: {
@@ -27,17 +27,38 @@ const useMenuStyles = makeStyles(theme => ({
   
   const message = `opciones de merg `;
 
-function viewMultMap ()  {
-        return <Redirect to={{pathname: '/multmap', mapProps:{files: selected}}} />
-}
 
 
 export default function MergeMenu(props) {
     const classes = useMenuStyles();
     const { handleRedirect, selected} = props;
-  
+    const [layers, setLayers] = React.useState(false)
+    const [linkFiles, setLinkFiles] = React.useState(false)
+
+    
+    
+    function viewLayers ()  {
+      setLayers(true)
+    }
+
+    function viewLinker (){
+      setLinkFiles(true)
+    }
+
+
+    function renderRedirect ()  {
+      if (layers) {
+        return <Redirect to={{pathname: '/multmap', mapProps:{files: selected}}} />
+      }
+      if (linkFiles){
+        return <Redirect to={{pathname: '/linkfiles', mapProps:{files: selected}}} />
+      }
+    }
+
     return (
+      
       <div className={classes.root}>
+         {renderRedirect()}
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
             
@@ -45,7 +66,7 @@ export default function MergeMenu(props) {
               <Typography>CAPAS: Visualizar ambas fuentes en el mapa</Typography>
             </Grid>
             <Grid item>
-            <Button variant="contained" className={classes.button} onClick={viewMultMap}>
+            <Button variant="contained" className={classes.button} onClick={viewLayers}>
                 View map
             </Button>
             </Grid>
@@ -56,7 +77,7 @@ export default function MergeMenu(props) {
             <Grid item xs>
               <Typography>Unir ambos archivos según criterios a definir</Typography>
             </Grid>
-            <Button variant="contained" className={classes.button} onClick={handleRedirect}>
+            <Button variant="contained" className={classes.button} onClick={viewLinker}>
                 Link
             </Button>
           </Grid>
