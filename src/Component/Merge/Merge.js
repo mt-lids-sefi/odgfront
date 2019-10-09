@@ -224,9 +224,7 @@ export default function Merge() {
   const [redirect, setRedirect] = React.useState(false)
   const [merging, setMerging] = React.useState(false)
 
-  function handleRedirect(){  
-    setRedirect(true)
-  }
+
 
   function handleMerge(){
     setMerging(true)
@@ -319,7 +317,7 @@ export default function Merge() {
     /**{renderRedirect()} */
       <div className={classes.root}>
         
-        <MergeMenu handleRedirect={handleRedirect} selected={selected} />
+        <MergeMenu selected={selected} />
       </div>
     )
   }
