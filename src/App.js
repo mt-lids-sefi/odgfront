@@ -14,6 +14,7 @@ import {Navbar,  Nav} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MergeMenu from './Component/Merge/MergeMenu';
 import LinkFiles from './Component/LinkFiles/LinkFIles';
+import ClosestPoint from './Component/LinkFiles/ClosestPoint';
 
 class App extends Component {
   render() {
@@ -45,6 +46,7 @@ class App extends Component {
               <Route path="/mergemenu" exact component={MergeMenu} />
               <Route path="/multmap" exact component={MutipleMap} />
               <Route path="/linkfiles" exact component={LinkFiles} />
+              <Route path="/closestpoint" exact component={ClosestPoint} />
           </Switch>
         </Router>      
         </div>

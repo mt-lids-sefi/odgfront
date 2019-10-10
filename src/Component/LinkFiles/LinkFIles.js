@@ -31,7 +31,7 @@ const useMenuStyles = makeStyles(theme => ({
 
 export default function LinkFiles(props) {
     const classes = useMenuStyles();
-    const {selected} = props;
+    const selected = props.location.mapProps.files;
     const [closest, setClosest] = React.useState(false)
     const [nearbyPoints, setNearbyPoints] = React.useState(false)
     const [similCols, setSimilCols] = React.useState(false)
@@ -52,7 +52,7 @@ export default function LinkFiles(props) {
 
     function renderRedirect ()  {
       if (closest) {
-        //return <Redirect to={{pathname: '/multmap', mapProps:{files: selected}}} />
+        return <Redirect to={{pathname: '/closestpoint', mapProps:{files: selected}}} />
       }
       if (nearbyPoints){
         //return <Redirect to={{pathname: '/linkfiles', mapProps:{files: selected}}} />
@@ -65,6 +65,7 @@ export default function LinkFiles(props) {
     return (
       
       <div className={classes.root}>
+        {console.log(selected)}
          {renderRedirect()}
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
