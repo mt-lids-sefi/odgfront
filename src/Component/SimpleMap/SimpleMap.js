@@ -46,10 +46,16 @@ class SimpleMap extends Component {
       const center = [-34.6131500, -58.3772300]
       const zoom = 13
       let markers = []
-      for (let element in Object.keys(this.state.dataMap) ) {
-        let lat = this.state.dataMap[element][this.state.lat_col]
-        let lon = this.state.dataMap[element][this.state.lon_col]
-        markers.push(<Marker  key={element} position={[lat, lon]}/>) 
+      //console.log(Object.entries(this.state.dataMap))
+      //console.log(this.state.dataMap[4][this.state.lat_col])
+      //for (let [key,val] in Object.entries(this.state.dataMap) ) {
+      //console.log(Object.keys(this.state.dataMap).length)
+       for (let i = 0; i < Object.keys(this.state.dataMap).length; i++){
+        //console.log(Object.entries(this.state.dataMap)[i])
+        let lat = Object.entries(this.state.dataMap)[i][1][this.state.lat_col]
+        let lon = Object.entries(this.state.dataMap)[i][1][this.state.lon_col]
+        //console.log(lat+"  "+lon)
+        markers.push(<Marker  key={i} position={[lat, lon]}/>) 
       }
      
 
