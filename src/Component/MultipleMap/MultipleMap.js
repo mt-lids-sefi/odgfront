@@ -41,11 +41,14 @@ class MutipleMap extends Component {
 
     makeMarkers(dataMap, icon){
       let markers = []
-      for (let element in Object.keys(dataMap.rows) ) {
-        let lat = dataMap.rows[element][dataMap.lat_col]
-        let lon = dataMap.rows[element][dataMap.lon_col]
-        markers.push(<Marker  key={element} position={[lat, lon]} icon={icon} />) 
+      for (let i = 0; i < Object.keys(dataMap.rows).length; i++){
+        //console.log(Object.entries(this.state.dataMap)[i])
+        let lat = Object.entries(dataMap.rows)[i][1][dataMap.lat_col]
+        let lon = Object.entries(dataMap.rows)[i][1][dataMap.lon_col]
+        //console.log(lat+"  "+lon)
+        markers.push(<Marker  key={i} position={[lat, lon]} icon={icon} />)
       }
+      
       return markers
     }
 

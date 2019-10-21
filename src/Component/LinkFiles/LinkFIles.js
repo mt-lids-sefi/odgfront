@@ -65,7 +65,6 @@ export default function LinkFiles(props) {
     return (
       
       <div className={classes.root}>
-        {console.log(selected)}
          {renderRedirect()}
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
