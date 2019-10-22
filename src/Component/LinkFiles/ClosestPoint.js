@@ -6,6 +6,9 @@ import StepWizard from 'react-step-wizard';
 import Merge from '../Merge/Merge';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Container, Divider, Grid, Header, Icon } from 'semantic-ui-react'
+import DataTable from '../DataTable/DataTable'
+import Cylon from '../LoadingComponents/Cylon';
 
 
 const styles = theme => ({
@@ -37,10 +40,10 @@ const styles = theme => ({
       this.state = {
         files : this.props.location.mapProps.files 
       };
-      this.loadFiles = this.loadFiles.bind(this);
+     // this.loadFiles = this.loadFiles.bind(this);
     }
 
-    async componentDidMount() {
+    /*async componentDidMount() {
       this.loadFiles();
     }
 
@@ -62,7 +65,7 @@ const styles = theme => ({
             this.setState({dataMapB:data})
         }
     }
-
+*/
     render(){
       const { classes } = this.props;
       if(this.state.files){
@@ -70,7 +73,7 @@ const styles = theme => ({
           <div className={classes.root}>
             <div className={'jumbotron'}>
                     <StepWizard>
-                      <PreviewFiles />
+                      <PreviewFiles files={this.state.files} />
                       <PreviewLinkedDataSet />
                       <SaveOptions />
                     </StepWizard>
@@ -105,7 +108,7 @@ const Stats = ({
       <hr />
       { step > 1 &&
        <Button variant="contained"  onClick={previousStep}>  Go back </Button>
-      }
+      } 
       { step < totalSteps ?
           <Button variant="contained"  onClick={nextStep}> Continue </Button>
           :
@@ -117,25 +120,89 @@ const Stats = ({
 
 
 class PreviewFiles extends Component {
+ 
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.loadFiles = this.loadFiles.bind(this);
+  }
+  async componentDidMount() {
+    this.loadFiles();
+  }
+
+  async loadFiles()
+  {
+      let doc_ids = this.props.files
+      console.log(doc_ids)
+      let promise = await axios.get("http://localhost:8000/map/"+doc_ids[0])
+      let status = promise.status;
+      if(status===200)
+      {
+          const data = promise.data;
+          this.setState({dataMapA:data})
+      }
+      promise = await axios.get("http://localhost:8000/map/"+doc_ids[1])
+      status = promise.status;
+      if(status===200)
+      {
+          const data = promise.data;
+          this.setState({dataMapB:data})
+      }
+  }
+  
+/*<DataTable data={this.state.fileA.rows} header={this.state.fileA.cols}/>*/
     render(){
+      if (this.state.dataMapA == null || this.state.dataMapB == null){
+        return <Cylon/>
+      }
+      else {
       return (     
            <div>
             <Typography variant="h5" id="tableTitle"> Files preview & settings </Typography>
-            <label>First Name</label>
-            <input type='text' className='form-control' name='firstname' placeholder='First Name'
-                onChange={this.update} />
+            
+            <Grid>
+              <Grid.Row columns={2}>
+                <Grid.Column>
+                <DataTable data={this.state.dataMapA.rows} header={this.state.dataMapA.cols}/>
+                </Grid.Column>
+                <Grid.Column>
+                <DataTable data={this.state.dataMapB.rows} header={this.state.dataMapB.cols}/>
+                </Grid.Column>
+              </Grid.Row>
+
+              <Grid.Row>
+                <Grid.Column width={4}>
+                  <p>
+                    <span>Four</span>
+                  </p>
+                </Grid.Column>
+                <Grid.Column width={8}>
+                  <p>
+                    <span>Eight</span>
+                  </p>
+                </Grid.Column>
+                <Grid.Column width={4}>
+                  <p>
+                    <span>Four</span>
+                  </p>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
             <Stats step={1} {...this.props} />
         </div>
     );
+      }
     }
 }
 
 
 class PreviewLinkedDataSet extends Component {
+
+
   render(){
     return (
       <div>
-          <h3 className='text-center'>Prev linked!</h3>
+         <Typography variant="h5" id="tableTitle"> Prev linked</Typography>
 
           <label>Acá veremos el preview del archivo linkeado</label>
           
@@ -149,7 +216,7 @@ class SaveOptions extends Component {
   render(){
     return (
       <div>
-          <h3 className='text-center'>Save options</h3>
+          <Typography variant="h5" id="tableTitle"> Save options </Typography>
 
           <label>Opciones de guardado</label>
           
