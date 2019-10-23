@@ -160,34 +160,12 @@ class PreviewFiles extends Component {
            <div>
             <Typography variant="h5" id="tableTitle"> Files preview & settings </Typography>
             
-            <Grid>
-              <Grid.Row columns={2}>
-                <Grid.Column>
+          
                 <DataTable data={this.state.dataMapA.rows} header={this.state.dataMapA.cols}/>
-                </Grid.Column>
-                <Grid.Column>
+             
                 <DataTable data={this.state.dataMapB.rows} header={this.state.dataMapB.cols}/>
-                </Grid.Column>
-              </Grid.Row>
-
-              <Grid.Row>
-                <Grid.Column width={4}>
-                  <p>
-                    <span>Four</span>
-                  </p>
-                </Grid.Column>
-                <Grid.Column width={8}>
-                  <p>
-                    <span>Eight</span>
-                  </p>
-                </Grid.Column>
-                <Grid.Column width={4}>
-                  <p>
-                    <span>Four</span>
-                  </p>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
+             
+          
             <Stats step={1} {...this.props} />
         </div>
     );
