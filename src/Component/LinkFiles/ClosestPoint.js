@@ -6,9 +6,10 @@ import StepWizard from 'react-step-wizard';
 import Merge from '../Merge/Merge';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Container, Divider, Grid, Header, Icon } from 'semantic-ui-react'
 import DataTable from '../DataTable/DataTable'
 import Cylon from '../LoadingComponents/Cylon';
+import Checkbox from '@material-ui/core/Checkbox';
+
 
 
 const styles = theme => ({
@@ -38,34 +39,20 @@ const styles = theme => ({
     constructor(props) {
       super(props);
       this.state = {
-        files : this.props.location.mapProps.files 
+        form: {},
+        files: [1,2]
+        //files : this.props.location.mapProps.files 
       };
-     // this.loadFiles = this.loadFiles.bind(this);
     }
 
-    /*async componentDidMount() {
-      this.loadFiles();
+    updateForm = (key, value) => {
+        const { form } = this.state;
+
+        form[key] = value;
+        this.setState({ form });
     }
 
-    async loadFiles()
-    {
-        let doc_ids = this.state.files
-        let promise = await axios.get("http://localhost:8000/map/"+doc_ids[0])
-        let status = promise.status;
-        if(status===200)
-        {
-            const data = promise.data;
-            this.setState({dataMapA:data})
-        }
-        promise = await axios.get("http://localhost:8000/map/"+doc_ids[1])
-        status = promise.status;
-        if(status===200)
-        {
-            const data = promise.data;
-            this.setState({dataMapB:data})
-        }
-    }
-*/
+
     render(){
       const { classes } = this.props;
       if(this.state.files){
@@ -74,7 +61,8 @@ const styles = theme => ({
             <div className={'jumbotron'}>
                     <StepWizard>
                       <PreviewFiles files={this.state.files} />
-                      <PreviewLinkedDataSet />
+                      <Settings update={this.updateForm}/>
+                      <PreviewLinkedDataSet  form={this.state.form}/>
                       <SaveOptions />
                     </StepWizard>
                 </div>
@@ -150,7 +138,6 @@ class PreviewFiles extends Component {
       }
   }
   
-/*<DataTable data={this.state.fileA.rows} header={this.state.fileA.cols}/>*/
     render(){
       if (this.state.dataMapA == null || this.state.dataMapB == null){
         return <Cylon/>
@@ -173,6 +160,31 @@ class PreviewFiles extends Component {
     }
 }
 
+class Settings extends Component {
+  update = (e) => {
+    this.props.update(e.target.name, e.target.value);
+}
+
+  handleChange(check){
+    return true
+  }
+  render(){
+    return (
+      <div>
+         <Typography variant="h5" id="tableTitle"> Settings</Typography>
+         <Checkbox checked={this.props.checkedB} onChange={this.handleChange('checkedB')} value="checkedB" color="primary" />
+          
+
+          <label>First Name</label>
+                <input type='text' className='form-control' name='firstname' placeholder='First Name'
+                    onChange={this.update} />
+          <Stats step={2} {...this.props} />
+      </div>
+  );
+  }
+}
+
+
 
 class PreviewLinkedDataSet extends Component {
 
@@ -182,9 +194,9 @@ class PreviewLinkedDataSet extends Component {
       <div>
          <Typography variant="h5" id="tableTitle"> Prev linked</Typography>
 
-          <label>Acá veremos el preview del archivo linkeado</label>
+          <label>Acá veremos si llegan los parámetros: { this.props.form.firstname && <h3>Hey {this.props.form.firstname}! 👋</h3> }</label>
           
-          <Stats step={2} {...this.props} />
+          <Stats step={3} {...this.props} />
       </div>
   );
   }
@@ -198,7 +210,7 @@ class SaveOptions extends Component {
 
           <label>Opciones de guardado</label>
           
-          <Stats step={3} {...this.props} />
+          <Stats step={4} {...this.props} />
       </div>
   );
   }
