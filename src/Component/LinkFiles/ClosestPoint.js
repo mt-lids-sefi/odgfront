@@ -9,6 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import DataTable from '../DataTable/DataTable'
 import Cylon from '../LoadingComponents/Cylon';
 import Checkbox from '@material-ui/core/Checkbox';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 
@@ -40,7 +43,7 @@ const styles = theme => ({
       super(props);
       this.state = {
         form: {},
-        files: [36,37]
+        files: [1,2]
         //files : this.props.location.mapProps.files 
       };
     }
@@ -184,7 +187,7 @@ class Settings extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {distance: false}
+    this.state = {distance: false, filebase: 'fileA'}
   }
 
  
@@ -193,12 +196,24 @@ class Settings extends Component {
     this.setState({distance : event.target.checked})
   };
 
+  handleRadioChange = event => {
+    this.setState({filebase :  event.target.value})
+  }
+
   render(){
     return (
       <div>
          <Typography variant="h5" id="tableTitle"> Settings</Typography>
+         <label>Select the base file </label>
          
+          <RadioGroup aria-label="gender" name="base" value={this.state.filebase} onChange={this.handleRadioChange}>
+            <FormControlLabel value="fileA" control={<Radio color="primary"/>} label="aRCHIV A" />
+            <FormControlLabel value="fileB" control={<Radio color="primary"/>} label="aRCHIVO B" />
+          </RadioGroup>
+
+         <hr />
          <label>Get the closest point by distance </label>
+        
          <Checkbox name='distance' checked={this.state.distance} 
                     onChange={this.handleChange} value={this.state.distance} color="primary" />
 
