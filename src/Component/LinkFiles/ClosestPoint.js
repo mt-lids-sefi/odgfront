@@ -40,7 +40,7 @@ const styles = theme => ({
       super(props);
       this.state = {
         form: {},
-        files: [1,2]
+        files: [36,37]
         //files : this.props.location.mapProps.files 
       };
     }
@@ -160,24 +160,58 @@ class PreviewFiles extends Component {
     }
 }
 
-class Settings extends Component {
-  update = (e) => {
+/**para actualizar x fuera:
+ * 
+ * 
+ * en el componente que sale: 
+update={this.updateForm}
+ *  update = (e) => {
     this.props.update(e.target.name, e.target.value);
-}
-
-  handleChange(check){
-    return true
   }
+ * 
+
+ <label>First Name</label>
+                <input type='text' className='form-control' name='firstname' placeholder='First Name'
+                    onChange={this.update} />
+
+
+    en el componente que recibe:
+    <PreviewLinkedDataSet  form={this.state.form}/>
+    { this.props.form.distance && <h3>Hey {this.props.form.firstname}!
+ */
+
+class Settings extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {distance: false}
+  }
+
+ 
+
+  handleChange = event => {
+    this.setState({distance : event.target.checked})
+  };
+
   render(){
     return (
       <div>
          <Typography variant="h5" id="tableTitle"> Settings</Typography>
-         <Checkbox checked={this.props.checkedB} onChange={this.handleChange('checkedB')} value="checkedB" color="primary" />
-          
+         
+         <label>Get the closest point by distance </label>
+         <Checkbox name='distance' checked={this.state.distance} 
+                    onChange={this.handleChange} value={this.state.distance} color="primary" />
 
-          <label>First Name</label>
-                <input type='text' className='form-control' name='firstname' placeholder='First Name'
+         
+         {this.state.distance &&
+            <div>
+               <label>Max distance </label>
+                <input type='text' className='form-control' name='max_distance' placeholder='Max distance'
                     onChange={this.update} />
+            </div>
+          }
+
+       
           <Stats step={2} {...this.props} />
       </div>
   );
@@ -194,7 +228,7 @@ class PreviewLinkedDataSet extends Component {
       <div>
          <Typography variant="h5" id="tableTitle"> Prev linked</Typography>
 
-          <label>Acá veremos si llegan los parámetros: { this.props.form.firstname && <h3>Hey {this.props.form.firstname}! 👋</h3> }</label>
+          <label>Acá veremos si llegan los parámetros: { this.props.form.distance && <h3>Hey {this.props.form.firstname}! 👋</h3> }</label>
           
           <Stats step={3} {...this.props} />
       </div>
