@@ -34,26 +34,38 @@ const Stats = ({
         <hr/>  
     </div>
   );
+
+
+
 class ClosestPointSettings extends Component {
 
     constructor(props) {
       super(props);
-      this.state = {}
+      this.state = {available_preview: true, filebase: 'fileA', distance: false}
     }
   
     handleChange = event => {
-      this.setState({distance : event.target.checked, loaded: false})
+      this.setState({distance : event.target.checked, loaded : false})
       this.props.update(event.target.name, event.target.checked);
+      if (event.target.checked){
+        this.setState({available_preview: false})
+      }
     };
   
     handleRadioChange = event => {
-      this.setState({filebase :  event.target.value, loaded: false})
+      this.setState({filebase : event.target.value, loaded : false})
       this.props.update(event.target.name, event.target.value);
     }
   
     handleInputChange = event => {
-      this.setState({max_distance :  event.target.value, loaded: false})
+      this.setState({max_distance : event.target.value, loaded : false})
       this.props.update(event.target.name, event.target.value);
+      if (event.target.value == ''){
+        this.setState({available_preview: false})
+      }
+      else {
+        this.setState({available_preview: true})
+      }
     }
   
     preview = async () => {
@@ -110,12 +122,12 @@ class ClosestPointSettings extends Component {
            {this.state.distance &&
               <div>
                  <label>Max distance </label>
-                  <input type='text' className='form-control' name='max_distance' placeholder='Max distance'
+                  <input type='number' className='form-control' name='max_distance' placeholder='Max distance'
                       onChange={this.handleInputChange} />
               </div>
             }
   
-          <Button variant="contained"  onClick={this.preview}>  Preview </Button>
+          <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Preview </Button>
             {this.state.loading ? <Cylon/>
                : this.state.loaded && <DataTable data={this.state.linked.data} header={this.state.linked.cols} />}
             

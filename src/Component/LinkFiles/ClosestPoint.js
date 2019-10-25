@@ -35,9 +35,9 @@ class ClosestPoints extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        form: {files: [1,2]},
-        //files: [36,37]
-        files: [1,2]
+        form: {files: [36,37]},
+        files: [36,37]
+        //files: [1,2]
         //files : this.props.location.mapProps.files 
       };
     }

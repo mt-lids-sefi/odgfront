@@ -46,7 +46,7 @@ class SaveOptions extends Component {
             <label>Description</label>
                   <input type='text' className='form-control' name='description' placeholder='Description'
                       onChange={this.update} />
-            <Stats step={4} {...this.props} nextStep={this.submit} />
+            <Stats step={3} {...this.props} nextStep={this.submit} />
         </div>
     );
     }
