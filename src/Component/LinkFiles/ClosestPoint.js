@@ -42,8 +42,9 @@ const styles = theme => ({
     constructor(props) {
       super(props);
       this.state = {
-        form: {},
-        files: [1,2]
+        form: {files: [36,37]},
+        files: [36,37]
+        //files: [1,2]
         //files : this.props.location.mapProps.files 
       };
     }
@@ -55,7 +56,11 @@ const styles = theme => ({
         this.setState({ form });
     }
 
+    set_done(){
+      this.setState({done_settings: true})
+    }
 
+    /** <PreviewLinkedDataSet  form={this.state.form}/> */
     render(){
       const { classes } = this.props;
       if(this.state.files){
@@ -64,8 +69,9 @@ const styles = theme => ({
             <div className={'jumbotron'}>
                     <StepWizard>
                       <PreviewFiles files={this.state.files} />
-                      <Settings update={this.updateForm}/>
-                      <PreviewLinkedDataSet  form={this.state.form}/>
+                      <Settings update={this.updateForm}  form={this.state.form}/>
+                      
+
                       <SaveOptions />
                     </StepWizard>
                 </div>
@@ -187,17 +193,54 @@ class Settings extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {distance: false, filebase: 'fileA'}
+    this.state = {}
   }
 
- 
-
   handleChange = event => {
-    this.setState({distance : event.target.checked})
+    this.setState({distance : event.target.checked, loaded: false})
+    this.props.update(event.target.name, event.target.checked);
   };
 
   handleRadioChange = event => {
-    this.setState({filebase :  event.target.value})
+    this.setState({filebase :  event.target.value, loaded: false})
+    this.props.update(event.target.name, event.target.value);
+  }
+
+  handleInputChange = event => {
+    this.setState({max_distance :  event.target.value, loaded: false})
+    this.props.update(event.target.name, event.target.value);
+  }
+
+  preview = async () => {
+    if(this.state.filebase == "fileA"){
+      this.state.fileA = this.props.form.files[0]
+      this.state.fileB = this.props.form.files[1]
+    }
+    else if(this.state.filebase == "fileB"){
+      this.state.fileA = this.props.form.files[1]
+      this.state.fileB = this.props.form.files[0]
+    }
+
+    if (this.state.distance){
+     let promise = await axios.get("http://localhost:8000/link_closest_point_filter_preview/"
+                                                +this.state.fileA+"/"+this.state.fileB+"/"+this.props.form.max_distance)
+      let status = promise.status;
+      if(status===200)
+      {
+          const data = promise.data;
+          this.setState({linked:data, loaded: true})
+      }
+    }
+    else{
+      let promise = await axios.get("http://localhost:8000/link_closest_point_preview/"+this.state.fileA+"/"+this.state.fileB)
+      let status = promise.status;
+      if(status===200)
+      {
+          const data = promise.data;
+          this.setState({linked:data, loaded: true})
+      }
+    }    
+
   }
 
   render(){
@@ -206,7 +249,7 @@ class Settings extends Component {
          <Typography variant="h5" id="tableTitle"> Settings</Typography>
          <label>Select the base file </label>
          
-          <RadioGroup aria-label="gender" name="base" value={this.state.filebase} onChange={this.handleRadioChange}>
+          <RadioGroup aria-label="gender" name="filebase" value={this.state.filebase} onChange={this.handleRadioChange}>
             <FormControlLabel value="fileA" control={<Radio color="primary"/>} label="aRCHIV A" />
             <FormControlLabel value="fileB" control={<Radio color="primary"/>} label="aRCHIVO B" />
           </RadioGroup>
@@ -222,11 +265,13 @@ class Settings extends Component {
             <div>
                <label>Max distance </label>
                 <input type='text' className='form-control' name='max_distance' placeholder='Max distance'
-                    onChange={this.update} />
+                    onChange={this.handleInputChange} />
             </div>
           }
 
-       
+        <Button variant="contained"  onClick={this.preview}>  Preview </Button>
+          {this.state.loaded && <DataTable data={this.state.linked.data} header={this.state.linked.cols} />}
+          
           <Stats step={2} {...this.props} />
       </div>
   );
@@ -235,21 +280,73 @@ class Settings extends Component {
 
 
 
-class PreviewLinkedDataSet extends Component {
+/*class PreviewLinkedDataSet extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {distance: this.props.form.distance,
+                  filebase: this.props.form.filebase};
+    this.linkFiles = this.linkFiles.bind(this);
+  }
+  /*
+  async componentDidMount() {
+    if(this.props.filebase == "fileA"){
+      this.state.fileA = this.props.form.files[0]
+      this.state.fileB = this.props.form.files[1]
+    }
+    else if(this.props.filebase == "fileB"){
+      this.state.fileA = this.props.form.files[1]
+      this.state.fileB = this.props.form.files[0]
+    }
+    this.linkFiles();
+  }*/
+/*
+  async linkFiles(){
+    if(this.props.filebase == "fileA"){
+      this.state.fileA = this.props.form.files[0]
+      this.state.fileB = this.props.form.files[1]
+    }
+    else if(this.props.filebase == "fileB"){
+      this.state.fileA = this.props.form.files[1]
+      this.state.fileB = this.props.form.files[0]
+    }
+
+    if (this.props.form.distance){
+     let promise = await axios.get("http://localhost:8000/link_closest_point_filter_preview/"
+                                                +this.state.fileA+"/"+this.state.fileB+"/"+this.props.form.max_distance)
+      let status = promise.status;
+      if(status===200)
+      {
+          const data = promise.data;
+          this.setState({linked:data})
+      }
+    }
+    else{
+      let promise = await axios.get("http://localhost:8000/link_closest_point_preview/"+this.state.fileA+"/"+this.state.fileB)
+      let status = promise.status;
+      if(status===200)
+      {
+          const data = promise.data;
+          this.setState({linked:data})
+      }
+    }    
+  }
 
   render(){
-    return (
-      <div>
-         <Typography variant="h5" id="tableTitle"> Prev linked</Typography>
-
-          <label>Acá veremos si llegan los parámetros: { this.props.form.distance && <h3>Hey {this.props.form.firstname}! 👋</h3> }</label>
-          
-          <Stats step={3} {...this.props} />
-      </div>
-  );
+    if (this.state.linked == null){
+      return <Cylon/>
+    }
+    else {
+      return (
+        <div>
+          <Typography variant="h5" id="tableTitle"> Prev linked</Typography>
+          <DataTable data={this.state.linked.data} header={this.state.linked.cols} />
+            <Stats step={3} {...this.props} />
+        </div>
+      );
+    }
   }
-}
+}*/
 
 class SaveOptions extends Component {
   render(){
