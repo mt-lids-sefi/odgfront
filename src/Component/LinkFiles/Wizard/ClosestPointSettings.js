@@ -9,6 +9,8 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+
+
 const Stats = ({
     currentStep,
     firstStep,
@@ -18,7 +20,7 @@ const Stats = ({
     previousStep,
     totalSteps,
     step,
-    
+    completed,
   }) => (
     
     <div>
@@ -27,7 +29,7 @@ const Stats = ({
          <Button variant="contained"  onClick={previousStep}>  Go back </Button>
         } 
         { step < totalSteps ?
-            <Button variant="contained"  onClick={nextStep}> Continue </Button>
+            <Button variant="contained" disabled={!completed} onClick={nextStep}> Continue </Button>
             :
             <Button variant="contained"  onClick={nextStep}>  Finish </Button>
         }
@@ -50,6 +52,9 @@ class ClosestPointSettings extends Component {
       if (event.target.checked){
         this.setState({available_preview: false})
       }
+      else if (!event.target.checked){
+        this.setState({available_preview: true})
+      }
     };
   
     handleRadioChange = event => {
@@ -60,7 +65,7 @@ class ClosestPointSettings extends Component {
     handleInputChange = event => {
       this.setState({max_distance : event.target.value, loaded : false})
       this.props.update(event.target.name, event.target.value);
-      if (event.target.value == ''){
+      if (event.target.value == '' && this.props.distance){
         this.setState({available_preview: false})
       }
       else {
@@ -131,7 +136,7 @@ class ClosestPointSettings extends Component {
             {this.state.loading ? <Cylon/>
                : this.state.loaded && <DataTable data={this.state.linked.data} header={this.state.linked.cols} />}
             
-            <Stats step={2} {...this.props} />
+            <Stats step={2} completed={this.state.available_preview} {...this.props} />
         </div>
     );
     }

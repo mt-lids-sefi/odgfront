@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import PreviewFiles from './Wizard/PreviewFiles'
 import ClosestPointSettings from './Wizard/ClosestPointSettings';
 import SaveOptions from './Wizard/SaveOptions'
+import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -35,10 +36,8 @@ class ClosestPoints extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        form: {files: [36,37]},
-        files: [36,37]
-        //files: [1,2]
-        //files : this.props.location.mapProps.files 
+        form: {files: this.props.location.mapProps.files , distance:false, filebase:'fileA', saved: false},
+        files: this.props.location.mapProps.files 
       };
     }
 
@@ -49,31 +48,24 @@ class ClosestPoints extends Component {
         this.setState({ form });
     }
 
-    set_done(){
-      this.setState({done_settings: true})
-    }
 
     render(){
       const { classes } = this.props;
-      if(this.state.files){
         return(
           <div className={classes.root}>
             <div className={'jumbotron'}>
                     <StepWizard>
                       <PreviewFiles files={this.state.files} update={this.updateForm}/>
                       <ClosestPointSettings update={this.updateForm}  form={this.state.form}/>
-                      <SaveOptions />
+                      <SaveOptions update={this.updateForm} form={this.state.form}/>
                     </StepWizard>
                 </div>
               
           </div>
           );
       }
-      else {
-        return ( <Merge />)
-      }
     }
-}
+
 
 
 const Stats = ({
