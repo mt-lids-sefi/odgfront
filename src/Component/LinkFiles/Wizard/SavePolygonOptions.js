@@ -64,46 +64,6 @@ class SavePolygonOptions extends Component {
         }
     }
 
-    submitNoFilter = async () => {
-        let fileA, fileB
-        if(this.props.form.filebase == "fileA"){
-            fileA = this.props.form.files[0]
-            fileB = this.props.form.files[1]
-          }
-          else if(this.props.form.filebase == "fileB"){
-            fileA = this.props.form.files[1]
-            fileB = this.props.form.files[0]
-          }
-        let promise = await axios.get("http://localhost:8000/link_closest_point/"
-                                                  +fileA+"/"+fileB+"/"+this.state.name+"/"+this.state.description)
-        let status = promise.status;
-        
-        if(status===200)
-        {
-            this.setState({saved: true})
-        }
-    }
-
-    submitFilter = async () => {
-        let fileA, fileB
-        if(this.props.form.filebase == "fileA"){
-            fileA = this.props.form.files[0]
-            fileB = this.props.form.files[1]
-          }
-          else if(this.props.form.filebase == "fileB"){
-            fileA = this.props.form.files[1]
-            fileB = this.props.form.files[0]
-          }
-        let promise = await axios.get("http://localhost:8000/link_closest_point_filter/"
-                                                  +fileA+"/"+fileB+"/"+this.props.form.max_distance+"/"+this.state.name+"/"+this.state.description)
-        let status = promise.status;
-        
-        if(status===200)
-        {
-            this.setState({saved: true})
-        }
-    }
-
     submit = async  () => {
         let fileA = this.props.form.files[0]
         let fileB = this.props.form.files[1]
