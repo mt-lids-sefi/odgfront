@@ -32,7 +32,7 @@ const Stats = ({
 );
 
 
-class SaveOptions extends Component {
+class SaveClosestOptions extends Component {
 
     constructor(props) {
         super(props);
@@ -135,4 +135,4 @@ class SaveOptions extends Component {
     }
 }
 
-export default SaveOptions;
+export default SaveClosestOptions;

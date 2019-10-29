@@ -15,6 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MergeMenu from './Component/Merge/MergeMenu';
 import LinkFiles from './Component/LinkFiles/LinkFIles';
 import ClosestPoint from './Component/LinkFiles/ClosestPoint';
+import Polygon from './Component/LinkFiles/Polygon';
 
 class App extends Component {
   render() {
@@ -47,6 +48,7 @@ class App extends Component {
               <Route path="/multmap" exact component={MutipleMap} />
               <Route path="/linkfiles" exact component={LinkFiles} />
               <Route path="/closestpoint" exact component={ClosestPoint} />
+              <Route path="/polygon" exact component={Polygon} />
           </Switch>
         </Router>      
         </div>

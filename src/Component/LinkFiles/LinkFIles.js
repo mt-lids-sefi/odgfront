@@ -55,7 +55,7 @@ export default function LinkFiles(props) {
         return <Redirect to={{pathname: '/closestpoint', mapProps:{files: selected}}} />
       }
       if (nearbyPoints){
-        //return <Redirect to={{pathname: '/linkfiles', mapProps:{files: selected}}} />
+        return <Redirect to={{pathname: '/polygon', mapProps:{files: selected}}} />
       }
       if (similCols){
         //return <Redirect to={{pathname: '/linkfiles', mapProps:{files: selected}}} />
