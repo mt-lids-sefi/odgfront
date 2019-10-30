@@ -91,7 +91,8 @@ class FileUploader extends Component {
       <h1>Upload File</h1>
       
         <form onSubmit={this.handleSubmit}>
-        
+        <div><Input type="file" onChange={this.handleUploadFile} /></div>
+        <hr />
             <div>
               <label>Name</label>
               <Input name="name" component="input"  type="text" placeholder="Name" value={name} onChange={this.onChange} />
@@ -102,7 +103,7 @@ class FileUploader extends Component {
             </div>
             <div>
             
-            <Input type="file" onChange={this.handleUploadFile} />
+            
             
 
           </div>
