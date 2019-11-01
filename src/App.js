@@ -16,6 +16,8 @@ import MergeMenu from './Component/Merge/MergeMenu';
 import LinkFiles from './Component/LinkFiles/LinkFIles';
 import ClosestPoint from './Component/LinkFiles/ClosestPoint';
 import Polygon from './Component/LinkFiles/Polygon';
+import Clusterize from './Component/Clusterize/Clusterize'
+import Clusterizer from './Component/Clusterize/Clusterizer';
 
 class App extends Component {
   render() {
@@ -34,11 +36,13 @@ class App extends Component {
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="/merge">Merge</Nav.Link>
             <Nav.Link href="/fileuploader">Upload</Nav.Link>
+            <Nav.Link href="/clusterize">Clusterize</Nav.Link>
           </Nav>
           </Navbar.Collapse>
         </Navbar>
           <Switch>
               <Route exact path='/' component={Home} />
+              <Route path='/clusterize' component={Clusterize} />
               <Route path='/about' component={About} />
               <Route path="/files" exact component={File} />
               <Route path="/map" exact component={SimpleMap} />
@@ -49,6 +53,7 @@ class App extends Component {
               <Route path="/linkfiles" exact component={LinkFiles} />
               <Route path="/closestpoint" exact component={ClosestPoint} />
               <Route path="/polygon" exact component={Polygon} />
+              <Route path="/clusterizer" exact component={Clusterizer} />
           </Switch>
         </Router>      
         </div>
