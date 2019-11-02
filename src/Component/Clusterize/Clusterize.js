@@ -9,10 +9,30 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
 
+const styles = theme => ({
+    root: {
+        width: '100%',
+        marginTop: theme.spacing(3),
+      },
+    paper: {
+      maxWidth: 400,
+      margin: `${theme.spacing(1)}px auto`,
+      padding: theme.spacing(2),
+    },
+    button: {
+      margin: theme.spacing(1),
+    },
+    input: {
+      display: 'none',
+    }
+  });
 
-export default class Clusterize extends Component {
+
+class Clusterize extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,9 +59,10 @@ export default class Clusterize extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return(
     
-    
+    <div className={classes.root}>
     <Paper >
     <Toolbar >
       <div >
@@ -69,13 +90,20 @@ export default class Clusterize extends Component {
                 {row.name}
               </TableCell>
               <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right"><Link to={{pathname: '/clusterizer', mapProps:{doc_id: row.id}}}>Select</Link></TableCell>
+              <TableCell align="right"><Link to={{pathname: '/clusterizer', mapProps:{file_id: row.id}}}>Select</Link></TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       </Paper>
+      </div>
     )
   }
 }
 
+Clusterize.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+  
+  export default withStyles(styles)(Clusterize);
+  

@@ -4,7 +4,29 @@ import Papa from 'papaparse';
 import { Redirect } from 'react-router-dom'
 import Input from '@material-ui/core/Input'; 
 import Button from '@material-ui/core/Button';
-import { lighten, makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+
+const styles = theme => ({
+  root: {
+      width: '100%',
+      marginTop: theme.spacing(3),
+    },
+  paper: {
+    maxWidth: 400,
+    margin: `${theme.spacing(1)}px auto`,
+    padding: theme.spacing(2),
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+  input: {
+    display: 'none',
+  }
+});
+
 
 class FileUploader extends Component {
     constructor(props) {
@@ -82,15 +104,20 @@ class FileUploader extends Component {
     
 
   render() {
+    const { classes } = this.props;
     const { name, description } = this.state;
     if (this.state.redirectToReferrer){
       return <Redirect to="/files" />
     }
     return (
       <Styles>
-      <h1>Upload File</h1>
-      
+        <div className={classes.root}>
+       
+        <Typography variant="h4" id="tableTitle">
+            File upload
+          </Typography>
         <form onSubmit={this.handleSubmit}>
+          
         <div><Input type="file" onChange={this.handleUploadFile} /></div>
         <hr />
             <div>
@@ -128,10 +155,16 @@ class FileUploader extends Component {
             </div>
             
           </form>
-     
+         
+          </div>
+       
     </Styles>
     );
   }
 }
 
-export default FileUploader;
+FileUploader.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(FileUploader);

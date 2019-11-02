@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { Map, TileLayer, Marker } from "react-leaflet";
-import MarkerClusterGroup from 'react-leaflet-markercluster';
 import 'react-leaflet-markercluster/dist/styles.min.css';
 import DataTable from '../DataTable/DataTable'
 import Cylon from "../LoadingComponents/Cylon"
-import Grid from '@material-ui/core/Grid';
+import SimpleMap from '../Maps/SimpleMap';
 
 
 
-class SimpleMap extends Component {
+class FileDetails extends Component {
     constructor(props) {
             super(props);
             this.state = {
@@ -43,31 +41,13 @@ class SimpleMap extends Component {
       return <Cylon/>
     }
     else{
-      const center = [-34.6131500, -58.3772300]
-      const zoom = 13
-      let markers = []
-       for (let i = 0; i < Object.keys(this.state.dataMap).length; i++){
-        let lat = Object.entries(this.state.dataMap)[i][1][this.state.lat_col]
-        let lon = Object.entries(this.state.dataMap)[i][1][this.state.lon_col]
-        markers.push(<Marker  key={i} position={[lat, lon]}/>) 
-      }
-     
-
       return (
           <div>
-            <Map className="markercluster-map" center={center} zoom={zoom} maxZoom={18}>
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              />
-              <MarkerClusterGroup>
-                {markers}
-            </MarkerClusterGroup>
-            </Map>
+            <SimpleMap data={this.state.dataMap} lat_col={this.state.lat_col} lon_col={this.state.lon_col} />
             <DataTable data={this.state.dataMap} header={this.state.cols}/>
           </div>
         );
   }}
 }
 
-export default SimpleMap;
+export default FileDetails;
