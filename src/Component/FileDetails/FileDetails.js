@@ -4,15 +4,42 @@ import 'react-leaflet-markercluster/dist/styles.min.css';
 import DataTable from '../DataTable/DataTable'
 import Cylon from "../LoadingComponents/Cylon"
 import SimpleMap from '../Maps/SimpleMap';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+import { Paper } from '@material-ui/core';
 
 
+const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: { 
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+  input: {
+    display: 'none',
+  }
+});
 
 class FileDetails extends Component {
     constructor(props) {
             super(props);
-            this.state = {
-             doc_id : this.props.location.mapProps.doc_id
-            };
+            if (this.props.location){
+              this.state = {
+                doc_id : this.props.location.mapProps.doc_id
+               };
+            }
+            else if (this.props.file){
+              this.state = {
+                doc_id : this.props.file
+               };
+            }
             this.loadFile = this.loadFile.bind(this);
         }
 
@@ -36,18 +63,32 @@ class FileDetails extends Component {
 
 
   render() {
-    
+    const { classes } = this.props;
     if (this.state.dataMap == null) {
       return <Cylon/>
     }
     else{
       return (
-          <div>
-            <SimpleMap data={this.state.dataMap} lat_col={this.state.lat_col} lon_col={this.state.lon_col} />
-            <DataTable data={this.state.dataMap} header={this.state.cols}/>
-          </div>
+        <div className={classes.root}>
+      
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+          <Paper className={classes.paper}><SimpleMap data={this.state.dataMap} lat_col={this.state.lat_col} lon_col={this.state.lon_col} /> </Paper>
+          </Grid>
+          <Grid item xs={6}>
+          <Paper className={classes.paper}><DataTable data={this.state.dataMap} header={this.state.cols}/></Paper>
+          </Grid>
+        </Grid>
+    
+      </div>
         );
   }}
 }
 
-export default FileDetails;
+
+FileDetails.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+  
+export default withStyles(styles)(FileDetails);
