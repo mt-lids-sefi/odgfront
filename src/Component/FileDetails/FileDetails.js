@@ -51,7 +51,7 @@ class FileDetails extends Component {
     async loadFile()
     {
         let doc_id = this.state.doc_id
-        const promise = await axios.get("http://localhost:8000/map/"+doc_id)
+        const promise = await axios.get("http://localhost:8000/geo_file/"+doc_id)
         const status = promise.status;
         if(status===200)
         {

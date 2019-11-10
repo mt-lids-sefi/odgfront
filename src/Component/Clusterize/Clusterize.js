@@ -49,7 +49,7 @@ class Clusterize extends Component {
 
   async loadFiles()
   {
-    const promise = await axios.get("http://localhost:8000/file");
+    const promise = await axios.get("http://localhost:8000/geofiles");
     const status = promise.status;
     if(status===200)
     {

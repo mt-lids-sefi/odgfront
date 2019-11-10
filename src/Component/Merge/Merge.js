@@ -234,7 +234,7 @@ export default function Merge() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
-        'http://localhost:8000/file',
+        'http://localhost:8000/geofiles',
       );
       const status = result.status;
       if(status===200)

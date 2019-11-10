@@ -50,14 +50,14 @@ class PreviewFiles extends Component {
   async loadFiles()
   {
       let doc_ids = this.props.files
-      let promise = await axios.get("http://localhost:8000/map/"+doc_ids[0])
+      let promise = await axios.get("http://localhost:8000/geo_file/"+doc_ids[0])
       let status = promise.status;
       if(status===200)
       {
           const data = promise.data;
           this.setState({dataMapA:data})
       }
-      promise = await axios.get("http://localhost:8000/map/"+doc_ids[1])
+      promise = await axios.get("http://localhost:8000/geo_file/"+doc_ids[1])
       status = promise.status;
       if(status===200)
       {
