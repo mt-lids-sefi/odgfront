@@ -8,9 +8,10 @@ import Home from "./Component/Home/Home"
 import About from "./Component/About/About"
 import FileDetails from './Component/FileDetails/FileDetails';
 import FileUploader from './Component/FileUploader/FileUploader';
+import DataFileUploader from './Component/FileUploader/DataFileUploader';
 import Merge from './Component/Merge/Merge';
 import MutipleMap from './Component/MultipleMap/MultipleMap';
-import {Navbar,  Nav} from 'react-bootstrap'
+import {Navbar,  Nav, NavDropdown} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MergeMenu from './Component/Merge/MergeMenu';
 import LinkFiles from './Component/LinkFiles/LinkFIles';
@@ -33,10 +34,13 @@ class App extends Component {
           <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/files">Files</Nav.Link>
-            <Nav.Link href="/about">About</Nav.Link>
+            <NavDropdown title="Upload" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/fileuploader">Data File</NavDropdown.Item>
+              <NavDropdown.Item href="/datafileuploader">Geo Data File</NavDropdown.Item>
+            </NavDropdown>
             <Nav.Link href="/merge">Merge</Nav.Link>
-            <Nav.Link href="/fileuploader">Upload</Nav.Link>
             <Nav.Link href="/clusterize">Clusterize</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
           </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -47,6 +51,7 @@ class App extends Component {
               <Route path="/files" exact component={File} />
               <Route path="/details" exact component={FileDetails} />
               <Route path="/fileuploader" exact component={FileUploader} />
+              <Route path="/datafileuploader" exact component={DataFileUploader} />
               <Route path="/merge" exact component={Merge} />
               <Route path="/mergemenu" exact component={MergeMenu} />
               <Route path="/multmap" exact component={MutipleMap} />
