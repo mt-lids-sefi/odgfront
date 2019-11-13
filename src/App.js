@@ -19,6 +19,7 @@ import ClosestPoint from './Component/LinkFiles/ClosestPoint';
 import Polygon from './Component/LinkFiles/Polygon';
 import Clusterize from './Component/Clusterize/Clusterize'
 import Clusterizer from './Component/Clusterize/Clusterizer';
+import DataFiles from './Component/File/DataFiles';
 
 class App extends Component {
   render() {
@@ -35,8 +36,12 @@ class App extends Component {
           <Nav className="mr-auto">
             <Nav.Link href="/files">Files</Nav.Link>
             <NavDropdown title="Upload" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/fileuploader">Data File</NavDropdown.Item>
               <NavDropdown.Item href="/datafileuploader">Geo Data File</NavDropdown.Item>
+              <NavDropdown.Item href="/fileuploader">Data File</NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title="Files" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/files">Geo Files</NavDropdown.Item>
+              <NavDropdown.Item href="/datafiles">Data Files</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="/merge">Merge</Nav.Link>
             <Nav.Link href="/clusterize">Clusterize</Nav.Link>
@@ -49,6 +54,7 @@ class App extends Component {
               <Route path='/clusterize' component={Clusterize} />
               <Route path='/about' component={About} />
               <Route path="/files" exact component={File} />
+              <Route path="/datafiles" exact component={DataFiles} />
               <Route path="/details" exact component={FileDetails} />
               <Route path="/fileuploader" exact component={FileUploader} />
               <Route path="/datafileuploader" exact component={DataFileUploader} />
