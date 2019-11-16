@@ -34,7 +34,6 @@ class App extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/files">Files</Nav.Link>
             <NavDropdown title="Upload" id="basic-nav-dropdown">
               <NavDropdown.Item href="/datafileuploader">Geo Data File</NavDropdown.Item>
               <NavDropdown.Item href="/fileuploader">Data File</NavDropdown.Item>
@@ -44,7 +43,6 @@ class App extends Component {
               <NavDropdown.Item href="/datafiles">Data Files</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="/merge">Merge</Nav.Link>
-            <Nav.Link href="/clusterize">Clusterize</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
           </Nav>
           </Navbar.Collapse>

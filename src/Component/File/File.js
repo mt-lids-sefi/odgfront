@@ -80,6 +80,7 @@ class File extends Component {
             <TableCell>Name</TableCell>
             <TableCell align="right">Description</TableCell>
             <TableCell align="right">Map</TableCell>
+            <TableCell align="right">Clusterize</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -90,6 +91,7 @@ class File extends Component {
               </TableCell>
               <TableCell align="right">{row.description}</TableCell>
               <TableCell align="right"><Link to={{pathname: '/details', mapProps:{doc_id: row.id}}}>View Map</Link></TableCell>
+              <TableCell align="right"><Link to={{pathname: '/clusterizer', mapProps:{file_id: row.id}}}>Clusterize</Link></TableCell>
             </TableRow>
           ))}
         </TableBody>
