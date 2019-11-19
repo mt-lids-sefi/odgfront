@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import File from '../File/File';
 
 class Home extends Component {
   render() {
     return (
         <div>
-          <h2>HOLA</h2>
+          <File/>
         </div>
     );
   }

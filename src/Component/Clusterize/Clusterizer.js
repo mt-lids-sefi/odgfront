@@ -5,6 +5,7 @@ import Cylon from '../LoadingComponents/Cylon';
 import StepWizard from 'react-step-wizard';
 import FileDetails from '../FileDetails/FileDetails';
 import ClusterDetails from './Wizard/ClusterDetails';
+import ClusterSettings from './Wizard/ClusterSettings';
 
 const styles = theme => ({
     root: {
@@ -47,6 +48,7 @@ class Clusterizer extends Component {
             <div className={'jumbotron'}>
               <StepWizard>  
                 <ClusterDetails file={this.state.file_id} />
+                <ClusterSettings file={this.state.file_id} />
               </StepWizard>
             </div>
           </div>

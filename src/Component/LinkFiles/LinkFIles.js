@@ -57,9 +57,6 @@ export default function LinkFiles(props) {
       if (nearbyPoints){
         return <Redirect to={{pathname: '/polygon', mapProps:{files: selected}}} />
       }
-      if (similCols){
-        //return <Redirect to={{pathname: '/linkfiles', mapProps:{files: selected}}} />
-      }
     }
 
     return (
@@ -85,16 +82,6 @@ export default function LinkFiles(props) {
               <Typography>Puntos cercanos</Typography>
             </Grid>
             <Button variant="contained" className={classes.button} onClick={viewNearbyPoints}>
-                Link
-            </Button>
-          </Grid>
-        </Paper>
-        <Paper className={classes.paper}>
-          <Grid container wrap="nowrap" spacing={2}>
-            <Grid item xs>
-              <Typography>Similitud de columnas</Typography>
-            </Grid>
-            <Button variant="contained" className={classes.button} onClick={viewSimilCols}>
                 Link
             </Button>
           </Grid>

@@ -17,7 +17,6 @@ import MergeMenu from './Component/Merge/MergeMenu';
 import LinkFiles from './Component/LinkFiles/LinkFIles';
 import ClosestPoint from './Component/LinkFiles/ClosestPoint';
 import Polygon from './Component/LinkFiles/Polygon';
-import Clusterize from './Component/Clusterize/Clusterize'
 import Clusterizer from './Component/Clusterize/Clusterizer';
 import DataFiles from './Component/File/DataFiles';
 
@@ -35,8 +34,8 @@ class App extends Component {
           <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <NavDropdown title="Upload" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/datafileuploader">Geo Data File</NavDropdown.Item>
-              <NavDropdown.Item href="/fileuploader">Data File</NavDropdown.Item>
+              <NavDropdown.Item href="/fileuploader">Geo Data File</NavDropdown.Item>
+              <NavDropdown.Item href="/datafileuploader">Data File</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Files" id="basic-nav-dropdown">
               <NavDropdown.Item href="/files">Geo Files</NavDropdown.Item>
@@ -49,7 +48,6 @@ class App extends Component {
         </Navbar>
           <Switch>
               <Route exact path='/' component={Home} />
-              <Route path='/clusterize' component={Clusterize} />
               <Route path='/about' component={About} />
               <Route path="/files" exact component={File} />
               <Route path="/datafiles" exact component={DataFiles} />
