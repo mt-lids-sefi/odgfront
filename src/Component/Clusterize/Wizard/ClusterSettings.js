@@ -85,25 +85,23 @@ class ClusterSettings extends Component {
   
     handleRadioChange = event => {
       this.setState({algorithm : event.target.value})
+      this.props.update(event.target.name, event.target.value);
     }
 
     handleInputChange = event => {
       this.setState({k : event.target.value})
+      this.props.update(event.target.name, event.target.value);
     }
 
     onChangeX = event => {
       this.setState({col_x : event.target.value})
+      this.props.update(event.target.name, event.target.value);
     }
     onChangeY = event => {
       this.setState({col_y : event.target.value})
+      this.props.update(event.target.name, event.target.value);
     }
 
-    preview = async () => {
-      this.setState({loading: true})
-      
-  
-    }
-  
     render(){
       const { classes } = this.props;
       return (

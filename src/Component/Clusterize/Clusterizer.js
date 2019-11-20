@@ -30,10 +30,17 @@ class Clusterizer extends Component {
     super(props);
     this.state = {
      file_id : this.props.location.mapProps.file_id,
-     //file_id : 1,
-     props : this.props
+     props : this.props,
+     form: {file: this.props.location.mapProps.file_id , algorithm:'',  k: '', col_x: '', col_y: '', name:'', description: ''},
     };
   }
+
+  updateForm = (key, value) => {
+    const { form } = this.state;
+
+    form[key] = value;
+    this.setState({ form });
+}
 
 
 
@@ -48,7 +55,7 @@ class Clusterizer extends Component {
             <div className={'jumbotron'}>
               <StepWizard>  
                 <ClusterDetails file={this.state.file_id} />
-                <ClusterSettings file={this.state.file_id} />
+                <ClusterSettings update={this.updateForm}  form={this.state.form} file={this.state.file_id} />
               </StepWizard>
             </div>
           </div>
