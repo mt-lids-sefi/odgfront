@@ -11,6 +11,21 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+});
+
 
 const Stats = ({
     currentStep,
@@ -43,11 +58,9 @@ class ClusterSettings extends Component {
 
     constructor(props) {
       super(props);
-      this.state = {col_x: "", col_y: ""};
+      this.state = {};
       if (this.props.file){
-        this.state = {
-          doc_id : this.props.file
-         };
+        this.state = {doc_id : this.props.file, col_x: '', col_y: '', algorithm: 'meanshift'};
       }
       this.loadFile = this.loadFile.bind(this);
     }
@@ -72,7 +85,17 @@ class ClusterSettings extends Component {
   
     handleRadioChange = event => {
       this.setState({algorithm : event.target.value})
-      //this.props.update(event.target.name, event.target.value);
+    }
+
+    handleInputChange = event => {
+      this.setState({k : event.target.value})
+    }
+
+    onChangeX = event => {
+      this.setState({col_x : event.target.value})
+    }
+    onChangeY = event => {
+      this.setState({col_y : event.target.value})
     }
 
     preview = async () => {
@@ -82,6 +105,7 @@ class ClusterSettings extends Component {
     }
   
     render(){
+      const { classes } = this.props;
       return (
         <div>
            <Typography variant="h5" id="tableTitle"> Settings</Typography>
@@ -100,22 +124,30 @@ class ClusterSettings extends Component {
                       onChange={this.handleInputChange} />
             </div>
            }
-           {this.state.data &&
-           <div>
-             <div>
-             <InputLabel id="demo-simple-select-filled-label">Column X</InputLabel>
-              <Select name="col_x" value={this.state.col_x} onChange={this.onChange}>
-                    {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
-              </Select>
-            </div>
+           <hr />
+           {this.state.data  &&
+            
             <div>
-            <InputLabel id="demo-simple-select-filled-label">Column Y</InputLabel>
-              <Select name="col_y" value={this.state.col_y} onChange={this.onChange}>
-                    {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
-              </Select>
-            </div>
-            </div>
+              <div>
+              <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-filled-label">Column X</InputLabel>
+               <Select name="col_x" value={this.state.col_x} onChange={this.onChangeX}>
+                     {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
+               </Select>
+               </FormControl>
+             </div>
+             <hr />
+             <div>
+             <FormControl variant="outlined" className={classes.formControl}>
+             <InputLabel id="demo-simple-select-filled-label">Column Y</InputLabel>
+               <Select name="col_y" value={this.state.col_y} onChange={this.onChangeY}>
+                     {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
+               </Select>
+               </FormControl>
+             </div>
+             </div>
            }
+      
 
            
             <Stats step={2}  {...this.props} />
@@ -125,4 +157,8 @@ class ClusterSettings extends Component {
   }
 
 
-export default ClusterSettings;
+ClusterSettings.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
+export default withStyles(styles)(ClusterSettings);
