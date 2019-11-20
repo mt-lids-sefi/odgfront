@@ -43,7 +43,7 @@ class ClusterSettings extends Component {
 
     constructor(props) {
       super(props);
-      this.state = {};
+      this.state = {col_x: "", col_y: ""};
       if (this.props.file){
         this.state = {
           doc_id : this.props.file
@@ -104,13 +104,13 @@ class ClusterSettings extends Component {
            <div>
              <div>
              <InputLabel id="demo-simple-select-filled-label">Column X</InputLabel>
-              <Select name="col_x" onChange={this.onChange}>
+              <Select name="col_x" value={this.state.col_x} onChange={this.onChange}>
                     {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
               </Select>
             </div>
             <div>
             <InputLabel id="demo-simple-select-filled-label">Column Y</InputLabel>
-              <Select name="col_y" onChange={this.onChange}>
+              <Select name="col_y" value={this.state.col_y} onChange={this.onChange}>
                     {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
               </Select>
             </div>
