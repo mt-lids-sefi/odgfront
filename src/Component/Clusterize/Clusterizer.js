@@ -6,6 +6,7 @@ import StepWizard from 'react-step-wizard';
 import FileDetails from '../FileDetails/FileDetails';
 import ClusterDetails from './Wizard/ClusterDetails';
 import ClusterSettings from './Wizard/ClusterSettings';
+import ClusterPreview from './Wizard/ClusterPreview';
 
 const styles = theme => ({
     root: {
@@ -56,6 +57,7 @@ class Clusterizer extends Component {
               <StepWizard>  
                 <ClusterDetails file={this.state.file_id} />
                 <ClusterSettings update={this.updateForm}  form={this.state.form} file={this.state.file_id} />
+                <ClusterPreview update={this.updateForm}  form={this.state.form} file={this.state.file_id} />
               </StepWizard>
             </div>
           </div>
