@@ -60,7 +60,8 @@ class ClusterSettings extends Component {
       super(props);
       this.state = {};
       if (this.props.file){
-        this.state = {doc_id : this.props.file, col_x: '', col_y: '', algorithm: 'meanshift'};
+        this.state = {doc_id : this.props.file, col_x: '', col_y: '', algorithm: 'meanshift', 
+        available_preview: true, loading: false, k: ''};
       }
       this.loadFile = this.loadFile.bind(this);
     }
@@ -79,27 +80,72 @@ class ClusterSettings extends Component {
         if(status===200)
         {
             const data = promise.data;
-            this.setState({data:data.rows, lat_col: data.lat_col, lon_col: data.lon_col, cols: data.cols}); 
+            this.setState({data:data.rows, lat_col: data.lat_col, lon_col: data.lon_col, cols: data.cols, col_x: data.cols[0], col_y: data.cols[0]});
         }
     }
   
     handleRadioChange = event => {
       this.setState({algorithm : event.target.value})
       this.props.update(event.target.name, event.target.value);
+      if (event.target.value == 'kmeans' && this.state.k == ''){
+        this.setState({available_preview: false})
+      }
+      if (event.target.value == 'kmeans' && this.state.k != ''){
+        this.setState({available_preview: true})
+      }
+      if (event.target.value == 'meanshift'){
+        this.setState({available_preview: true})
+      }
+      
     }
 
     handleInputChange = event => {
       this.setState({k : event.target.value})
-      this.props.update(event.target.name, event.target.value);
+      //this.props.update(event.target.name, event.target.value);
+      if (event.target.value == ''){
+        this.setState({available_preview: false})
+      }
+      else{
+        this.setState({available_preview: true})
+      }
     }
 
     onChangeX = event => {
       this.setState({col_x : event.target.value})
-      this.props.update(event.target.name, event.target.value);
+      //this.props.update(event.target.name, event.target.value);
     }
     onChangeY = event => {
       this.setState({col_y : event.target.value})
-      this.props.update(event.target.name, event.target.value);
+      //this.props.update(event.target.name, event.target.value);
+    }
+
+    preview = async () => {
+        this.setState({loading: true})
+      
+       if (this.props.form.algorithm == 'kmeans'){
+          let k=""
+          if(this.state.k != null ){
+              k="/"+this.state.k
+          }
+          const promise = await axios.get("http://localhost:8000/clusterize_kmeans_preview/"+this.state.doc_id+"/"+this.state.col_x+"/"+this.state.col_y+k)
+          let status = promise.status;
+          if(status===200)
+          {
+              const data = promise.data;
+              this.setState({cluster:data.results, loaded: true, loading:false})
+          }
+        }
+        else if (this.props.form.algorithm == 'meanshift'){
+          const promise = await axios.get("http://localhost:8000/clusterize_meanshift_preview/"+this.state.doc_id+"/"+this.state.col_x+"/"+this.state.col_y)
+          let status = promise.status;
+          if(status===200)
+          {
+              const data = promise.data;
+              this.setState({cluster:data.results, loaded: true, loading:false})
+          }
+      }
+
+        
     }
 
     render(){
@@ -146,7 +192,9 @@ class ClusterSettings extends Component {
              </div>
            }
       
-
+            <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Preview </Button>
+            {this.state.loading ? <Cylon/>
+            : this.state.loaded && <Typography variant="h5" id="tableTitle"> Results: {this.state.cluster}</Typography> }
            
             <Stats step={2}  {...this.props} />
         </div>

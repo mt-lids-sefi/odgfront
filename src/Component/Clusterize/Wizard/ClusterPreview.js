@@ -57,7 +57,7 @@ const Stats = ({
       super(props);
       this.state = {};
       if (this.props.file){
-        this.state = {doc_id : this.props.file, col_x: this.props.form.col_x, col_y: this.props.form.col_y, algorithm: this.props.form.algorithm};
+        this.state = {doc_id : this.props.file};
       }
       this.loadPreview = this.loadPreview.bind(this);
     }

@@ -32,7 +32,7 @@ class Clusterizer extends Component {
     this.state = {
      file_id : this.props.location.mapProps.file_id,
      props : this.props,
-     form: {file: this.props.location.mapProps.file_id , algorithm:'',  k: '', col_x: '', col_y: '', name:'', description: ''},
+     form: {file: this.props.location.mapProps.file_id, algorithm: 'meanshift'},
     };
   }
 
@@ -57,7 +57,6 @@ class Clusterizer extends Component {
               <StepWizard>  
                 <ClusterDetails file={this.state.file_id} />
                 <ClusterSettings update={this.updateForm}  form={this.state.form} file={this.state.file_id} />
-                <ClusterPreview update={this.updateForm}  form={this.state.form} file={this.state.file_id} />
               </StepWizard>
             </div>
           </div>
