@@ -132,7 +132,7 @@ class ClusterSettings extends Component {
           if(status===200)
           {
               const data = promise.data;
-              this.setState({cluster:data.results, loaded: true, loading:false})
+              this.setState({centroids:data.centroids, labels: data.labels, clustered_data: data.data, cluster_size: data.cluster_size, loaded: true, loading:false})
           }
         }
         else if (this.props.form.algorithm == 'meanshift'){
@@ -141,7 +141,7 @@ class ClusterSettings extends Component {
           if(status===200)
           {
               const data = promise.data;
-              this.setState({cluster:data.results, loaded: true, loading:false})
+              this.setState({centroids:data.centroids, labels: data.labels, clustered_data: data.data, cluster_size: data.cluster_size, loaded: true, loading:false})
           }
       }
 
@@ -194,7 +194,7 @@ class ClusterSettings extends Component {
       
             <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Preview </Button>
             {this.state.loading ? <Cylon/>
-            : this.state.loaded && <Typography variant="h5" id="tableTitle"> Results: {this.state.cluster}</Typography> }
+            : this.state.loaded && <Typography variant="h5" id="tableTitle"> Results: {this.state.centroids+", LABELS:"+this.state.labels}</Typography> }
            
             <Stats step={2}  {...this.props} />
         </div>
