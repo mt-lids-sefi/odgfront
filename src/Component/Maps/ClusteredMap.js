@@ -14,7 +14,9 @@ class ClusteredMap extends Component {
          lat_col : this.props.lat_col,
          lon_col : this.props.lon_col,
          cluster_size: this.props.cluster_size,
-         clustered_data: this.props.clustered_data
+         clustered_data: this.props.clustered_data,
+         col_a: this.props.col_a, 
+         col_b: this.props.col_b
         };
     }
 }
