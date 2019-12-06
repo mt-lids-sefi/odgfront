@@ -11,10 +11,10 @@ class ClusteredMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
-         data : this.props.data,
          lat_col : this.props.lat_col,
          lon_col : this.props.lon_col,
-         cluster_size: this.props.cluster_size
+         cluster_size: this.props.cluster_size,
+         clustered_data: this.props.clustered_data
         };
     }
 }
