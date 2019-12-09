@@ -15,6 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import ClusteredMap from '../../Maps/ClusteredMap';
 
 const styles = theme => ({
   formControl: {
@@ -194,7 +195,9 @@ class ClusterSettings extends Component {
       
             <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Preview </Button>
             {this.state.loading ? <Cylon/>
-            : this.state.loaded && <Typography variant="h5" id="tableTitle"> Results: {this.state.centroids+", LABELS:"+this.state.labels}</Typography> }
+            : this.state.loaded && <Typography variant="h5" id="tableTitle"> Results: {this.state.centroids+", LABELS:"+this.state.labels}</Typography>
+            && <ClusteredMap lat_col={this.state.lat_col} lon_col={this.state.lon_col} cluster_size={this.state.cluster_size} 
+                            clustered_data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}/> }
            
             <Stats step={2}  {...this.props} />
         </div>

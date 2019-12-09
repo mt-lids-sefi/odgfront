@@ -15,3 +15,17 @@ export function getIcon(colour){
         });
     return icon
 }
+
+export function getAllIcons(){
+    let icons = []
+    icons.push(getIcon('green'))
+    icons.push(getIcon('violet'))
+    icons.push(getIcon('red'))
+    icons.push(getIcon('blue'))
+    return icons
+}
+
+export function getIconByNumber(number){
+    const colours = {0: 'yellow', 1: 'red', 2: 'green', 3: 'blue', 4: 'black', 5: 'grey', 6: 'orange', 7: 'violet'}
+    return getIcon(colours[number])
+}

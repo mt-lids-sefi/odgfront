@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import 'react-leaflet-markercluster/dist/styles.min.css';
 import axios from "axios";
 import Cylon from "../LoadingComponents/Cylon"
-import { Map, TileLayer, Marker, LayerGroup, LayersControl } from "react-leaflet";
+import { Map, TileLayer, Marker,  LayersControl } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import  {getIcon} from  '../../Utils/utils' 
-const { BaseLayer, Overlay } = LayersControl
+const {Overlay } = LayersControl
 
 class MutipleMap extends Component {
     constructor(props) {
