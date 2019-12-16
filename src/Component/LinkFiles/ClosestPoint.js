@@ -53,6 +53,7 @@ class ClosestPoints extends Component {
       const { classes } = this.props;
         return(
           <div className={classes.root}>
+            
             <div className={'jumbotron'}>
                     <StepWizard>
                       <PreviewFiles files={this.state.files} update={this.updateForm}/>

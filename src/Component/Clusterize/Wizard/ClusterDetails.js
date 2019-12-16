@@ -4,6 +4,33 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Cylon from '../../LoadingComponents/Cylon';
 import FileDetails from '../../FileDetails/FileDetails';
+import { Paper } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  paper: { 
+    padding: theme.spacing(2),
+    textAlign: 'left',
+    color: theme.palette.text.secondary,
+  },
+  root: {
+    flexGrow: 1
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+  input: {
+    display: 'none',
+  }
+});
 
 
 const Stats = ({
@@ -46,17 +73,20 @@ class ClusterDetails extends Component {
   
 
     render(){
+      const { classes } = this.props;
       if (!this.props.file){
         return <Cylon/>
       }
       else {
       return (     
            <div>
+              <Paper className={classes.paper}>
             <div >
-            <Typography variant="h5" id="tableTitle"> File preview & settings </Typography>
+            <Typography variant="h6" id="tableTitle" align="left"> File preview & settings </Typography>
             </div>    
               <FileDetails file={this.props.file} />
             <Stats step={1} {...this.props} />
+            </Paper>
         </div>
         );
       }
@@ -64,4 +94,9 @@ class ClusterDetails extends Component {
 }
 
 
-export default ClusterDetails;
+
+ClusterDetails.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(ClusterDetails);

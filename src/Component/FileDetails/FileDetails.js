@@ -73,10 +73,10 @@ class FileDetails extends Component {
       
         <Grid container spacing={3}>
           <Grid item xs={6}>
-          <Paper className={classes.paper}><SimpleMap data={this.state.dataMap} lat_col={this.state.lat_col} lon_col={this.state.lon_col} /> </Paper>
+            <SimpleMap data={this.state.dataMap} lat_col={this.state.lat_col} lon_col={this.state.lon_col} /> 
           </Grid>
           <Grid item xs={6}>
-          <Paper className={classes.paper}><DataTable data={this.state.dataMap} header={this.state.cols}/></Paper>
+            <DataTable data={this.state.dataMap} header={this.state.cols}/>
           </Grid>
         </Grid>
     

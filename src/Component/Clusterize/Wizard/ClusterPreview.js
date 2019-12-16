@@ -59,46 +59,10 @@ const Stats = ({
       if (this.props.file){
         this.state = {doc_id : this.props.file};
       }
-      this.loadPreview = this.loadPreview.bind(this);
     }
   
 
-    async componentDidMount() {
-      this.loadPreview();
-      }
-
-
-    async loadPreview()
-    {
-        console.log("paso")
-        console.log(this.props.form.algorithm)
-        let doc_id = this.state.doc_id
-        if (this.props.form.algorithm == 'kmeans'){
-            let k=""
-            if(this.state.k != null ){
-                k="/"+this.state.k
-            }
-            const promise = await axios.get("http://localhost:8000/kmeans/"+doc_id+"/"+this.state.col_x+"/"+this.state.col_y+k)
-            const status = promise.status;
-            if(status===200)
-            {
-                const data = promise.data;
-                this.setState({results:data.results}); 
-                
-            }
-        }
-        else if (this.props.form.algorithm == 'meanshift'){
-            const promise = await axios.get("http://localhost:8000/clusterize_meanshift_preview/"+doc_id+"/"+this.state.col_x+"/"+this.state.col_y)
-            const status = promise.status;
-            if(status===200)
-            {
-                const data = promise.data;
-                this.setState({results:data.results}); 
-                console.log(data)
-            }
-        }
-        
-    }
+ 
   
     
 

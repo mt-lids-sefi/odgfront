@@ -37,7 +37,7 @@ class App extends Component {
               <NavDropdown.Item href="/fileuploader">Geo Data File</NavDropdown.Item>
               <NavDropdown.Item href="/datafileuploader">Data File</NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Files" id="basic-nav-dropdown">
+            <NavDropdown title="Files" id="basic-nav-dropdown" href="/files">
               <NavDropdown.Item href="/files">Geo Files</NavDropdown.Item>
               <NavDropdown.Item href="/datafiles">Data Files</NavDropdown.Item>
             </NavDropdown>

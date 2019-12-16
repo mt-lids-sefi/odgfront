@@ -16,6 +16,10 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ClusteredMap from '../../Maps/ClusteredMap';
+import Grid from '@material-ui/core/Grid';
+import { Paper } from '@material-ui/core';
+import FileDetails from '../../FileDetails/FileDetails';
+import ClusterChart from '../../Charts/ClusterChart';
 
 const styles = theme => ({
   formControl: {
@@ -25,6 +29,20 @@ const styles = theme => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  paper: { 
+    padding: theme.spacing(2),
+    textAlign: 'left',
+    color: theme.palette.text.secondary,
+  },
+  root: {
+    flexGrow: 1
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+  input: {
+    display: 'none',
+  }
 });
 
 
@@ -153,55 +171,71 @@ class ClusterSettings extends Component {
       const { classes } = this.props;
       return (
         <div>
-           <Typography variant="h5" id="tableTitle"> Settings</Typography>
-           <label>Select the cluster algorithm </label>
-           
-            <RadioGroup aria-label="gender" name="algorithm" value={this.state.algorithm} onChange={this.handleRadioChange}>
-                <FormControlLabel value="meanshift" control={<Radio color="primary"/>} label="Mean Shift" />
-                <FormControlLabel value="kmeans" control={<Radio color="primary"/>} label="K Means" />
-            </RadioGroup>
-  
-           <hr />
-           {this.state.algorithm == "kmeans" &&
-           <div>
-            <label>Set the K </label>
-            <input type='number' className='form-control' name='max_distance' placeholder='Max distance'
-                      onChange={this.handleInputChange} />
-            </div>
-           }
-           <hr />
-           {this.state.data  &&
+         <Paper className={classes.paper}>
+         <div > 
+            <Typography variant="h6" id="tableTitle" align="left" > Settings </Typography>
             
-            <div>
-              <div>
-              <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel id="demo-simple-select-filled-label">Column X</InputLabel>
-               <Select name="col_x" value={this.state.col_x} onChange={this.onChangeX}>
-                     {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
-               </Select>
-               </FormControl>
-             </div>
-             <hr />
-             <div>
-             <FormControl variant="outlined" className={classes.formControl}>
-             <InputLabel id="demo-simple-select-filled-label">Column Y</InputLabel>
-               <Select name="col_y" value={this.state.col_y} onChange={this.onChangeY}>
-                     {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
-               </Select>
-               </FormControl>
-             </div>
-             </div>
-           }
-      
-            <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Preview </Button>
-            {this.state.loading ? <Cylon/>
-            : this.state.loaded && <Typography variant="h5" id="tableTitle"> Results: {this.state.centroids+", LABELS:"+this.state.labels}</Typography>
-            && <ClusteredMap lat_col={this.state.lat_col} lon_col={this.state.lon_col} cluster_size={this.state.cluster_size} 
-                            clustered_data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}/> }
-           
-            <Stats step={2}  {...this.props} />
+            </div>    
+          <Grid container spacing={3}>
+            <Grid item xs={6}>
+             
+
+                <label>Select the cluster algorithm </label>
+
+                <RadioGroup aria-label="gender" name="algorithm" value={this.state.algorithm} onChange={this.handleRadioChange}>
+                  <FormControlLabel value="meanshift" control={<Radio color="primary"/>} label="Mean Shift" />
+                  <FormControlLabel value="kmeans" control={<Radio color="primary"/>} label="K Means" />
+                </RadioGroup>
+
+              
+                {this.state.algorithm == "kmeans" &&
+                <div>
+                <label>Set the K </label>
+                <input type='number' className='form-control' name='max_distance' placeholder='K'
+                  onChange={this.handleInputChange} />
+                </div>
+                }
+                <hr />
+                {this.state.data  &&
+
+                <div>
+                  <div>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                      <InputLabel id="demo-simple-select-filled-label">Column X</InputLabel>
+                      <Select name="col_x" value={this.state.col_x} onChange={this.onChangeX}>
+                        {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
+                      </Select>
+                    </FormControl>
+                    </div>
+                    <hr />
+                    <div>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                      <InputLabel id="demo-simple-select-filled-label">Column Y</InputLabel>
+                      <Select name="col_y" value={this.state.col_y} onChange={this.onChangeY}>
+                        {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
+                      </Select>
+                    </FormControl>
+                  </div>
+                </div>
+                }
+
+                <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Preview </Button>
+             
+            </Grid>
+            {this.state.loading ? <Cylon/> : this.state.loaded && 
+            <Grid item xs={6}>
+              
+              <ClusteredMap lat_col={this.state.lat_col} lon_col={this.state.lon_col} cluster_size={this.state.cluster_size} 
+                      clustered_data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}/> 
+              <ClusterChart col_x={this.state.col_x} col_y={this.state.col_y}  />
+            </Grid>
+            }
+
+          </Grid>
+          <Stats step={2}  {...this.props} />
+          </Paper>
         </div>
-    );
+      );
     }
   }
 

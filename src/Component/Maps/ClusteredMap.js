@@ -58,8 +58,6 @@ class ClusteredMap extends Component {
             const zoom = 13
             let markers = this.makeMarkers(this.state.clustered_data)
             let overlays = this.makeOverlays(markers)
-            console.log(markers)
-            console.log(overlays)
             return (
                 <div>
                     <Map className="markercluster-map" center={center} zoom={zoom} maxZoom={18}>
