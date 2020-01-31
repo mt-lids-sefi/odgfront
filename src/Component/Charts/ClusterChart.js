@@ -1,10 +1,10 @@
 import React,  { Component }  from 'react';
 import axios from "axios";
 import Typography from '@material-ui/core/Typography';
-import Cylon from '../../LoadingComponents/Cylon';
+import Cylon from '../../Component/LoadingComponents/Cylon';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from Recharts;
+import {ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 
 
 const styles = theme => ({
