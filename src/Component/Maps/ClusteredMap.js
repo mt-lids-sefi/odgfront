@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import 'react-leaflet-markercluster/dist/styles.min.css';
+import './styles.css';
+//import 'react-leaflet-markercluster/dist/styles.min.css';
 import Cylon from "../LoadingComponents/Cylon"
 import  { getIconByNumber} from  '../../Utils/utils' 
-
+import L from 'leaflet';
 import {LayersControl } from "react-leaflet";
 const {Overlay } = LayersControl
+
+
+
+const createClusterCustomIcon = function (cluster) {
+    return L.divIcon({
+      html: `<span>${cluster.getChildCount()}</span>`,
+      className: 'marker-cluster-custom',
+      iconSize: L.point(40, 40, true),
+    });
+  };
 
 class ClusteredMap extends Component {
 
@@ -37,11 +48,14 @@ class ClusteredMap extends Component {
         return markers
       }
 
+      
+
     makeOverlays(markers){
+
         let overlays = []
         for (let i = 0; i < markers.length; i++){
             let overlay = <Overlay checked name={"Cluster n° "+i}>
-                                <MarkerClusterGroup> {markers[i]} </MarkerClusterGroup>  
+                                <MarkerClusterGroup  iconCreateFunction={createClusterCustomIcon} > {markers[i]} </MarkerClusterGroup>  
                            </Overlay>
             overlays.push(overlay)
         }
@@ -49,7 +63,7 @@ class ClusteredMap extends Component {
     }
 
     render (){
-
+        console.log(this.state.clustered_data)
         if (this.state.clustered_data == null) {
             return <Cylon/>
         }

@@ -7,7 +7,7 @@ const Balls = () => (
   <Section>
       <Article key={"balls"}>
         <ReactLoading type={"balls"} color="#fff" />
-        <Prop>{"Cargando"}</Prop>
+        <Prop>{"Loading"}</Prop>
       </Article>
   </Section>
 );

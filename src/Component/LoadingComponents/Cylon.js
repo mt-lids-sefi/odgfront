@@ -7,7 +7,7 @@ const Cylon = () => (
   <Section>
       <Article key={"cylon"}>
         <ReactLoading type={"cylon"} color="#fff" />
-        <Prop>{"Cargando"}</Prop>
+        <Prop>{"Loading"}</Prop>
       </Article>
   </Section>
 );
