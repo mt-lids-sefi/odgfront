@@ -4,20 +4,11 @@ import MarkerClusterGroup from 'react-leaflet-markercluster';
 import './styles.css';
 //import 'react-leaflet-markercluster/dist/styles.min.css';
 import Cylon from "../LoadingComponents/Cylon"
-import  { getIconByNumber} from  '../../Utils/utils' 
+import  { getIconByNumber, getIcon} from  '../../Utils/utils' 
 import L from 'leaflet';
 import {LayersControl } from "react-leaflet";
 const {Overlay } = LayersControl
 
-
-
-const createClusterCustomIcon = function (cluster) {
-    return L.divIcon({
-      html: `<span>${cluster.getChildCount()}</span>`,
-      className: 'marker-cluster-custom',
-      iconSize: L.point(40, 40, true),
-    });
-  };
 
 class ClusteredMap extends Component {
 
@@ -29,9 +20,18 @@ class ClusteredMap extends Component {
          cluster_size: this.props.cluster_size,
          clustered_data: this.props.clustered_data,
          col_x: this.props.col_x, 
-         col_y: this.props.col_y
+         col_y: this.props.col_y,
+         currentCluster: 0
         };
     }
+
+     createClusterCustomIcon = (cluster, number) => {
+        return L.divIcon({
+          html: `<span>${cluster.getChildCount()}</span>`,
+          className: 'marker-cluster-custom-'+number,
+          iconSize: L.point(40, 40, true),
+        });
+      };
 
     makeMarkers(dataMap){
         let markers = [] 
@@ -43,7 +43,7 @@ class ClusteredMap extends Component {
           let c = Object.entries(dataMap)[i][1]['cluster']
           let lat = Object.entries(dataMap)[i][1][this.state.lat_col]
           let lon = Object.entries(dataMap)[i][1][this.state.lon_col]
-          markers[c].push(<Marker  key={i} position={[lat, lon]} icon={getIconByNumber(c)} />)
+          markers[c].push(<Marker  key={i} position={[lat, lon]} icon={getIcon(c)} />)
         }
         return markers
       }
@@ -55,7 +55,7 @@ class ClusteredMap extends Component {
         let overlays = []
         for (let i = 0; i < markers.length; i++){
             let overlay = <Overlay checked name={"Cluster n° "+i}>
-                                <MarkerClusterGroup  iconCreateFunction={createClusterCustomIcon} > {markers[i]} </MarkerClusterGroup>  
+                                <MarkerClusterGroup iconCreateFunction={(c) => this.createClusterCustomIcon(c, i)} > {markers[i]} </MarkerClusterGroup>  
                            </Overlay>
             overlays.push(overlay)
         }
@@ -63,7 +63,6 @@ class ClusteredMap extends Component {
     }
 
     render (){
-        console.log(this.state.clustered_data)
         if (this.state.clustered_data == null) {
             return <Cylon/>
         }

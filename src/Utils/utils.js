@@ -1,12 +1,16 @@
 import * as L from 'leaflet'
 
+
+
 /**
  * 
  * @param {string} color  it has to be a 'common' colour (TODO enum)
  */
-export function getIcon(colour){
+export function getIcon(number){
     const icon = new L.Icon({
-        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-'+colour+'.png',
+        //iconUrl: './icons/'+number+'.png',
+        iconUrl: require('./icons/'+number+'.png'),
+        //iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-'+colour+'.png',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
         iconSize: [25, 41],
         iconAnchor: [12, 41],
@@ -16,16 +20,10 @@ export function getIcon(colour){
     return icon
 }
 
-export function getAllIcons(){
-    let icons = []
-    icons.push(getIcon('green'))
-    icons.push(getIcon('violet'))
-    icons.push(getIcon('red'))
-    icons.push(getIcon('blue'))
-    return icons
-}
-
-export function getIconByNumber(number){
-    const colours = {0: 'yellow', 1: 'red', 2: 'green', 3: 'blue', 4: 'black', 5: 'grey', 6: 'orange', 7: 'violet'}
-    return getIcon(colours[number])
-}
+export function createClusterCustomIcon (cluster, number) {
+    return L.divIcon({
+      html: `<span>${cluster.getChildCount()}</span>`,
+      className: 'marker-cluster-custom-'+number,
+      iconSize: L.point(40, 40, true),
+    });
+  };

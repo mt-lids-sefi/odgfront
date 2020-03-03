@@ -53,8 +53,8 @@ class MutipleMap extends Component {
     }
 
   render() {
-    const greenIcon = getIcon('green')
-    const violetIcon = getIcon('violet')
+    const greenIcon = getIcon(2)
+    const violetIcon = getIcon(3)
 
     if (this.state.dataMapA == null || this.state.dataMapB == null){
       return <Cylon/>

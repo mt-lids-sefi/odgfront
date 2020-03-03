@@ -3,7 +3,7 @@ import { Map, TileLayer, Marker } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import 'react-leaflet-markercluster/dist/styles.min.css';
 import Cylon from "../LoadingComponents/Cylon"
-
+import  { getIconByNumber, getIcon} from  '../../Utils/utils' 
 
 
 class SimpleMap extends Component {
@@ -27,7 +27,7 @@ class SimpleMap extends Component {
        for (let i = 0; i < Object.keys(this.state.data).length; i++){
         let lat = Object.entries(this.state.data)[i][1][this.state.lat_col]
         let lon = Object.entries(this.state.data)[i][1][this.state.lon_col]
-        markers.push(<Marker  key={i} position={[lat, lon]}/>) 
+        markers.push(<Marker  key={i} position={[lat, lon]} icon={getIcon(1)}/>) 
       }
     return (
           <div>
