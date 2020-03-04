@@ -1,5 +1,5 @@
 .marker-cluster-custom {
-    background: #9370db;
+    background: #e9e9e9;
     border: 3px solid #ededed;
     border-radius: 50%;
     color: #ededed;
@@ -32,8 +32,152 @@
   width: 40px;
 }
 
-.marker-cluster-custom-2 {
+.marker-cluster-custom-6 {
   background: #cc0a37;
+  border: 3px solid #ededed;
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 37px;
+  text-align: center;
+  width: 40px;
+}
+
+.marker-cluster-custom-3 {
+  background: #a1f10b;
+  border: 3px solid #ededed;
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 37px;
+  text-align: center;
+  width: 40px;
+}
+
+.marker-cluster-custom-4 {
+  background: #403e94;
+  border: 3px solid #ededed;
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 37px;
+  text-align: center;
+  width: 40px;
+}
+
+
+.marker-cluster-custom-5 {
+  background: #9d9ce0;
+  border: 3px solid #ededed;
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 37px;
+  text-align: center;
+  width: 40px;
+}
+
+.marker-cluster-custom-2 {
+  background: #e4e99e;
+  border: 3px solid #ededed;
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 37px;
+  text-align: center;
+  width: 40px;
+}
+
+.marker-cluster-custom-7 {
+  background: #dbb7bc;
+  border: 3px solid #ededed;
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 37px;
+  text-align: center;
+  width: 40px;
+}
+
+.marker-cluster-custom-8 {
+  background: #d6ec0b;
+  border: 3px solid #ededed;
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 37px;
+  text-align: center;
+  width: 40px;
+}
+
+.marker-cluster-custom-9 {
+  background: #c28ce6;
+  border: 3px solid #ededed;
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 37px;
+  text-align: center;
+  width: 40px;
+}
+
+.marker-cluster-custom-10 {
+  background: #df9409;
+  border: 3px solid #ededed;
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 37px;
+  text-align: center;
+  width: 40px;
+}
+
+.marker-cluster-custom-11 {
+  background: #6d4202;
+  border: 3px solid #ededed;
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 37px;
+  text-align: center;
+  width: 40px;
+}
+
+.marker-cluster-custom-12 {
+  background: #d7ff45;
+  border: 3px solid #ededed;
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 37px;
+  text-align: center;
+  width: 40px;
+}
+
+.marker-cluster-custom-13 {
+  background: #15b693;
+  border: 3px solid #ededed;
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 37px;
+  text-align: center;
+  width: 40px;
+}
+
+.marker-cluster-custom-14 {
+  background: #05038d;
+  border: 3px solid #ededed;
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 37px;
+  text-align: center;
+  width: 40px;
+}
+
+.marker-cluster-custom-15 {
+  background: #da10da;
   border: 3px solid #ededed;
   border-radius: 50%;
   color: #ededed;
