@@ -169,6 +169,7 @@ class ClusterSettings extends Component {
 
     render(){
       const { classes } = this.props;
+      
       return (
         <div>
          <Paper className={classes.paper}>
@@ -227,7 +228,7 @@ class ClusterSettings extends Component {
               
               <ClusteredMap lat_col={this.state.lat_col} lon_col={this.state.lon_col} cluster_size={this.state.cluster_size} 
                       clustered_data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}/> 
-              <ClusterChart col_x={this.state.col_x} col_y={this.state.col_y}  />
+              <ClusterChart data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}  />
             </Grid>
             }
 

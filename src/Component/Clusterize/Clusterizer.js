@@ -7,6 +7,8 @@ import FileDetails from '../FileDetails/FileDetails';
 import ClusterDetails from './Wizard/ClusterDetails';
 import ClusterSettings from './Wizard/ClusterSettings';
 import ClusterPreview from './Wizard/ClusterPreview';
+import File from '../File/File';
+import { Redirect } from 'react-router-dom'
 
 const styles = theme => ({
     root: {
@@ -29,11 +31,19 @@ const styles = theme => ({
 class Clusterizer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    if(this.props.location.mapProps){
+      this.state = {
      file_id : this.props.location.mapProps.file_id,
      props : this.props,
      form: {file: this.props.location.mapProps.file_id, algorithm: 'meanshift'},
     };
+    } 
+    else{
+      this.state  = {
+        return : true
+      }
+    }
+    
   }
 
   updateForm = (key, value) => {
@@ -47,9 +57,14 @@ class Clusterizer extends Component {
 
     render(){
       const { classes } = this.props;
+      if (this.state.return){
+  
+        return <Redirect to={{pathname: '/files'}} />
+      }
       if (this.state.file_id == null){
         return ( <Cylon />)
       }
+      
       else {
         return (
           <div className={classes.root}>
