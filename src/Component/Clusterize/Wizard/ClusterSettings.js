@@ -131,11 +131,11 @@ class ClusterSettings extends Component {
 
     onChangeX = event => {
       this.setState({col_x : event.target.value})
-      //this.props.update(event.target.name, event.target.value);
+      //this.setState({available_preview: false})
     }
     onChangeY = event => {
       this.setState({col_y : event.target.value})
-      //this.props.update(event.target.name, event.target.value);
+      //this.setState({available_preview: false})
     }
 
     preview = async () => {
@@ -228,7 +228,7 @@ class ClusterSettings extends Component {
               
               <ClusteredMap lat_col={this.state.lat_col} lon_col={this.state.lon_col} cluster_size={this.state.cluster_size} 
                       clustered_data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}/> 
-              <ClusterChart data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}  />
+              <ClusterChart data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y} centroids={this.state.centroids} />
             </Grid>
             }
 
