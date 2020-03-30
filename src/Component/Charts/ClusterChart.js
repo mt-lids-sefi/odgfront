@@ -60,7 +60,7 @@ class ClusterChart extends Component {
           let chart_data = []
           let centroids = []
           for (let i = 0; i < Object.keys(this.state.data).length; i++){
-            let current = {"x" : this.state.data[i][this.state.col_x], "y" : this.state.data[i][this.state.col_y], "cluster": this.state.data[i]["cluster"]}
+            let current = {"x" : this.state.data[i][this.state.col_x+"_cat"], "y" : this.state.data[i][this.state.col_y+"_cat"], "cluster": this.state.data[i]["cluster"]}
             chart_data.push(current)
           }
           for (let i = 0; i < Object.keys(this.state.centroids).length; i++){
