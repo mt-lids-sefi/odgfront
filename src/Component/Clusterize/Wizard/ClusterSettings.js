@@ -228,7 +228,7 @@ class ClusterSettings extends Component {
               
               <ClusteredMap lat_col={this.state.lat_col} lon_col={this.state.lon_col} cluster_size={this.state.cluster_size} 
                       clustered_data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}/> 
-              <ClusterChart data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y} centroids={this.state.centroids} />
+              <ClusterChart cluster_size={this.state.cluster_size} data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y} centroids={this.state.centroids} />
             </Grid>
             }
 
