@@ -106,10 +106,10 @@ class ClusterChart extends Component {
                   >
                   <CartesianGrid strokeDasharray="3 3"/>
                   <XAxis type="number" dataKey="x" name={this.state.col_x}> 
-                    <Label value={this.state.col_x} offset={0} position="bottom" />  
+                    <Label value={this.state.col_x} offset={0} position="insideBottomRight" />  
                   </XAxis>
                   <YAxis type="number" dataKey="y" name={this.state.col_y}>
-                    <Label value={this.state.col_y} offset={0} position="left" />
+                    <Label value={this.state.col_y} offset={0} position="insideTopLeft" />
                   </YAxis>
                   <Legend />
                   <Tooltip cursor={{ strokeDasharray: '3 3' }} />

@@ -80,7 +80,7 @@ class ClusterSettings extends Component {
       this.state = {};
       if (this.props.file){
         this.state = {doc_id : this.props.file, col_x: '', col_y: '', algorithm: 'meanshift', 
-        available_preview: true, loading: false, k: ''};
+        available_preview: true, loading: false, k: '', categorize_x: false, categorize_y: false};
       }
       this.loadFile = this.loadFile.bind(this);
     }
@@ -151,7 +151,7 @@ class ClusterSettings extends Component {
           if(status===200)
           {
               const data = promise.data;
-              this.setState({centroids:data.centroids, labels: data.labels, clustered_data: data.data, cluster_size: data.cluster_size, loaded: true, loading:false})
+              this.setState({centroids:data.centroids, labels: data.labels, clustered_data: data.data, cluster_size: data.cluster_size, cats: data.cats, loaded: true, loading:false})
           }
         }
         else if (this.props.form.algorithm == 'meanshift'){
@@ -160,7 +160,7 @@ class ClusterSettings extends Component {
           if(status===200)
           {
               const data = promise.data;
-              this.setState({centroids:data.centroids, labels: data.labels, clustered_data: data.data, cluster_size: data.cluster_size, loaded: true, loading:false})
+              this.setState({centroids:data.centroids, labels: data.labels, clustered_data: data.data, cluster_size: data.cluster_size, cats: data.cats, loaded: true, loading:false})
           }
       }
 
@@ -169,7 +169,15 @@ class ClusterSettings extends Component {
 
     render(){
       const { classes } = this.props;
-      
+      if (this.state.cats){
+        if(Object.keys(this.state.cats["x"]).length != 0){
+          this.setState({categorize_x: true})
+        }
+        if(Object.keys(this.state.cats["y"]).length != 0){
+          this.setState({categorize_y: true})
+        }
+        
+      }
       return (
         <div>
          <Paper className={classes.paper}>
@@ -229,6 +237,7 @@ class ClusterSettings extends Component {
               <ClusteredMap lat_col={this.state.lat_col} lon_col={this.state.lon_col} cluster_size={this.state.cluster_size} 
                       clustered_data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}/> 
               <ClusterChart cluster_size={this.state.cluster_size} data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y} centroids={this.state.centroids} />
+
             </Grid>
             }
 
