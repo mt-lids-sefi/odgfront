@@ -163,13 +163,7 @@ class ClusterSettings extends Component {
               this.setState({centroids:data.centroids, labels: data.labels, clustered_data: data.data, cluster_size: data.cluster_size, cats: data.cats, loaded: true, loading:false})
           }
       }
-
-        
-    }
-
-    render(){
-      const { classes } = this.props;
-      if (this.state.cats){
+     
         if(Object.keys(this.state.cats["x"]).length != 0){
           this.setState({categorize_x: true})
         }
@@ -177,7 +171,14 @@ class ClusterSettings extends Component {
           this.setState({categorize_y: true})
         }
         
-      }
+      
+        
+    }
+
+    render(){
+      const { classes } = this.props;
+      if (this.state.categorize_x) {console.log(this.state.cats["x"])}
+      if (this.state.categorize_y) {console.log(this.state.cats["y"])}
       return (
         <div>
          <Paper className={classes.paper}>
@@ -239,6 +240,12 @@ class ClusterSettings extends Component {
               <ClusterChart cluster_size={this.state.cluster_size} data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y} centroids={this.state.centroids} />
 
             </Grid>
+            }
+            {this.state.loading ? <Cylon/> : this.state.loaded && this.state.categorize_x &&
+              <DataTable data={this.state.cats["x"]} header={["original", "categorized"]} />
+            }
+            {this.state.loading ? <Cylon/> : this.state.loaded && this.state.categorize_y &&
+              <DataTable data={this.state.cats["y"]} header={["original", "categorized"]} />
             }
 
           </Grid>
