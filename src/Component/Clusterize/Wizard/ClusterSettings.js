@@ -151,7 +151,7 @@ class ClusterSettings extends Component {
           if(status===200)
           {
               const data = promise.data;
-              this.setState({centroids:data.centroids, labels: data.labels, clustered_data: data.data, cluster_size: data.cluster_size, cats: data.cats, loaded: true, loading:false})
+              this.setState({centroids:data.centroids, labels: data.labels, clustered_data: data.data, cluster_size: data.cluster_size, cats: data.cats, loaded: true, loading:false, cols: data.cols})
           }
         }
         else if (this.props.form.algorithm == 'meanshift'){
@@ -160,7 +160,7 @@ class ClusterSettings extends Component {
           if(status===200)
           {
               const data = promise.data;
-              this.setState({centroids:data.centroids, labels: data.labels, clustered_data: data.data, cluster_size: data.cluster_size, cats: data.cats, loaded: true, loading:false})
+              this.setState({centroids:data.centroids, labels: data.labels, clustered_data: data.data, cluster_size: data.cluster_size, cats: data.cats, loaded: true, loading:false, cols: data.cols})
           }
       }
      
@@ -238,16 +238,23 @@ class ClusterSettings extends Component {
               <ClusteredMap lat_col={this.state.lat_col} lon_col={this.state.lon_col} cluster_size={this.state.cluster_size} 
                       clustered_data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}/> 
               <ClusterChart cluster_size={this.state.cluster_size} data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y} centroids={this.state.centroids} />
-
+              <DataTable data={this.state.clustered_data}  header={this.state.cols} />
             </Grid>
             }
+            <Grid item xs={6}>
             {this.state.loading ? <Cylon/> : this.state.loaded && this.state.categorize_x &&
-              <DataTable data={this.state.cats["x"]} header={["original", "categorized"]} />
+              <div>
+                <Typography variant="h6" id="tableTitle" align="left" > {this.state.col_x} </Typography>
+                <DataTable data={this.state.cats["x"]} header={["original", "categorized"]} />
+              </div> 
             }
             {this.state.loading ? <Cylon/> : this.state.loaded && this.state.categorize_y &&
-              <DataTable data={this.state.cats["y"]} header={["original", "categorized"]} />
+              <div>
+                <Typography variant="h6" id="tableTitle" align="left" > {this.state.col_y} </Typography>
+                <DataTable data={this.state.cats["y"]} header={["original", "categorized"]} />
+              </div>
             }
-
+            </Grid>
           </Grid>
           <Stats step={2}  {...this.props} />
           </Paper>

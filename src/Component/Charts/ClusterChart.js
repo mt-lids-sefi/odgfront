@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Cell, Legend, LineChart, Line, Label} from 'recharts';
 import { scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
+import { Paper } from '@material-ui/core';
 
 const colors = scaleOrdinal(schemeCategory10).range();
 
@@ -97,6 +98,8 @@ class ClusterChart extends Component {
           let scatters = this.getScatters()
           let centroids = this.getCentroids()
             return(
+              <Paper className={classes.root}>
+                <div className={classes.tableWrapper}></div>
                 <ScatterChart
                   width={400}
                   height={400}
@@ -120,6 +123,7 @@ class ClusterChart extends Component {
                     }
                   </Scatter>
                 </ScatterChart>
+                </Paper>
             )
         }
     }
