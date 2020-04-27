@@ -120,7 +120,7 @@ class ClusterSettings extends Component {
 
     handleInputChange = event => {
       this.setState({k : event.target.value})
-      //this.props.update(event.target.name, event.target.value);
+      this.props.update(event.target.name, event.target.value);
       if (event.target.value == ''){
         this.setState({available_preview: false})
       }
@@ -131,11 +131,11 @@ class ClusterSettings extends Component {
 
     onChangeX = event => {
       this.setState({col_x : event.target.value})
-      //this.setState({available_preview: false})
+      this.props.update(event.target.name, event.target.value);
     }
     onChangeY = event => {
       this.setState({col_y : event.target.value})
-      //this.setState({available_preview: false})
+      this.props.update(event.target.name, event.target.value);
     }
 
     preview = async () => {
@@ -174,11 +174,20 @@ class ClusterSettings extends Component {
       
         
     }
+    showCentroids(){
+      let centroids = [] 
+      for (let i = 0; i < this.state.centroids.length; i++){
+        centroids.push(<Grid item xs={4}>
+                <Paper>{this.state.centroids[i][0]+", "+this.state.centroids[i][1]}</Paper>
+              </Grid>)
+      }
+      return centroids
+    }
+
 
     render(){
       const { classes } = this.props;
-      if (this.state.categorize_x) {console.log(this.state.cats["x"])}
-      if (this.state.categorize_y) {console.log(this.state.cats["y"])}
+      
       return (
         <div>
          <Paper className={classes.paper}>
@@ -201,7 +210,7 @@ class ClusterSettings extends Component {
                 {this.state.algorithm == "kmeans" &&
                 <div>
                 <label>Set the K </label>
-                <input type='number' className='form-control' name='max_distance' placeholder='K'
+                <input type='number' className='form-control' name='k' placeholder='K'
                   onChange={this.handleInputChange} />
                 </div>
                 }
@@ -254,6 +263,14 @@ class ClusterSettings extends Component {
                 <DataTable data={this.state.cats["y"]} header={["original", "categorized"]} />
               </div>
             }
+            </Grid>
+            <Grid item xs={6}>
+              {this.state.loading ? <Cylon/> : this.state.loaded && 
+                <div>
+                  <Typography variant="h6" id="tableTitle" align="left" > Centroides </Typography>
+                  {this.showCentroids()}
+                </div>
+              }
             </Grid>
           </Grid>
           <Stats step={2}  {...this.props} />

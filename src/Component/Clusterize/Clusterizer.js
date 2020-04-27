@@ -9,6 +9,8 @@ import ClusterSettings from './Wizard/ClusterSettings';
 import ClusterPreview from './Wizard/ClusterPreview';
 import File from '../File/File';
 import { Redirect } from 'react-router-dom'
+import SaveClusterization from './Wizard/SaveClusterization';
+
 
 const styles = theme => ({
     root: {
@@ -72,6 +74,7 @@ class Clusterizer extends Component {
               <StepWizard>  
                 <ClusterDetails file={this.state.file_id} />
                 <ClusterSettings update={this.updateForm}  form={this.state.form} file={this.state.file_id} />
+                <SaveClusterization update={this.updateForm} form={this.state.form}/>
               </StepWizard>
             </div>
           </div>
