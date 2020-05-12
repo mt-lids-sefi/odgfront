@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker } from "react-leaflet";
+import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import './styles.css';
 //import 'react-leaflet-markercluster/dist/styles.min.css';
@@ -43,7 +43,15 @@ class ClusteredMap extends Component {
           let c = Object.entries(dataMap)[i][1]['cluster']
           let lat = Object.entries(dataMap)[i][1][this.state.lat_col]
           let lon = Object.entries(dataMap)[i][1][this.state.lon_col]
-          markers[c].push(<Marker  key={i} position={[lat, lon]} icon={getIcon(c)} />)
+          let popup_data = ""
+        let n = 0
+        for (const key in Object.entries(dataMap)[i][1]) {
+            if (n<5 && (key != this.state.lat_col || key != this.state.lon_col))  {
+                n +=1
+                popup_data += key+": "+Object.entries(dataMap)[i][1][key]+" "
+            }
+        }
+          markers[c].push(<Marker  key={i} position={[lat, lon]} icon={getIcon(c)} ><Popup> {popup_data} </Popup></Marker>)
         }
         return markers
       }
