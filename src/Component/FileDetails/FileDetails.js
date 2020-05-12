@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { Paper } from '@material-ui/core';
-
+import { Redirect } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -30,7 +30,7 @@ const styles = theme => ({
 class FileDetails extends Component {
     constructor(props) {
             super(props);
-            if (this.props.location){
+            if (this.props.location.mapProps){
               this.state = {
                 doc_id : this.props.location.mapProps.doc_id
                };
@@ -39,6 +39,11 @@ class FileDetails extends Component {
               this.state = {
                 doc_id : this.props.file
                };
+            }
+            else {
+              this.state  = {
+                return : true
+              }
             }
             this.loadFile = this.loadFile.bind(this);
         }
@@ -64,6 +69,9 @@ class FileDetails extends Component {
 
   render() {
     const { classes } = this.props;
+    if (this.state.return){
+      return <Redirect to={{pathname: '/files'}} />
+    }
     if (this.state.dataMap == null) {
       return <Cylon/>
     }

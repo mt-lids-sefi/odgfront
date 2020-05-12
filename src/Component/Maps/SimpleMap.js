@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker } from "react-leaflet";
+import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import 'react-leaflet-markercluster/dist/styles.min.css';
 import Cylon from "../LoadingComponents/Cylon"
@@ -27,7 +27,15 @@ class SimpleMap extends Component {
        for (let i = 0; i < Object.keys(this.state.data).length; i++){
         let lat = Object.entries(this.state.data)[i][1][this.state.lat_col]
         let lon = Object.entries(this.state.data)[i][1][this.state.lon_col]
-        markers.push(<Marker  key={i} position={[lat, lon]} icon={getIcon(1)}/>) 
+        let popup_data = ""
+        let n = 0
+        for (const key in Object.entries(this.state.data)[i][1]) {
+          if (n<5 && (key != this.state.lat_col || key != this.state.lon_col))  {
+            n +=1
+            popup_data += key+": "+Object.entries(this.state.data)[i][1][key]+" "
+          }
+        }
+        markers.push(<Marker  key={i} position={[lat, lon]} icon={getIcon(1)}><Popup> {popup_data} </Popup></Marker>) 
       }
     return (
           <div>

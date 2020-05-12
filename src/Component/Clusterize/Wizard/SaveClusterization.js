@@ -72,7 +72,6 @@ class SaveClusterization extends Component {
             url = "http://localhost:8000/clusterize_meanshift/"+this.props.form.file+"/"+this.state.name+"/"+this.state.description+"/"+
                                             this.props.form.col_x+"/"+this.props.form.col_y
           }
-          console.log(url)
         let promise = await axios.get(url)
         let status = promise.status;
         
@@ -89,10 +88,10 @@ class SaveClusterization extends Component {
                 <Typography variant="h5" id="tableTitle"> Save options </Typography>
                 <label>Name</label>
                     <input type='text' className='form-control' name='name' placeholder='Name'
-                        onChange={this.updateName} required={true}/>
+                        onBlur={this.updateName} required={true}/>
                 <label>Description</label>
                     <input type='text' className='form-control' name='description' placeholder='Description'
-                        onChange={this.updateDesc} required={true} />
+                        onBlur={this.updateDesc} required={true} />
                 <Stats step={3} done={this.state.done} {...this.props} nextStep={this.submit} />
             </div>
             )   ;
