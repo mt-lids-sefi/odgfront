@@ -104,12 +104,13 @@ export default function DataTable(props) {
 
   const header = props.header
   const data = props.data
+  console.log(data)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   let rows = []
   for (const key in data) {
-    let row = data[key]
+    row = data[key]
     row["PK_fe"] = key
     rows.push(row)
   }

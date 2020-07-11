@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { Paper } from '@material-ui/core';
 import { Redirect } from 'react-router-dom'
-import DetailsCard from './DetailsCard';
 
 const styles = theme => ({
   root: {
@@ -31,7 +30,7 @@ const styles = theme => ({
 class FileDetails extends Component {
     constructor(props) {
             super(props);
-            if (this.props.location.mapProps){
+            if (this.props.location){
               this.state = {
                 doc_id : this.props.location.mapProps.doc_id
                };
@@ -86,9 +85,6 @@ class FileDetails extends Component {
           </Grid>
           <Grid item xs={6}>
             <DataTable data={this.state.dataMap} header={this.state.cols}/>
-          </Grid>
-          <Grid>
-            <DetailsCard file_id={this.state.doc_id} />
           </Grid>
         </Grid>
     

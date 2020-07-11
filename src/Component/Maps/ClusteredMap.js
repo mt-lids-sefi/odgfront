@@ -40,18 +40,18 @@ class ClusteredMap extends Component {
             markers[i] = []
         }
         for (let i = 0; i < Object.keys(dataMap).length; i++){
-          let c = Object.entries(dataMap)[i][1]['cluster']
-          let lat = Object.entries(dataMap)[i][1][this.state.lat_col]
-          let lon = Object.entries(dataMap)[i][1][this.state.lon_col]
-          let popup_data = ""
-        let n = 0
-        for (const key in Object.entries(dataMap)[i][1]) {
-            if (n<5 && (key != this.state.lat_col || key != this.state.lon_col))  {
-                n +=1
-                popup_data += key+": "+Object.entries(dataMap)[i][1][key]+" "
+            let c = Object.entries(dataMap)[i][1]['cluster']
+            let lat = Object.entries(dataMap)[i][1][this.state.lat_col]
+            let lon = Object.entries(dataMap)[i][1][this.state.lon_col]
+            let popup_data = ""
+            let n = 0
+            for (const key in Object.entries(dataMap)[i][1]) {
+                if (n<5 && (key != this.state.lat_col || key != this.state.lon_col))  {
+                    n +=1
+                    popup_data += key+": "+Object.entries(dataMap)[i][1][key]+" "
+                }
             }
-        }
-          markers[c].push(<Marker  key={i} position={[lat, lon]} icon={getIcon(c)} ><Popup> {popup_data} </Popup></Marker>)
+            markers[c].push(<Marker  key={i} position={[lat, lon]} icon={getIcon(c)} ><Popup> {popup_data} </Popup></Marker>)
         }
         return markers
       }

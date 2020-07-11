@@ -31,7 +31,7 @@ const styles = theme => ({
 class FileDetails extends Component {
     constructor(props) {
             super(props);
-            if (this.props.location.mapProps){
+            if (this.props.location){
               this.state = {
                 doc_id : this.props.location.mapProps.doc_id
                };
@@ -87,9 +87,7 @@ class FileDetails extends Component {
           <Grid item xs={6}>
             <DataTable data={this.state.dataMap} header={this.state.cols}/>
           </Grid>
-          <Grid>
-            <DetailsCard file_id={this.state.doc_id} />
-          </Grid>
+          
         </Grid>
     
       </div>
@@ -104,3 +102,7 @@ FileDetails.propTypes = {
 
   
 export default withStyles(styles)(FileDetails);
+
+/*<Grid>
+            <DetailsCard file_id={this.state.doc_id} />
+          </Grid>*/

@@ -31,7 +31,12 @@ const styles = theme => ({
 class FileDetails extends Component {
     constructor(props) {
             super(props);
-            if (this.props.location.mapProps){
+            if (this.props.location.mapProps == null) {
+              this.state  = {
+                return : true
+              }
+            }
+            if (this.props.location){
               this.state = {
                 doc_id : this.props.location.mapProps.doc_id
                };

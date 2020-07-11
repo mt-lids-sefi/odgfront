@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import 'react-leaflet-markercluster/dist/styles.min.css';
 import axios from "axios";
 import Cylon from "../LoadingComponents/Cylon"
-import { Map, TileLayer, Marker,  LayersControl } from "react-leaflet";
+import { Map, TileLayer, Marker,  LayersControl , Popup } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import  {getIcon} from  '../../Utils/utils' 
 const {Overlay } = LayersControl
@@ -42,11 +42,17 @@ class MutipleMap extends Component {
     makeMarkers(dataMap, icon){
       let markers = []
       for (let i = 0; i < Object.keys(dataMap.rows).length; i++){
-        //console.log(Object.entries(this.state.dataMap)[i])
         let lat = Object.entries(dataMap.rows)[i][1][dataMap.lat_col]
         let lon = Object.entries(dataMap.rows)[i][1][dataMap.lon_col]
-        //console.log(lat+"  "+lon)
-        markers.push(<Marker  key={i} position={[lat, lon]} icon={icon} />)
+        let popup_data = "File: " + dataMap.name + " "
+        let n = 0
+        for (const key in Object.entries(dataMap.rows)[i][1]) {
+            if (n<5 && (key != dataMap.lat_col || key != dataMap.lon_col))  {
+                n +=1
+                popup_data += key+": "+Object.entries(dataMap.rows)[i][1][key]+" "
+            }
+        }
+        markers.push(<Marker key={i} position={[lat, lon]} icon={icon}> <Popup> {popup_data} </Popup> </Marker> )
       }
       
       return markers

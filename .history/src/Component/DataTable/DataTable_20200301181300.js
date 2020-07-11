@@ -109,9 +109,7 @@ export default function DataTable(props) {
 
   let rows = []
   for (const key in data) {
-    let row = data[key]
-    row["PK_fe"] = key
-    rows.push(row)
+    rows.push(data[key])
   }
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -144,7 +142,7 @@ export default function DataTable(props) {
           <TableHead><TableRow>{heads}</TableRow></TableHead>
           <TableBody>
           {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => (
-              <TableRow key={row.PK_fe}>
+              <TableRow key={row.id}>
                 {header.map(key => (
                   <TableCell component="th" scope="row" key={key}>{row[key]} </TableCell>
                 ))}
