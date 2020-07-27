@@ -10,10 +10,13 @@ import Grid from '@material-ui/core/Grid';
 import { Paper } from '@material-ui/core';
 import { Redirect } from 'react-router-dom'
 import DetailsCard from './DetailsCard';
+import Typography from '@material-ui/core/Typography';
+import { Container, Row, Col } from 'react-bootstrap'
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    width: '100%',
+    marginTop: theme.spacing(3),
   },
   paper: { 
     padding: theme.spacing(2),
@@ -28,17 +31,18 @@ const styles = theme => ({
   }
 });
 
+
 class FileDetails extends Component {
     constructor(props) {
             super(props);
-            if (this.props.location.mapProps){
-              this.state = {
-                doc_id : this.props.location.mapProps.doc_id
-               };
-            }
-            else if (this.props.file){
+            if (this.props.file){
               this.state = {
                 doc_id : this.props.file
+               };
+            }
+            else if (this.props.location.mapProps){
+              this.state = {
+                doc_id : this.props.location.mapProps.doc_id
                };
             }
             else {
@@ -78,21 +82,26 @@ class FileDetails extends Component {
     }
     else{
       return (
-        <div className={classes.root}>
-      
-        <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <SimpleMap data={this.state.dataMap} lat_col={this.state.lat_col} lon_col={this.state.lon_col} /> 
-          </Grid>
-          <Grid item xs={6}>
-            <DataTable data={this.state.dataMap} header={this.state.cols}/>
-          </Grid>
-          <Grid>
-            <DetailsCard file_id={this.state.doc_id} />
-          </Grid>
-        </Grid>
-    
-      </div>
+        <Paper className={classes.paper}>
+          <div className={classes.root}>
+          <div >
+          <Paper className={classes.paper}>
+          <Typography variant="h6" id="tableTitle" align="left">
+           Geodatafile details
+          </Typography>
+          </Paper>
+     
+   </div>
+          <Row>
+              <Col sm={9}> <SimpleMap data={this.state.dataMap} lat_col={this.state.lat_col} lon_col={this.state.lon_col} /></Col>
+              <Col sm={2}> <DetailsCard file_id={this.state.doc_id} /></Col>
+          </Row>
+          <Row>
+              <Col> <DataTable data={this.state.dataMap} header={this.state.cols}/> </Col>
+              
+          </Row>
+        </div>
+      </Paper>
         );
   }}
 }

@@ -129,10 +129,6 @@ class FileUploader extends Component {
               <Input name="description" component="textarea" placeholder="Description"  value={description} onChange={this.onChange} />
             </div>
             <div>
-            
-            
-            
-
           </div>
             <div>
             <label>Lat col</label>

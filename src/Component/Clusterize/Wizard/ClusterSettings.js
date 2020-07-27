@@ -267,7 +267,7 @@ class ClusterSettings extends Component {
             <Grid item xs={6}>
               {this.state.loading ? <Cylon/> : this.state.loaded && 
                 <div>
-                  <Typography variant="h6" id="tableTitle" align="left" > Centroides </Typography>
+                  <Typography variant="h6" id="tableTitle" align="left" > Centroids </Typography>
                   {this.showCentroids()}
                 </div>
               }

@@ -57,17 +57,22 @@ export default function LinkFiles(props) {
       if (nearbyPoints){
         return <Redirect to={{pathname: '/polygon', mapProps:{files: selected}}} />
       }
+      if (similCols){
+        return <Redirect to={{pathname: '/similcols', mapProps:{files: selected}}} />
+      }
     }
 
     return (
-      
+    <Paper className={classes.paper}>
       <div className={classes.root}>
          {renderRedirect()}
+         <Typography variant="h6" id="tableTitle" align="center">
+           Merging files: SALUD PBA + UNQ
+          </Typography>
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
-            
             <Grid item xs>
-              <Typography>Punto más cercano</Typography>
+              <Typography>Closest point</Typography>
             </Grid>
             <Grid item>
             <Button variant="contained" className={classes.button} onClick={viewClosestPoint}>
@@ -79,13 +84,24 @@ export default function LinkFiles(props) {
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item xs>
-              <Typography>Puntos cercanos</Typography>
+              <Typography>Circumference around a point</Typography>
             </Grid>
             <Button variant="contained" className={classes.button} onClick={viewNearbyPoints}>
                 Link
             </Button>
           </Grid>
         </Paper>
+        <Paper className={classes.paper}>
+          <Grid container wrap="nowrap" spacing={2}>
+            <Grid item xs>
+              <Typography>Columns similarity</Typography>
+            </Grid>
+            <Button variant="contained" className={classes.button} onClick={viewSimilCols}>
+                Link
+            </Button>
+          </Grid>
+        </Paper>
       </div>
+      </Paper>
     );
   }

@@ -136,7 +136,7 @@ const EnhancedTableToolbar = props => {
           </Typography>
         ) : (
           <Typography variant="h6" id="tableTitle">
-            Files
+            Merge files
           </Typography>
         )}
       </div>

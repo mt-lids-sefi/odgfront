@@ -4,8 +4,33 @@ import axios from "axios";
 import Cylon from "../LoadingComponents/Cylon"
 import { Map, TileLayer, Marker,  LayersControl , Popup } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import  {getIcon} from  '../../Utils/utils' 
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import DetailsCard from '../FileDetails/DetailsCard';
+import { Row, Col } from 'react-bootstrap';
 const {Overlay } = LayersControl
+
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing(3),
+  },
+  paper: { 
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+  input: {
+    display: 'none',
+  }
+});
 
 class MutipleMap extends Component {
     constructor(props) {
@@ -59,6 +84,7 @@ class MutipleMap extends Component {
     }
 
   render() {
+    const { classes } = this.props;
     const greenIcon = getIcon(2)
     const violetIcon = getIcon(3)
 
@@ -72,27 +98,48 @@ class MutipleMap extends Component {
       let markersA = this.makeMarkers(this.state.dataMapA, greenIcon)
       let markersB = this.makeMarkers(this.state.dataMapB, violetIcon)
       return (
-        <div>
-          <Map className="markercluster-map" center={center} zoom={zoom} maxZoom={18}>
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-              <LayersControl collapsed position="topright">
+        <Paper className={classes.paper}>
+        <div className={classes.root}>
+        <Paper className={classes.paper}>
+          <Typography variant="h6" id="tableTitle" align="left">
+           Layers map: SALUD PBA + UNQ
+          </Typography>
+        </Paper>
+          <Row>
+          <Col sm={9}>  
+          <div>
+            <Map className="markercluster-map" center={center} zoom={zoom} maxZoom={18}>
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              />
+                <LayersControl collapsed position="topright">
 
-              <Overlay checked name={this.state.dataMapA.name+" (green colour)"}>
-                <MarkerClusterGroup> {markersA} </MarkerClusterGroup>  
-              </Overlay>
-              <Overlay checked name={this.state.dataMapB.name+ " (purple colour)"}>
-                <MarkerClusterGroup> {markersB} </MarkerClusterGroup>  
-              </Overlay>
-              </LayersControl>
-          
-          </Map>
+                <Overlay checked name={this.state.dataMapA.name}>
+                  <MarkerClusterGroup> {markersA} </MarkerClusterGroup>  
+                </Overlay>
+                <Overlay checked name={this.state.dataMapB.name}>
+                  <MarkerClusterGroup> {markersB} </MarkerClusterGroup>  
+                </Overlay>
+                </LayersControl>
+            </Map>
         </div>
+        </Col>
+        <Col sm={2}>
+        <DetailsCard file_id={this.state.files[0]} />
+        <DetailsCard file_id={this.state.files[1]} />
+        </Col>
+        </Row>
+        </div>
+        </Paper>
       );
       
   }}
 }
 
-export default MutipleMap;
+MutipleMap.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+  
+export default withStyles(styles)(MutipleMap);

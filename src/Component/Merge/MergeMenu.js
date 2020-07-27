@@ -56,14 +56,16 @@ export default function MergeMenu(props) {
     }
 
     return (
-      
+      <Paper className={classes.paper}>
       <div className={classes.root}>
          {renderRedirect()}
+         <Typography variant="h6" id="tableTitle" align="center">
+           Merging files: SALUD PBA + UNQ
+          </Typography>
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
-            
             <Grid item xs>
-              <Typography>CAPAS: Visualizar ambas fuentes en el mapa</Typography>
+              <Typography>Layers: Visualize both data sources on the map</Typography>
             </Grid>
             <Grid item>
             <Button variant="contained" className={classes.button} onClick={viewLayers}>
@@ -75,7 +77,7 @@ export default function MergeMenu(props) {
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item xs>
-              <Typography>Unir ambos archivos según criterios a definir</Typography>
+              <Typography>Merge data sources</Typography>
             </Grid>
             <Button variant="contained" className={classes.button} onClick={viewLinker}>
                 Link
@@ -84,5 +86,6 @@ export default function MergeMenu(props) {
         </Paper>
         
       </div>
+      </Paper>
     );
   }

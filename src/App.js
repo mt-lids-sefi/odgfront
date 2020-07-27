@@ -19,6 +19,7 @@ import ClosestPoint from './Component/LinkFiles/ClosestPoint';
 import Polygon from './Component/LinkFiles/Polygon';
 import Clusterizer from './Component/Clusterize/Clusterizer';
 import DataFiles from './Component/File/DataFiles';
+import Similarity from './Component/LinkFiles/Similarity';
 
 class App extends Component {
   render() {
@@ -61,6 +62,7 @@ class App extends Component {
               <Route path="/closestpoint" exact component={ClosestPoint} />
               <Route path="/polygon" exact component={Polygon} />
               <Route path="/clusterizer" exact component={Clusterizer} />
+              <Route path="/similcols" exact component={Similarity} />
           </Switch>
         </Router>      
         </div>
