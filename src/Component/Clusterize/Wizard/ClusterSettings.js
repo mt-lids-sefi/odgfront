@@ -219,18 +219,18 @@ class ClusterSettings extends Component {
 
                 <div>
                   <div>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                      <InputLabel id="demo-simple-select-filled-label">Column X</InputLabel>
-                      <Select name="col_x" value={this.state.col_x} onChange={this.onChangeX}>
+                    <FormControl className={classes.formControl}>
+                      <InputLabel htmlFor="x-native-simple">Column X</InputLabel>
+                      <Select inputProps={{name: 'x',id: 'x-native-simple'}} name="col_x" value={this.state.col_x} onChange={this.onChangeX}>
                         {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
                       </Select>
                     </FormControl>
                     </div>
                     <hr />
                     <div>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                      <InputLabel id="demo-simple-select-filled-label">Column Y</InputLabel>
-                      <Select name="col_y" value={this.state.col_y} onChange={this.onChangeY}>
+                    <FormControl className={classes.formControl}>
+                      <InputLabel htmlFor="y-native-simple">Column Y</InputLabel>
+                      <Select inputProps={{name: 'y',id: 'y-native-simple'}} name="col_y" value={this.state.col_y} onChange={this.onChangeY}>
                         {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
                       </Select>
                     </FormControl>

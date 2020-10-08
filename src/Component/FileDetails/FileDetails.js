@@ -12,6 +12,7 @@ import { Redirect } from 'react-router-dom'
 import DetailsCard from './DetailsCard';
 import Typography from '@material-ui/core/Typography';
 import { Container, Row, Col } from 'react-bootstrap'
+import Table from '../DataTable/Table';
 
 const styles = theme => ({
   root: {
@@ -34,43 +35,41 @@ const styles = theme => ({
 
 class FileDetails extends Component {
     constructor(props) {
-            super(props);
-            if (this.props.file){
-              this.state = {
-                doc_id : this.props.file
-               };
-            }
-            else if (this.props.location.mapProps){
-              this.state = {
-                doc_id : this.props.location.mapProps.doc_id
-               };
-            }
-            else {
-              this.state  = {
-                return : true
-              }
-            }
-            this.loadFile = this.loadFile.bind(this);
+      super(props);
+      if (this.props.file){
+        this.state = {
+          doc_id : this.props.file
+          };
+      }
+      else if (this.props.location.mapProps){
+        this.state = {
+          doc_id : this.props.location.mapProps.doc_id
+          };
+      }
+      else {
+        this.state  = {
+          return : true
         }
+      }
+      this.loadFile = this.loadFile.bind(this);
+  }
 
-    async componentDidMount() {
-        this.loadFile();
-        }
+  async componentDidMount() {
+     this.loadFile();
+  }
+    
 
-
-    async loadFile()
-    {
-        let doc_id = this.state.doc_id
-        const promise = await axios.get("http://localhost:8000/geo_file/"+doc_id)
-        const status = promise.status;
-        if(status===200)
-        {
-            const data = promise.data;
-            this.setState({dataMap:data.rows, lat_col: data.lat_col, lon_col: data.lon_col, cols: data.cols}); 
-        }
-    }
-
-
+  async loadFile()
+  {
+      let doc_id = this.state.doc_id
+      const promise = await axios.get("http://localhost:8000/geo_file/"+doc_id)
+      const status = promise.status;
+      if(status===200)
+      {
+          const data = promise.data;
+          this.setState({dataMap:data.rows, lat_col: data.lat_col, lon_col: data.lon_col, cols: data.cols}); 
+      }
+  }
 
   render() {
     const { classes } = this.props;
@@ -97,7 +96,7 @@ class FileDetails extends Component {
               <Col sm={2}> <DetailsCard file_id={this.state.doc_id} /></Col>
           </Row>
           <Row>
-              <Col> <DataTable data={this.state.dataMap} header={this.state.cols}/> </Col>
+              <Col><Table data={this.state.dataMap} header={this.state.cols} title={"Testing"} /></Col>
               
           </Row>
         </div>

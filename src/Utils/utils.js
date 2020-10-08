@@ -27,3 +27,12 @@ export function createClusterCustomIcon (cluster, number) {
       iconSize: L.point(40, 40, true),
     });
   };
+
+export function getColumnContent(rows,column){
+  let values = []
+  for (let i = 0; i < Object.keys(rows).length; i++){
+    let val = rows[i][column]
+    values.push(val)
+  }
+  return values
+}

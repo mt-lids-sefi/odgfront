@@ -2,7 +2,6 @@ import React,  { Component }  from 'react';
 import axios from "axios";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import DataTable from '../../DataTable/DataTable'
 import Cylon from '../../LoadingComponents/Cylon';
 import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio';

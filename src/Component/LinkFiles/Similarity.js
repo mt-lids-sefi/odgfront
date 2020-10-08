@@ -5,7 +5,7 @@ import StepWizard from 'react-step-wizard';
 import Button from '@material-ui/core/Button';
 import PreviewFiles from './Wizard/PreviewFiles'
 import { Redirect } from 'react-router-dom';
-import ClosestPointSettings from './Wizard/ClosestPointSettings';
+import RulesSetting from './Wizard/RulesSetting';
  
 const styles = theme => ({
     root: {
@@ -77,7 +77,7 @@ class Similarity extends Component {
                 <div className={'jumbotron'}>
                     <StepWizard>
                         <PreviewFiles files={this.state.files} update={this.updateForm}/>
-                        <ClosestPointSettings update={this.updateForm}  form={this.state.form}/>
+                        <RulesSetting update={this.updateForm}  form={this.state.form}/>
                     </StepWizard>
                 </div>
             </div>

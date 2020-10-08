@@ -55,7 +55,6 @@ class DetailsCard extends Component {
           return <Cylon/>
         }
         else{
-			console.log(this.state.details.doc)
             return (
                 <div className={classes.root}>
 					<Card style={{ width: '18rem' }}>

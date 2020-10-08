@@ -47,7 +47,7 @@ class SaveClusterization extends Component {
             this.setState({done: true})
         }
         else {
-            this.setState({done:false})
+            this.setState({done: false})
         }
     }
     updateDesc = (e) => {
