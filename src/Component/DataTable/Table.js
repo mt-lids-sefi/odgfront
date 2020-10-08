@@ -5,6 +5,7 @@ import DataTable  from 'react-data-table-component';
 import { withStyles } from '@material-ui/core/styles';
 import Cylon from '../LoadingComponents/Cylon';
 import { BrowserRouter as  Route, Link } from 'react-router-dom';
+import { CSVLink } from "react-csv";
 
 const styles = theme => ({
   root: {
@@ -23,7 +24,6 @@ const styles = theme => ({
     display: 'none',
   }
 });
-
 
 class Table extends Component {
   constructor(props) {
@@ -51,6 +51,8 @@ class Table extends Component {
     if (this.state.links != null){
       this.createLinkColumns();
     }
+   // let csvData = json2csv(this.state.data);
+   // this.setState({csvData: csvData})
   }
 
   createRows(){
@@ -96,6 +98,7 @@ class Table extends Component {
       return <Cylon/>
     }
     else {
+      console.log(this.state.data)
       return(
         <div>
           <DataTable
@@ -105,6 +108,7 @@ class Table extends Component {
             data={this.state.rows}
             pagination
           />
+          <CSVLink data={this.state.rows}>Download me</CSVLink>
         </div>
       )
     }

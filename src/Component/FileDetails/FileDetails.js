@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import 'react-leaflet-markercluster/dist/styles.min.css';
-import DataTable from '../DataTable/DataTable'
 import Cylon from "../LoadingComponents/Cylon"
 import SimpleMap from '../Maps/SimpleMap';
 import { withStyles } from '@material-ui/core/styles';
