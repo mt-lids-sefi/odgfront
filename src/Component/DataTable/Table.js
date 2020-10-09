@@ -33,10 +33,21 @@ class Table extends Component {
       headers: this.props.header,
       title: this.props.title,
       links: this.props.links,
+      selectable: false,
       linkColumns: [],
       columns: [],
-      rows: []
+      rows: [], 
+      download: false
     };
+    if (this.props.selectable != null){
+      this.state.selectable = this.props.selectable
+    }
+    if (this.props.download != null){
+      this.state.download = this.props.download
+    }
+    if (this.props.headersDesc != null){
+      this.state.headersDesc = this.props.headersDesc
+    }
     this.proccessData = this.proccessData.bind(this);
     this.createRows = this.createRows.bind(this);
   }
@@ -51,8 +62,6 @@ class Table extends Component {
     if (this.state.links != null){
       this.createLinkColumns();
     }
-   // let csvData = json2csv(this.state.data);
-   // this.setState({csvData: csvData})
   }
 
   createRows(){
@@ -68,9 +77,11 @@ class Table extends Component {
   createColumns(){
     let columns = []
     let column = {}
+    let name
     this.state.headers.map(header => (
+        name = this.state.headersDesc != null ? this.state.headersDesc[header] : header.charAt(0).toUpperCase() + header.slice(1),
         column = {
-          name: header.charAt(0).toUpperCase() + header.slice(1),
+          name: name,
           selector: header,
           sortable: true
         },
@@ -107,8 +118,10 @@ class Table extends Component {
             columns={this.state.columns.concat(this.state.linkColumns)}
             data={this.state.rows}
             pagination
+            selectableRows={this.state.selectable}
+            selectableRowDisabled= {row => row.fat > 6}
           />
-          <CSVLink data={this.state.rows}>Download me</CSVLink>
+          {this.state.download && <CSVLink align="left" data={this.state.rows}>Descargar CSV</CSVLink>}
         </div>
       )
     }
@@ -121,3 +134,4 @@ Table.propTypes = {
 };
 
 export default withStyles(styles)(Table);
+/*si hay dos seleccionadas y no soy una de ellas, disable*/

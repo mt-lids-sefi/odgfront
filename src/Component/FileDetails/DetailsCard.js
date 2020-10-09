@@ -58,18 +58,18 @@ class DetailsCard extends Component {
             return (
                 <div className={classes.root}>
 					<Card style={{ width: '18rem' }}>
-						<Card.Header>Datasource details</Card.Header>
+						<Card.Header>Detalles</Card.Header>
 						<ListGroup variant="flush">
-							<ListGroup.Item>Name: {this.state.details.name}</ListGroup.Item>
-							<ListGroup.Item>Description: {this.state.details.description}</ListGroup.Item>
-							{this.state.details.doc && <ListGroup.Item>File: {this.state.details.doc}</ListGroup.Item>}
-							{this.state.details.uploaded_at && <ListGroup.Item>Upload date: {this.state.details.uploaded_at}</ListGroup.Item>}
-							{this.state.details.lat_col && <ListGroup.Item>Latitude column: {this.state.details.lat_col}</ListGroup.Item> }	
-							{this.state.details.lon_col	&& <ListGroup.Item>Longitude column: {this.state.details.lon_col}</ListGroup.Item>}
-							{this.state.details.link_strategy && <ListGroup.Item>Link strategy: {this.state.details.link_strategy}</ListGroup.Item>}
-							{this.state.details.source_a && <ListGroup.Item>Dataset A: {this.state.details.source_a}</ListGroup.Item>}
-							{this.state.details.source_b && <ListGroup.Item>Dataset B: {this.state.details.source_b}</ListGroup.Item>}
-							{this.state.details.distance && <ListGroup.Item>Max distance: {this.state.details.distance}</ListGroup.Item>}
+							<ListGroup.Item>Nombre: {this.state.details.name}</ListGroup.Item>
+							<ListGroup.Item>Descripción: {this.state.details.description}</ListGroup.Item>
+							{this.state.details.doc && <ListGroup.Item>Archivo: {this.state.details.doc}</ListGroup.Item>}
+							{this.state.details.uploaded_at && <ListGroup.Item>Fecha de carga: {this.state.details.uploaded_at}</ListGroup.Item>}
+							{this.state.details.lat_col && <ListGroup.Item>Columna latitud: {this.state.details.lat_col}</ListGroup.Item> }	
+							{this.state.details.lon_col	&& <ListGroup.Item>Columna longitud: {this.state.details.lon_col}</ListGroup.Item>}
+							{this.state.details.link_strategy && <ListGroup.Item>Estrategia de combinación: {this.state.details.link_strategy}</ListGroup.Item>}
+							{this.state.details.source_a && <ListGroup.Item>Conjunto de datos A: {this.state.details.source_a}</ListGroup.Item>}
+							{this.state.details.source_b && <ListGroup.Item>Conjunto de datos B: {this.state.details.source_b}</ListGroup.Item>}
+							{this.state.details.distance && <ListGroup.Item>Máxima distancia: {this.state.details.distance}</ListGroup.Item>}
 						</ListGroup>
 					</Card>
                 </div>

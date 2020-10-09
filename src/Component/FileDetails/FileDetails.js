@@ -84,18 +84,15 @@ class FileDetails extends Component {
           <div className={classes.root}>
           <div >
           <Paper className={classes.paper}>
-          <Typography variant="h6" id="tableTitle" align="left">
-           Geodatafile details
-          </Typography>
+            <Typography variant="h3" id="tableTitle" align="left">Detalles del archivo georeferenciado</Typography>
           </Paper>
-     
-   </div>
+          </div>
           <Row>
               <Col sm={9}> <SimpleMap data={this.state.dataMap} lat_col={this.state.lat_col} lon_col={this.state.lon_col} /></Col>
               <Col sm={2}> <DetailsCard file_id={this.state.doc_id} /></Col>
           </Row>
           <Row>
-              <Col><Table data={this.state.dataMap} header={this.state.cols} title={"Testing"} /></Col>
+              <Col><Table data={this.state.dataMap} header={this.state.cols} download={true} title={ <Typography variant="h6" id="tableTitle" align="left">Conjunto de datos</Typography>} /></Col>
               
           </Row>
         </div>

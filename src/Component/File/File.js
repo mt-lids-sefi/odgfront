@@ -55,12 +55,13 @@ class File extends Component {
     }
     else {
       let headers = ['name', 'description']
-      let linkColumns = [{"name": "Details", "url": "/details"}, {"name": "Clusterize", "url": "/clusterizer"} ]
+      let headersDesc = {"name": "Nombre", "description": "Descripción"}
+      let linkColumns = [{"name": "Detalles", "url": "/details"}, {"name": "Clusterizar", "url": "/clusterizer"} ]
       const { classes } = this.props;
       return(
         <div className={classes.root}>
           <Paper >
-            <Table data={this.state.files} header={headers} links={linkColumns} title={"Files"} />
+            <Table data={this.state.files} header={headers} links={linkColumns} headersDesc={headersDesc} title={"Conjuntos de datos"} />
           </Paper>
         </div>
       )
