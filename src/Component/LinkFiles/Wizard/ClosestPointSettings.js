@@ -2,7 +2,7 @@ import React,  { Component }  from 'react';
 import axios from "axios";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import DataTable from '../../DataTable/DataTable'
+import Table from '../../DataTable/Table'
 import Cylon from '../../LoadingComponents/Cylon';
 import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio';
@@ -103,9 +103,10 @@ class ClosestPointSettings extends Component {
             this.setState({linked:data, loaded: true, loading:false})
         }
       }    
-  
     }
   
+    
+
     render(){
       return (
         <div>
@@ -134,7 +135,7 @@ class ClosestPointSettings extends Component {
   
           <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Preview </Button>
             {this.state.loading ? <Cylon/>
-               : this.state.loaded && <DataTable data={this.state.linked.data} header={this.state.linked.cols} />}
+               : this.state.loaded && <Table data={this.state.linked.data} header={this.state.linked.cols} />}
             
             <Stats step={2} completed={this.state.available_preview} {...this.props} />
         </div>

@@ -2,7 +2,7 @@ import React,  { Component }  from 'react';
 import axios from "axios";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import DataTable from '../../DataTable/DataTable'
+import Table from '../../DataTable/Table'
 import Cylon from '../../LoadingComponents/Cylon';
 import Popup from "reactjs-popup";
 import RulesCreation from './RulesCreation';
@@ -52,7 +52,7 @@ class RulesSetting extends Component {
       return (     
            <div>
             <Typography variant="h5" id="tableTitle"> Rules </Typography>
-            <DataTable data={this.state.rules} header={this.state.header}/>
+            <Table data={this.state.rules} header={this.state.header}/>
 
              <Popup trigger={<button> Trigger</button>} position="right center"  
                     modal

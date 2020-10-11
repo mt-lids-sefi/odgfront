@@ -2,9 +2,7 @@ import React,  { Component }  from 'react';
 import axios from "axios";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import DataTable from '../../DataTable/DataTable'
 import Cylon from '../../LoadingComponents/Cylon';
-import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -18,8 +16,8 @@ import { withStyles } from '@material-ui/core/styles';
 import ClusteredMap from '../../Maps/ClusteredMap';
 import Grid from '@material-ui/core/Grid';
 import { Paper } from '@material-ui/core';
-import FileDetails from '../../FileDetails/FileDetails';
 import ClusterChart from '../../Charts/ClusterChart';
+import Table from '../../DataTable/Table'
 
 const styles = theme => ({
   formControl: {
@@ -247,20 +245,20 @@ class ClusterSettings extends Component {
               <ClusteredMap lat_col={this.state.lat_col} lon_col={this.state.lon_col} cluster_size={this.state.cluster_size} 
                       clustered_data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}/> 
               <ClusterChart cluster_size={this.state.cluster_size} data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y} centroids={this.state.centroids} />
-              <DataTable data={this.state.clustered_data}  header={this.state.cols} />
+              <Table data={this.state.clustered_data}  header={this.state.cols} />
             </Grid>
             }
             <Grid item xs={6}>
             {this.state.loading ? <Cylon/> : this.state.loaded && this.state.categorize_x &&
               <div>
                 <Typography variant="h6" id="tableTitle" align="left" > {this.state.col_x} </Typography>
-                <DataTable data={this.state.cats["x"]} header={["original", "categorized"]} />
+                <Table data={this.state.cats["x"]} header={["original", "categorized"]} />
               </div> 
             }
             {this.state.loading ? <Cylon/> : this.state.loaded && this.state.categorize_y &&
               <div>
                 <Typography variant="h6" id="tableTitle" align="left" > {this.state.col_y} </Typography>
-                <DataTable data={this.state.cats["y"]} header={["original", "categorized"]} />
+                <Table data={this.state.cats["y"]} header={["original", "categorized"]} />
               </div>
             }
             </Grid>
