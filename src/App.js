@@ -34,16 +34,16 @@ class App extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <NavDropdown title="Upload" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/fileuploader">Geo Data File</NavDropdown.Item>
-              <NavDropdown.Item href="/datafileuploader">Data File</NavDropdown.Item>
+            <NavDropdown title="Carga" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/fileuploader">Conjunto de datos georeferenciados</NavDropdown.Item>
+              <NavDropdown.Item href="/datafileuploader">Conjunto de datos</NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Files" id="basic-nav-dropdown" href="/files">
-              <NavDropdown.Item href="/files">Geo Files</NavDropdown.Item>
-              <NavDropdown.Item href="/datafiles">Data Files</NavDropdown.Item>
+            <NavDropdown title="Conjuntos de datos" id="basic-nav-dropdown" href="/files">
+              <NavDropdown.Item href="/files">Datos georeferenciados</NavDropdown.Item>
+              <NavDropdown.Item href="/datafiles">Datos </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="/merge">Merge</Nav.Link>
-            <Nav.Link href="/about">About</Nav.Link>
+            <Nav.Link href="/merge">Combinar</Nav.Link>
+            <Nav.Link href="/about">Acerca de...</Nav.Link>
           </Nav>
           </Navbar.Collapse>
         </Navbar>

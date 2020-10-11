@@ -20,12 +20,12 @@ const Stats = ({
   <div>
       <hr />
       { step > 1 &&
-       <Button variant="contained"  onClick={previousStep}>  Go back </Button>
+       <Button variant="contained"  onClick={previousStep}>  Atrás </Button>
       } 
       { step < totalSteps ?
-          <Button variant="contained"  onClick={nextStep}> Continue </Button>
+          <Button variant="contained"  onClick={nextStep}> Continuar </Button>
           :
-          <Button variant="contained"  disabled={!done} onClick={nextStep}>  Finish </Button>
+          <Button variant="contained"  disabled={!done} onClick={nextStep}>  Finalizar </Button>
       }
       <hr/>  
   </div>
@@ -85,11 +85,11 @@ class SaveClusterization extends Component {
       if(!this.state.saved){
         return (
             <div>
-                <Typography variant="h5" id="tableTitle"> Save options </Typography>
-                <label>Name</label>
+                <Typography variant="h5" id="tableTitle"> Opciones de guardado</Typography>
+                <label>Nombre</label>
                     <input type='text' className='form-control' name='name' placeholder='Name'
                         onBlur={this.updateName} required={true}/>
-                <label>Description</label>
+                <label>Descripción</label>
                     <input type='text' className='form-control' name='description' placeholder='Description'
                         onBlur={this.updateDesc} required={true} />
                 <Stats step={3} done={this.state.done} {...this.props} nextStep={this.submit} />

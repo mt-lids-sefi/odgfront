@@ -40,12 +40,12 @@ const Stats = ({
     <div>
         <hr />
         { step > 1 &&
-         <Button variant="contained"  onClick={previousStep}>  Go back </Button>
+         <Button variant="contained"  onClick={previousStep}>  Atrás</Button>
         } 
         { step < totalSteps ?
-            <Button variant="contained" onClick={nextStep}> Continue </Button>
+            <Button variant="contained" onClick={nextStep}> Continuar </Button>
             :
-            <Button variant="contained"  onClick={nextStep}>  Finish </Button>
+            <Button variant="contained"  onClick={nextStep}>  Finalizar </Button>
         }
         <hr/>  
     </div>
@@ -69,7 +69,7 @@ const Stats = ({
       const { classes } = this.props;
       return (
         <div>
-           <Typography variant="h5" id="tableTitle"> Preview</Typography>
+           <Typography variant="h5" id="tableTitle">Previsualización</Typography>
                   
       
 

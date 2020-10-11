@@ -84,7 +84,7 @@ class FileDetails extends Component {
           <div className={classes.root}>
           <div >
           <Paper className={classes.paper}>
-            <Typography variant="h3" id="tableTitle" align="left">Detalles del archivo georeferenciado</Typography>
+            <Typography variant="h5" id="tableTitle" align="left">Detalles del conjunto de datos georeferenciado</Typography>
           </Paper>
           </div>
           <Row>

@@ -60,12 +60,12 @@ const Stats = ({
     <div>
         <hr />
         { step > 1 &&
-         <Button variant="contained"  onClick={previousStep}>  Go back </Button>
+         <Button variant="contained"  onClick={previousStep}>  Atrás </Button>
         } 
         { step < totalSteps ?
-            <Button variant="contained" onClick={nextStep}> Continue </Button>
+            <Button variant="contained" onClick={nextStep}> Continuar </Button>
             :
-            <Button variant="contained"  onClick={nextStep}>  Finish </Button>
+            <Button variant="contained"  onClick={nextStep}>  Finalizar </Button>
         }
         <hr/>  
     </div>
@@ -192,14 +192,14 @@ class ClusterSettings extends Component {
         <div>
          <Paper className={classes.paper}>
          <div > 
-            <Typography variant="h6" id="tableTitle" align="left" > Settings </Typography>
+            <Typography variant="h6" id="tableTitle" align="left" > Configuración </Typography>
             
             </div>    
           <Grid container spacing={3}>
             <Grid item xs={6}>
              
 
-                <label>Select the cluster algorithm </label>
+                <label>Seleccionar el tipo de algoritmo</label>
 
                 <RadioGroup aria-label="gender" name="algorithm" value={this.state.algorithm} onChange={this.handleRadioChange}>
                   <FormControlLabel value="meanshift" control={<Radio color="primary"/>} label="Mean Shift" />
@@ -209,7 +209,7 @@ class ClusterSettings extends Component {
               
                 {this.state.algorithm == "kmeans" &&
                 <div>
-                <label>Set the K </label>
+                <label>Configurar el valor K </label>
                 <input type='number' className='form-control' name='k' placeholder='K'
                   onChange={this.handleInputChange} />
                 </div>
@@ -220,7 +220,7 @@ class ClusterSettings extends Component {
                 <div>
                   <div>
                     <FormControl className={classes.formControl}>
-                      <InputLabel htmlFor="x-native-simple">Column X</InputLabel>
+                      <InputLabel htmlFor="x-native-simple">Columna X</InputLabel>
                       <Select inputProps={{name: 'x',id: 'x-native-simple'}} name="col_x" value={this.state.col_x} onChange={this.onChangeX}>
                         {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
                       </Select>
@@ -229,7 +229,7 @@ class ClusterSettings extends Component {
                     <hr />
                     <div>
                     <FormControl className={classes.formControl}>
-                      <InputLabel htmlFor="y-native-simple">Column Y</InputLabel>
+                      <InputLabel htmlFor="y-native-simple">Columna Y</InputLabel>
                       <Select inputProps={{name: 'y',id: 'y-native-simple'}} name="col_y" value={this.state.col_y} onChange={this.onChangeY}>
                         {this.state.cols.map((col) => <MenuItem key={col} value={col}>{col}</MenuItem>)}
                       </Select>
@@ -238,7 +238,7 @@ class ClusterSettings extends Component {
                 </div>
                 }
 
-                <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Preview </Button>
+                <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Previsualizar </Button>
              
             </Grid>
             {this.state.loading ? <Cylon/> : this.state.loaded && 
@@ -267,7 +267,7 @@ class ClusterSettings extends Component {
             <Grid item xs={6}>
               {this.state.loading ? <Cylon/> : this.state.loaded && 
                 <div>
-                  <Typography variant="h6" id="tableTitle" align="left" > Centroids </Typography>
+                  <Typography variant="h6" id="tableTitle" align="left" > Centroides </Typography>
                   {this.showCentroids()}
                 </div>
               }

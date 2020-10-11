@@ -112,48 +112,41 @@ class FileUploader extends Component {
     return (
       <Styles>
         <div className={classes.root}>
-       
         <Typography variant="h4" id="tableTitle">
-            File upload
+            Carga de conjunto de datos georeferenciados
           </Typography>
         <form onSubmit={this.handleSubmit}>
-          
-        <div><Input type="file" onChange={this.handleUploadFile} /></div>
+        <div><Input type="file" placeholder="Seleccionar archivo" onChange={this.handleUploadFile} /></div>
         <hr />
             <div>
-              <label>Name</label>
-              <Input name="name" component="input"  type="text" placeholder="Name" value={name} onChange={this.onChange} />
+              <label>Nombre</label>
+              <Input name="name" component="input"  type="text" placeholder="Nombre" value={name} onChange={this.onChange} />
             </div>
             <div>
-              <label>Description</label>
-              <Input name="description" component="textarea" placeholder="Description"  value={description} onChange={this.onChange} />
+              <label>Descripción</label>
+              <Input name="description" component="textarea" placeholder="Descripción"  value={description} onChange={this.onChange} />
             </div>
             <div>
           </div>
             <div>
-            <label>Lat col</label>
+            <label>Columna de latitud</label>
             <select name="latCol" onChange={this.onChange}>
                   {this.state.csvCols.map((col) => <option key={col} value={col}>{col}</option>)}
              </select>
           </div>
           <div>
-            <label>Lon col</label>
+            <label>Columna de longitud</label>
             <select name="lonCol" onChange={this.onChange}>
                   {this.state.csvCols.map((col) => <option key={col} value={col}>{col}</option>)}
              </select>
           </div>
-          
             <div className="buttons">
               <Button variant="contained" color="primary" type="submit" >
-                Submit
+                Guardar
               </Button>
-             
             </div>
-            
           </form>
-         
           </div>
-       
     </Styles>
     );
   }

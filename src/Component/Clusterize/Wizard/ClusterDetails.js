@@ -48,12 +48,12 @@ const Stats = ({
     <div>
         <hr />
         { step > 1 &&
-         <Button variant="contained"  onClick={previousStep}>  Go back </Button>
+         <Button variant="contained"  onClick={previousStep}> Atrás </Button>
         } 
         { step < totalSteps ?
-            <Button variant="contained"  onClick={nextStep}> Continue </Button>
+            <Button variant="contained"  onClick={nextStep}> Continuar </Button>
             :
-            <Button variant="contained"  onClick={nextStep}>  Finish </Button>
+            <Button variant="contained"  onClick={nextStep}>  Finalizar </Button>
         }
         <hr/>  
     </div>
@@ -82,7 +82,7 @@ class ClusterDetails extends Component {
            <div>
               <Paper className={classes.paper}>
             <div >
-            <Typography variant="h6" id="tableTitle" align="left"> Clusterize - File preview & settings </Typography>
+            <Typography variant="h6" id="tableTitle" align="left"> Clusterizar - Previsualización de conjuntos de datos y configuración</Typography>
             </div>    
               <FileDetails file={this.props.file} />
             <Stats step={1} {...this.props} />

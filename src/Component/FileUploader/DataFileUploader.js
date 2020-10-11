@@ -110,7 +110,7 @@ class DataFileUploader extends Component {
         <div className={classes.root}>
        
         <Typography variant="h4" id="tableTitle">
-           Data file upload
+           Carga de conjunto de datos
           </Typography>
         <form onSubmit={this.handleSubmit}>
           
@@ -118,11 +118,11 @@ class DataFileUploader extends Component {
         <hr />
             <div>
               <label>Name</label>
-              <Input name="name" component="input"  type="text" placeholder="Name" value={name} onChange={this.onChange} />
+              <Input name="name" component="input"  type="text" placeholder="Nombre" value={name} onChange={this.onChange} />
             </div>
             <div>
               <label>Description</label>
-              <Input name="description" component="textarea" placeholder="Description"  value={description} onChange={this.onChange} />
+              <Input name="description" component="textarea" placeholder="Descripción"  value={description} onChange={this.onChange} />
             </div>
             <div>
           </div>
@@ -130,7 +130,7 @@ class DataFileUploader extends Component {
           
             <div className="buttons">
               <Button variant="contained" color="primary" type="submit" >
-                Submit
+                Guardar
               </Button>
              
             </div>

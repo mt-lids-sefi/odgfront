@@ -60,12 +60,12 @@ class DataFiles extends Component {
     }
     else{
       let headers = ['name', 'description']
-      let linkColumns = [{"name": "Details", "url": "//datafile_details"}]
+      let linkColumns = [{"name": "Detalles", "url": "//datafile_details"}]
       const { classes } = this.props;
       return(
         <div className={classes.root}>
           <Paper >
-            <Table data={this.state.files} header={headers} links={linkColumns} title={"Data Files"} />
+            <Table data={this.state.files} header={headers} links={linkColumns} title={"Conjuntos de datos"} />
           </Paper>
         </div>
       )
