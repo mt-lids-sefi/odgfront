@@ -2,7 +2,7 @@ import React,  { Component }  from 'react';
 import axios from "axios";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import DataTable from '../../DataTable/DataTable'
+import Table from '../../DataTable/Table'
 import Cylon from '../../LoadingComponents/Cylon';
 
 
@@ -78,9 +78,9 @@ class PreviewFiles extends Component {
             <Typography variant="h5" id="tableTitle"> Files preview & settings </Typography>
             
           
-                <DataTable data={this.state.dataMapA.rows} header={this.state.dataMapA.cols}/>
+                <Table data={this.state.dataMapA.rows} header={this.state.dataMapA.cols}/>
              
-                <DataTable data={this.state.dataMapB.rows} header={this.state.dataMapB.cols}/>
+                <Table data={this.state.dataMapB.rows} header={this.state.dataMapB.cols}/>
              
           
             <Stats step={1} {...this.props} />

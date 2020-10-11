@@ -66,10 +66,13 @@ class Table extends Component {
 
   createRows(){
     let rows = []
-    for (let i = 0; i < Object.keys(this.state.data).length; i++){
-        let row = this.state.data[i]
+    let i = 0 
+    for (const key in this.state.data) {
+    //for (let i = 0; i < Object.keys(this.state.data).length; i++){
+        let row = this.state.data[key]
         row['id_key'] = i
         rows[i] = row
+        i++
     }
     this.state.rows = rows
   }
@@ -109,7 +112,6 @@ class Table extends Component {
       return <Cylon/>
     }
     else {
-      console.log(this.state.data)
       return(
         <div>
           <DataTable
