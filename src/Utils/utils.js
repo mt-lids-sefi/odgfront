@@ -28,11 +28,13 @@ export function createClusterCustomIcon (cluster, number) {
     });
   };
 
-export function getColumnContent(rows,column){
+export function getColumnContent(data,column){
   let values = []
-  for (let i = 0; i < Object.keys(rows).length; i++){
-    let val = rows[i][column]
-    values.push(val)
+  for (let i = 0; i < Object.keys(data).length; i++){
+    let val = data[i][column]
+    if(values.indexOf(val) == -1){
+      values.push(val)
+    }
   }
   return values
 }

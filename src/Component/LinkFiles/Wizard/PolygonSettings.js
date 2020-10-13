@@ -82,7 +82,7 @@ class PolygonSettings extends Component {
               </div>
             
   
-          <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Preview </Button>
+          <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Previsualizar </Button>
             {this.state.loading ? <Cylon/>
                : this.state.loaded && <Table data={this.state.linked.data} header={this.state.linked.cols} />}
             

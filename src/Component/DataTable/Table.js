@@ -108,6 +108,7 @@ class Table extends Component {
   }
 
   render() {
+    let paginationOptions= { rowsPerPageText: 'Filas por página:'}
     if (this.state.rows == []) {
       return <Cylon/>
     }
@@ -120,8 +121,8 @@ class Table extends Component {
             columns={this.state.columns.concat(this.state.linkColumns)}
             data={this.state.rows}
             pagination
-            selectableRows={this.state.selectable}
-            selectableRowDisabled= {row => row.fat > 6}
+            noDataComponent="No hay datos para mostrar"
+            paginationComponentOptions={paginationOptions}
           />
           {this.state.download && <CSVLink align="left" data={this.state.rows}>Descargar CSV</CSVLink>}
         </div>
