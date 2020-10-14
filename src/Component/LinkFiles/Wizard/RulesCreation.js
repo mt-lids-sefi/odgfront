@@ -57,15 +57,12 @@ class RulesCreation extends Component {
     this.setState({colA : event.target.value})
     let column_content = getColumnContent(this.state.fileA.rows, event.target.value)
     this.setState({values_colA: column_content, a_selected: true})
-
-    //this.props.update(event.target.name, event.target.value);
   }
 
   onChangeB = event => {
     this.setState({colB : event.target.value})
     let column_content = getColumnContent(this.state.fileB.rows, event.target.value)
     this.setState({values_colB: column_content, b_selected: true})
-    //this.props.update(event.target.name, event.target.value);
   }
 
   onChangeValA = event => {
@@ -77,7 +74,6 @@ class RulesCreation extends Component {
   }
 
   saveRule = event => {
-    console.log("saveruel")
     let rule= {}
     rule['col_a'] = this.state.colA
     rule['col_b'] = this.state.colB
@@ -131,36 +127,3 @@ RulesCreation.propTypes = {
   };
 
 export default withStyles(styles)(RulesCreation);
-
-/**<MaterialTable
-          title="Editable Preview"
-          columns={[{ title: 'Column A', field: 'col_a', lookup: this.state.values_colA },{ title: 'Column B', field: 'col_b', lookup: this.state.values_colB }]}
-          data={data}
-          editable={{
-            onRowAdd: newData =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  console.log(newData)
-                  data.push(newData)
-                  console.log(data)
-                  this.addData(newData);
-                  
-                  resolve();
-                }, 1000)
-              }),
-            onRowDelete: oldData =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  /*const dataDelete = [...this.state.matches];
-                  const index = oldData.tableData.id;
-                  dataDelete.splice(index, 1);
-                  this.setState({matches: dataDelete});
-                  const index = oldData.tableData.id;
-                  const dataDelete = [...data];
-                  dataDelete.splice(index, 1);
-
-                  resolve()
-                }, 1000)
-              }),
-          }}
-        /> }*/

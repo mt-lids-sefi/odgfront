@@ -2,11 +2,10 @@ import React,  { Component, useRef }  from 'react';
 import axios from "axios";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Table from '../../DataTable/Table'
-import Cylon from '../../LoadingComponents/Cylon';
 import Popup from "reactjs-popup";
 import RulesCreation from './RulesCreation';
 import DataTable  from 'react-data-table-component';
+import  {setRules} from  '../../../Utils/utils' 
 
 
 const Stats = ({
@@ -41,7 +40,7 @@ class RulesSetting extends Component {
  
   constructor(props) {
     super(props);
-    this.state = {rules: [],  open: false}
+    this.state = {rules: [],  open: false, available_preview: false}
     this.setOpen = this.setOpen.bind(this);
   }
 
@@ -58,11 +57,10 @@ class RulesSetting extends Component {
   }
 
   updateRules = (rule) => {
-    console.log("llego")
-    console.log(rule)
     this.state.rules.push(rule)
     this.setState({open: !this.state.open, rules: this.state.rules})
     this.forceUpdate();
+    this.setState({available_preview: true})
   }
 
   setOpen() {
@@ -72,6 +70,9 @@ class RulesSetting extends Component {
     this.forceUpdate();
   }
 
+  preview = async () => {
+    let sending_rules = setRules(this.state.rules)
+  }
 
     render(){
       const columns = [{name: 'Columna conjunto de datos A',selector: 'col_a',sortable: true},
@@ -94,6 +95,7 @@ class RulesSetting extends Component {
                     open={this.state.open} >
               <div><RulesCreation fileA={this.props.form.data_fileA} fileB={this.props.form.data_fileB} update={this.updateRules}  form={this.state.form} /></div>
             </Popup>
+            <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Previsualizar </Button>
             <Stats step={2} {...this.props} />
         </div>
        

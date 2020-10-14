@@ -38,3 +38,16 @@ export function getColumnContent(data,column){
   }
   return values
 }
+
+export function setRules(rules){
+  /**rule es:
+   * rule['col_a'] = this.state.colA
+    rule['col_b'] = this.state.colB
+    rule['match'] = [this.state.val_a, this.state.val_b]
+
+    BE recibe 
+    {"rules": 
+    [{"col_a": "JURISDICCI", "col_b": "verificado", "matches": [{"PROV": "Invalido"}, {"NAC": "Invalido"}]}]
+}
+   */
+}
