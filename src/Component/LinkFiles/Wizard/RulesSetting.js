@@ -7,6 +7,7 @@ import RulesCreation from './RulesCreation';
 import DataTable  from 'react-data-table-component';
 import  {addRule} from  '../../../Utils/utils' 
 import { utils } from 'react-bootstrap';
+import Table from '../../DataTable/Table';
 
 
 const Stats = ({
@@ -41,8 +42,9 @@ class RulesSetting extends Component {
  
   constructor(props) {
     super(props);
-    this.state = {rules: [],  open: false, available_preview: false, jsonRules: []}
+    this.state = {rules: [],  open: false, available_preview: false, jsonRules: [], dataPreview: false}
     this.setOpen = this.setOpen.bind(this);
+    this.preview = this.preview.bind(this);
   }
 
 
@@ -80,8 +82,17 @@ class RulesSetting extends Component {
     this.forceUpdate();
   }
 
-  preview = async () => {
-    console.log(this.state.jsonRules)
+  async preview() {
+    let rules = this.state.jsonRules
+    let fileA = this.props.form.files[0]
+    let fileB = this.props.form.files[1]
+    const promise = await axios.post('http://localhost:8000/link_similarity_preview/'+fileA+'/'+fileB, {"rules": rules})
+    const status = promise.status;
+    if(status===200)
+    {
+      const data = promise.data;
+      this.setState({preview: data, dataPreview: true})
+    }
   }
 
     render(){
@@ -106,6 +117,8 @@ class RulesSetting extends Component {
               <div><RulesCreation fileA={this.props.form.data_fileA} fileB={this.props.form.data_fileB} update={this.updateRules}  form={this.state.form} /></div>
             </Popup>
             <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Previsualizar </Button>
+            {this.state.dataPreview &&
+            <Table data={this.state.preview.data} header={this.state.preview.cols} title={"Previsualización"}  />}
             <Stats step={2} {...this.props} />
         </div>
        

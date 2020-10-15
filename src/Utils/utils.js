@@ -61,7 +61,7 @@ export function addRule(rule, jsonRules){
       return jsonRules
     }
   }
-  //si no sale en el break es que no estaba, la agrego.
+  //si no sale en el for/if es que no estaba, la agrego.
   let newRule = {'col_a': rule['col_a'], 'col_b': rule['col_b'], 'matches':[{a:valA, b:valB}]}
   jsonRules.push(newRule)
   return jsonRules
