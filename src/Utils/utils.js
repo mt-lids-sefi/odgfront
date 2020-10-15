@@ -1,4 +1,6 @@
+import { TrendingUp } from '@material-ui/icons';
 import * as L from 'leaflet'
+import { func } from 'prop-types';
 
 
 
@@ -39,15 +41,37 @@ export function getColumnContent(data,column){
   return values
 }
 
-export function setRules(rules){
-  /**rule es:
-   * rule['col_a'] = this.state.colA
-    rule['col_b'] = this.state.colB
-    rule['match'] = [this.state.val_a, this.state.val_b]
-
-    BE recibe 
-    {"rules": 
-    [{"col_a": "JURISDICCI", "col_b": "verificado", "matches": [{"PROV": "Invalido"}, {"NAC": "Invalido"}]}]
+/**
+ * Agrega una regla, y si las columnas de esa regla existen agrega los matchets
+ * @param {*} rule 
+ * @param {*} jsonRules 
+ */
+export function addRule(rule, jsonRules){
+  let m = rule['match']
+  let valA = m[0]
+  let valB = m[1]
+  let mRule = {'col_a': rule['col_a'], 'col_b': rule['col_b'], match:{a:valA, b:valB}}
+  for (let i = 0; i < jsonRules.length; i++){
+    let r = jsonRules[i]
+    if (r['col_a'] == mRule['col_a'] && r['col_b'] == mRule['col_b']){
+      let matches = r['matches']
+      matches.push(mRule['match'])
+      let newRule = {'col_a': r['col_a'], 'col_b': r['col_b'], 'matches':matches}
+      jsonRules[i] = newRule
+      return jsonRules
+    }
+  }
+  //si no sale en el break es que no estaba, la agrego.
+  let newRule = {'col_a': rule['col_a'], 'col_b': rule['col_b'], 'matches':[{a:valA, b:valB}]}
+  jsonRules.push(newRule)
+  return jsonRules
 }
-   */
+
+export function ruleExists(rule, rules){
+  for (let i = 0; i < rules.length; i++){
+    if (rules[i] == rule){
+      return true
+    }
+  }
+  return false
 }

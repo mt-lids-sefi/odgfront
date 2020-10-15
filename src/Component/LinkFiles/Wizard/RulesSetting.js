@@ -5,7 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import Popup from "reactjs-popup";
 import RulesCreation from './RulesCreation';
 import DataTable  from 'react-data-table-component';
-import  {setRules} from  '../../../Utils/utils' 
+import  {addRule} from  '../../../Utils/utils' 
+import { utils } from 'react-bootstrap';
 
 
 const Stats = ({
@@ -40,7 +41,7 @@ class RulesSetting extends Component {
  
   constructor(props) {
     super(props);
-    this.state = {rules: [],  open: false, available_preview: false}
+    this.state = {rules: [],  open: false, available_preview: false, jsonRules: []}
     this.setOpen = this.setOpen.bind(this);
   }
 
@@ -57,10 +58,19 @@ class RulesSetting extends Component {
   }
 
   updateRules = (rule) => {
+    for (let i = 0; i < this.state.rules.length; i++){
+      if ((this.state.rules[i]['col_a'] == rule['col_a'] 
+            && this.state.rules[i]['col_b'] == rule['col_b'] 
+            && this.state.rules[i]['match'][0] == rule['match'][0] 
+            && this.state.rules[i]['match'][1] == rule['match'][1] )){
+        this.setState({open: !this.state.open})
+        return
+      }
+    }
     this.state.rules.push(rule)
-    this.setState({open: !this.state.open, rules: this.state.rules})
-    this.forceUpdate();
-    this.setState({available_preview: true})
+    let jsonRules = this.state.jsonRules
+    jsonRules = addRule(rule, jsonRules)
+    this.setState({open: !this.state.open, jsonRules: jsonRules, available_preview: true})
   }
 
   setOpen() {
@@ -71,7 +81,7 @@ class RulesSetting extends Component {
   }
 
   preview = async () => {
-    let sending_rules = setRules(this.state.rules)
+    console.log(this.state.jsonRules)
   }
 
     render(){
