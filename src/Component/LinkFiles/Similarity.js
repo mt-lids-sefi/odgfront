@@ -7,6 +7,7 @@ import PreviewFiles from './Wizard/PreviewFiles'
 import { Redirect } from 'react-router-dom';
 import RulesSetting from './Wizard/RulesSetting';
 import Cylon from '../LoadingComponents/Cylon';
+import SaveSimilarityOptions from './Wizard/SaveSimilarityOptions';
  
 const styles = theme => ({
     root: {
@@ -60,7 +61,7 @@ class Similarity extends Component {
       if(this.props.location.mapProps){
         this.state = {
           files: this.props.location.mapProps.files,
-          form: {files: this.props.location.mapProps.files, saved: false},
+          form: {files: this.props.location.mapProps.files, saved: false, rules: []},
         };
       }
       else{
@@ -90,6 +91,7 @@ class Similarity extends Component {
                   <StepWizard>
                       <PreviewFiles files={this.state.files} update={this.updateForm}/>
                       <RulesSetting update={this.updateForm}  form={this.state.form}/>
+                      <SaveSimilarityOptions update={this.updateForm} form={this.state.form}/>
                   </StepWizard>
               </div>
           </div>

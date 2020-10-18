@@ -72,7 +72,8 @@ class RulesSetting extends Component {
     this.state.rules.push(rule)
     let jsonRules = this.state.jsonRules
     jsonRules = addRule(rule, jsonRules)
-    this.setState({open: !this.state.open, jsonRules: jsonRules, available_preview: true})
+    this.setState({open: !this.state.open, jsonRules: jsonRules, available_preview: true, dataPreview: false})
+    this.props.update('rules', jsonRules);
   }
 
   setOpen() {
@@ -92,6 +93,7 @@ class RulesSetting extends Component {
     {
       const data = promise.data;
       this.setState({preview: data, dataPreview: true})
+      console.log(data)
     }
   }
 
