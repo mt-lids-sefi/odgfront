@@ -37,7 +37,7 @@ class Clusterizer extends Component {
       this.state = {
      file_id : this.props.location.mapProps.doc_id,
      props : this.props,
-     form: {file: this.props.location.mapProps.file_id, algorithm: 'meanshift'},
+     form: {file: this.props.location.mapProps.doc_id, algorithm: 'meanshift'},
     };
     } 
     else{

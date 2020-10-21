@@ -20,6 +20,8 @@ import Polygon from './Component/LinkFiles/Polygon';
 import Clusterizer from './Component/Clusterize/Clusterizer';
 import DataFiles from './Component/File/DataFiles';
 import Similarity from './Component/LinkFiles/Similarity';
+import Configurations from './Component/Visualizations/Configurations';
+import ClusterVisualization from './Component/Visualizations/ClusterVisualization';
 
 class App extends Component {
   render() {
@@ -43,6 +45,7 @@ class App extends Component {
               <NavDropdown.Item href="/datafiles">Datos </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="/merge">Combinar</Nav.Link>
+            <Nav.Link href="/configurations">Configuraciones</Nav.Link>
             <Nav.Link href="/about">Acerca de...</Nav.Link>
           </Nav>
           </Navbar.Collapse>
@@ -63,6 +66,8 @@ class App extends Component {
               <Route path="/polygon" exact component={Polygon} />
               <Route path="/clusterizer" exact component={Clusterizer} />
               <Route path="/similcols" exact component={Similarity} />
+              <Route path="/configurations" exact component={Configurations} />
+              <Route path="/view_conf" exact component={ClusterVisualization} />
           </Switch>
         </Router>      
         </div>

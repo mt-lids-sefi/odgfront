@@ -66,11 +66,11 @@ class SaveClusterization extends Component {
         let url = ''
         if(this.props.form.algorithm == "kmeans"){
             url = "http://localhost:8000/clusterize_kmeans/"+this.props.form.file+"/"+this.state.name+"/"+this.state.description+"/"+
-                                            this.props.form.col_x+"/"+this.props.form.col_y+"/"+ this.props.form.k
+                                            this.props.form.x+"/"+this.props.form.y+"/"+ this.props.form.k
           }
           else if(this.props.form.algorithm == "meanshift"){
             url = "http://localhost:8000/clusterize_meanshift/"+this.props.form.file+"/"+this.state.name+"/"+this.state.description+"/"+
-                                            this.props.form.col_x+"/"+this.props.form.col_y
+                                            this.props.form.x+"/"+this.props.form.y
           }
         let promise = await axios.get(url)
         let status = promise.status;
