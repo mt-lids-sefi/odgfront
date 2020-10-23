@@ -82,7 +82,7 @@ class ClusterDetails extends Component {
            <div>
               <Paper className={classes.paper}>
             <div >
-            <Typography variant="h6" id="tableTitle" align="left"> Clusterizar - Previsualización de conjuntos de datos y configuración</Typography>
+            <Typography variant="h4" id="tableTitle" align="left"> Clusterizar - Previsualización de conjuntos de datos y configuración</Typography>
             </div>    
               <FileDetails file={this.props.file} />
             <Stats step={1} {...this.props} />

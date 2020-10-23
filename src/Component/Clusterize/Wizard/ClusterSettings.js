@@ -190,21 +190,16 @@ class ClusterSettings extends Component {
         <div>
          <Paper className={classes.paper}>
          <div > 
-            <Typography variant="h6" id="tableTitle" align="left" > Configuración </Typography>
+            <Typography variant="h4" id="tableTitle" align="left" > Configuración </Typography>
             
             </div>    
           <Grid container spacing={3}>
             <Grid item xs={6}>
-             
-
-                <label>Seleccionar el tipo de algoritmo</label>
-
+                <Typography variant="h6" id="tableTitle" align="left" > Seleccionar el tipo de algoritmo</Typography>
                 <RadioGroup aria-label="gender" name="algorithm" value={this.state.algorithm} onChange={this.handleRadioChange}>
                   <FormControlLabel value="meanshift" control={<Radio color="primary"/>} label="Mean Shift" />
                   <FormControlLabel value="kmeans" control={<Radio color="primary"/>} label="K Means" />
                 </RadioGroup>
-
-              
                 {this.state.algorithm == "kmeans" &&
                 <div>
                 <label>Configurar el valor K </label>
@@ -212,10 +207,14 @@ class ClusterSettings extends Component {
                   onChange={this.handleInputChange} />
                 </div>
                 }
+            </Grid>
+            <Grid item xs={6}>
                 <hr />
                 {this.state.data  &&
 
                 <div>
+                  <Typography variant="h6" id="tableTitle" align="left" > Seleccionar las columnas</Typography>
+                  <Typography variant="subtitle1" id="tableTitle" align="left" > Se utilizarán para formar los puntos sobre los que de aplicará el algoritmo </Typography>
                   <div>
                     <FormControl className={classes.formControl}>
                       <InputLabel htmlFor="x-native-simple">Columna X</InputLabel>
@@ -235,18 +234,26 @@ class ClusterSettings extends Component {
                   </div>
                 </div>
                 }
-
-                <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Previsualizar </Button>
-             
             </Grid>
+            <Grid item xs={12}><Button variant="contained" style={{float: 'center'}} onClick={this.preview} disabled={!this.state.available_preview}>  Previsualizar </Button></Grid>
             {this.state.loading ? <Cylon/> : this.state.loaded && 
-            <Grid item xs={6}>
               
-              <ClusteredMap lat_col={this.state.lat_col} lon_col={this.state.lon_col} cluster_size={this.state.cluster_size} 
-                      clustered_data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}/> 
-              <ClusterChart cluster_size={this.state.cluster_size} data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y} centroids={this.state.centroids} />
-              <Table data={this.state.clustered_data}  header={this.state.cols} />
-            </Grid>
+                <Grid item xs={12}>
+                  <ClusteredMap lat_col={this.state.lat_col} lon_col={this.state.lon_col} cluster_size={this.state.cluster_size} 
+                        clustered_data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}/> 
+                  <Typography variant="h6" id="tableTitle" align="left" > Conjunto de datos </Typography>
+                  <Table data={this.state.clustered_data}  header={this.state.cols} />
+                  <Grid item xs={3}>   
+                    <Typography variant="h6" id="tableTitle" align="left" > Gráfico puntos clusterizados </Typography>
+                    <ClusterChart cluster_size={this.state.cluster_size} data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y} centroids={this.state.centroids} />
+                  </Grid>
+                  <Grid item xs={3}>  
+                    <Typography variant="h6" id="tableTitle" align="left" > Centroides </Typography>
+                    {this.showCentroids()}
+                  </Grid>
+                </Grid>
+                
+              
             }
             <Grid item xs={6}>
             {this.state.loading ? <Cylon/> : this.state.loaded && this.state.categorize_x &&
@@ -263,12 +270,7 @@ class ClusterSettings extends Component {
             }
             </Grid>
             <Grid item xs={6}>
-              {this.state.loading ? <Cylon/> : this.state.loaded && 
-                <div>
-                  <Typography variant="h6" id="tableTitle" align="left" > Centroides </Typography>
-                  {this.showCentroids()}
-                </div>
-              }
+              
             </Grid>
           </Grid>
           <Stats step={2}  {...this.props} />
