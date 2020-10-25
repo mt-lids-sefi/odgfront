@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Cylon from '../LoadingComponents/Cylon';
 import { BrowserRouter as  Route, Link } from 'react-router-dom';
 import { CSVLink } from "react-csv";
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
@@ -116,7 +117,7 @@ class Table extends Component {
       return(
         <div>
           <DataTable
-            title={this.state.title}
+            title={<Typography variant="h6" id="tableTitle" align="left" > {this.state.title} </Typography>}
             keyField="id_key"
             columns={this.state.columns.concat(this.state.linkColumns)}
             data={this.state.rows}

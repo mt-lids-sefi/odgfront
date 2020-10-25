@@ -244,8 +244,7 @@ class ClusterSettings extends Component {
                   <Typography variant="subtitle1" id="tableTitle" align="left" > Información dividida en clusters por colores </Typography>
                   <ClusteredMap lat_col={this.state.lat_col} lon_col={this.state.lon_col} cluster_size={this.state.cluster_size} 
                         clustered_data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}/> 
-                  <Typography variant="h6" id="tableTitle" align="left" > Conjunto de datos </Typography>
-                  <Table data={this.state.clustered_data}  header={this.state.cols} />
+                  <Table data={this.state.clustered_data}  header={this.state.cols} title={"Conjunto de datos"} />
                   </Grid>
                   <Grid item xs={6}>   
                     <Typography variant="h6" id="tableTitle" align="left" > Gráfico puntos clusterizados </Typography>
@@ -262,14 +261,16 @@ class ClusterSettings extends Component {
             <Grid item xs={6}>
             {this.state.loading ? <Cylon/> : this.state.loaded && this.state.categorize_x &&
               <div>
-                <Typography variant="h6" id="tableTitle" align="left" > {this.state.col_x} </Typography>
-                <Table data={this.state.cats["x"]} header={["original", "categorized"]} />
+                <Typography variant="h6" id="tableTitle" align="left" > Categorización de {this.state.col_x} </Typography>
+                <Table data={this.state.cats["x"]} headersDesc={{"original": "Original", "categorized": "Categorización"}}  header={["original", "categorized"]} />
               </div> 
             }
+            </Grid>
+            <Grid item xs={6}>
             {this.state.loading ? <Cylon/> : this.state.loaded && this.state.categorize_y &&
               <div>
-                <Typography variant="h6" id="tableTitle" align="left" > {this.state.col_y} </Typography>
-                <Table data={this.state.cats["y"]} header={["original", "categorized"]} />
+                <Typography variant="h6" id="tableTitle" align="left" > Categorización de {this.state.col_y} </Typography>
+                <Table data={this.state.cats["y"]}  headersDesc={{"original": "Original", "categorized": "Categorización"}} header={["original", "categorized"]} />
               </div>
             }
             </Grid>

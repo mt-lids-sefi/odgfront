@@ -98,16 +98,20 @@ render(){
         <div>
             <Paper className={classes.paper}>
             <div > 
-            <Typography variant="h6" id="tableTitle" align="left" > Visualización </Typography>
+            <Typography variant="h4" id="tableTitle" align="left" > Visualización </Typography>
             
             </div>    
             <Grid container spacing={3}>
               <Grid item xs={12}>
+                <Typography variant="h6" id="tableTitle" align="left" > Mapa </Typography>
+                <Typography variant="subtitle1" id="tableTitle" align="left" > Información dividida en clusters por colores </Typography>
                 <ClusteredMap lat_col={this.state.lat} lon_col={this.state.lon} cluster_size={this.state.cluster_size} 
                         clustered_data={this.state.data} col_x={this.state.col_a} col_y={this.state.col_b}/> 
-                <Table data={this.state.data}  header={this.state.cols} />
+                <Typography variant="h6" id="tableTitle" align="left" > Conjunto de datos </Typography>
+                <Table data={this.state.data}  header={this.state.cols}/>
               </Grid>
               <Grid item xs={6}>
+                <Typography variant="h6" id="tableTitle" align="left" > Gráfico puntos clusterizados </Typography>
                 <ClusterChart cluster_size={this.state.cluster_size} data={this.state.data} col_x={this.state.col_a} col_y={this.state.col_b} centroids={this.state.centroids} />
               </Grid>
               {this.state.centroids != null && 
@@ -115,17 +119,19 @@ render(){
                       <Typography variant="h6" id="tableTitle" align="left" > Centroides </Typography>
                       {this.showCentroids()}
               </Grid>}
-              <Grid item xs={12}>
+              <Grid item xs={6}>
               {this.state.categorize_x &&
                   <div>
-                  <Typography variant="h6" id="tableTitle" align="left" > {this.state.col_x} </Typography>
-                  <Table data={this.state.cats["x"]} header={["original", "categorized"]} />
+                  <Typography variant="h6" id="tableTitle" align="left" > Categorización de {this.state.col_a} </Typography>
+                  <Table data={this.state.cats["x"]} headersDesc={{"original": "Original", "categorized": "Categorización"}} header={["original", "categorized"]} />
                   </div> 
               }
+              </Grid>
+              <Grid item xs={6}>
               {this.state.categorize_y &&
                   <div>
-                  <Typography variant="h6" id="tableTitle" align="left" > {this.state.col_y} </Typography>
-                  <Table data={this.state.cats["y"]} header={["original", "categorized"]} />
+                  <Typography variant="h6" id="tableTitle" align="left" > Categorización de {this.state.col_b} </Typography>
+                  <Table data={this.state.cats["y"]} headersDesc={{"original": "Original", "categorized": "Categorización"}} header={["original", "categorized"]} />
                   </div>
               }
               </Grid>
