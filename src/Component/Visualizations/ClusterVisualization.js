@@ -11,6 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import { Paper } from '@material-ui/core';
 import ClusterChart from '../Charts/ClusterChart';
 import Table from '../DataTable/Table'
+import { Redirect } from 'react-router-dom'
 
 const styles = theme => ({
   formControl: {
@@ -77,15 +78,17 @@ class ClusterVisualization extends Component {
     showCentroids(){
       let centroids = [] 
       for (let i = 0; i < this.state.centroids.length; i++){
-        centroids.push(<Grid item xs={4}>
-                <Paper>{this.state.centroids[i][0]+", "+this.state.centroids[i][1]}</Paper>
-              </Grid>)
+        centroids.push({x: this.state.centroids[i][0], y: this.state.centroids[i][1]})
       }
-      return centroids
+      let tab = <Table data={centroids}  header={['x', 'y']}/>
+      return tab
     }
 
 render(){
     const { classes } = this.props;
+    if (this.state.doc_id == null){
+      return <Redirect to={{pathname: '/configurations'}} />
+    }
     if(!this.state.loaded){
         return  <Cylon/>
     }
@@ -99,37 +102,33 @@ render(){
             
             </div>    
             <Grid container spacing={3}>
-            
-            
-            <Grid item xs={6}>
-                
+              <Grid item xs={12}>
                 <ClusteredMap lat_col={this.state.lat} lon_col={this.state.lon} cluster_size={this.state.cluster_size} 
                         clustered_data={this.state.data} col_x={this.state.col_a} col_y={this.state.col_b}/> 
-                <ClusterChart cluster_size={this.state.cluster_size} data={this.state.data} col_x={this.state.col_a} col_y={this.state.col_b} centroids={this.state.centroids} />
                 <Table data={this.state.data}  header={this.state.cols} />
-            </Grid>
-            
-            <Grid item xs={6}>
-            {this.state.categorize_x &&
-                <div>
-                <Typography variant="h6" id="tableTitle" align="left" > {this.state.col_x} </Typography>
-                <Table data={this.state.cats["x"]} header={["original", "categorized"]} />
-                </div> 
-            }
-            {this.state.categorize_y &&
-                <div>
-                <Typography variant="h6" id="tableTitle" align="left" > {this.state.col_y} </Typography>
-                <Table data={this.state.cats["y"]} header={["original", "categorized"]} />
-                </div>
-            }
-            </Grid>
-            {this.state.centroids != null && <Grid item xs={6}>
-                <div>
-                    <Typography variant="h6" id="tableTitle" align="left" > Centroides </Typography>
-                    {this.showCentroids()}
-                </div>
-                
-            </Grid>}
+              </Grid>
+              <Grid item xs={6}>
+                <ClusterChart cluster_size={this.state.cluster_size} data={this.state.data} col_x={this.state.col_a} col_y={this.state.col_b} centroids={this.state.centroids} />
+              </Grid>
+              {this.state.centroids != null && 
+              <Grid item xs={6}>
+                      <Typography variant="h6" id="tableTitle" align="left" > Centroides </Typography>
+                      {this.showCentroids()}
+              </Grid>}
+              <Grid item xs={12}>
+              {this.state.categorize_x &&
+                  <div>
+                  <Typography variant="h6" id="tableTitle" align="left" > {this.state.col_x} </Typography>
+                  <Table data={this.state.cats["x"]} header={["original", "categorized"]} />
+                  </div> 
+              }
+              {this.state.categorize_y &&
+                  <div>
+                  <Typography variant="h6" id="tableTitle" align="left" > {this.state.col_y} </Typography>
+                  <Table data={this.state.cats["y"]} header={["original", "categorized"]} />
+                  </div>
+              }
+              </Grid>
             </Grid>
             </Paper>
         </div>

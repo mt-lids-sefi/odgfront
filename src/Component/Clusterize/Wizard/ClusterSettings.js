@@ -172,14 +172,14 @@ class ClusterSettings extends Component {
       
         
     }
+    
     showCentroids(){
       let centroids = [] 
       for (let i = 0; i < this.state.centroids.length; i++){
-        centroids.push(<Grid item xs={4}>
-                <Paper>{this.state.centroids[i][0]+", "+this.state.centroids[i][1]}</Paper>
-              </Grid>)
+        centroids.push({x: this.state.centroids[i][0], y: this.state.centroids[i][1]})
       }
-      return centroids
+      let tab = <Table data={centroids}  header={['x', 'y']}/>
+      return tab
     }
 
 
@@ -191,8 +191,7 @@ class ClusterSettings extends Component {
          <Paper className={classes.paper}>
          <div > 
             <Typography variant="h4" id="tableTitle" align="left" > Configuración </Typography>
-            
-            </div>    
+          </div>    
           <Grid container spacing={3}>
             <Grid item xs={6}>
                 <Typography variant="h6" id="tableTitle" align="left" > Seleccionar el tipo de algoritmo</Typography>
@@ -235,24 +234,29 @@ class ClusterSettings extends Component {
                 </div>
                 }
             </Grid>
-            <Grid item xs={12}><Button variant="contained" style={{float: 'center'}} onClick={this.preview} disabled={!this.state.available_preview}>  Previsualizar </Button></Grid>
+            <Grid item xs={12}>
+              <Button variant="contained" style={{float: 'center'}} onClick={this.preview} disabled={!this.state.available_preview}>  Previsualizar </Button>
+            </Grid>
             {this.state.loading ? <Cylon/> : this.state.loaded && 
-              
+              <Grid container spacing={3}>
                 <Grid item xs={12}>
+                  <Typography variant="h6" id="tableTitle" align="left" > Mapa </Typography>
+                  <Typography variant="subtitle1" id="tableTitle" align="left" > Información dividida en clusters por colores </Typography>
                   <ClusteredMap lat_col={this.state.lat_col} lon_col={this.state.lon_col} cluster_size={this.state.cluster_size} 
                         clustered_data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y}/> 
                   <Typography variant="h6" id="tableTitle" align="left" > Conjunto de datos </Typography>
                   <Table data={this.state.clustered_data}  header={this.state.cols} />
-                  <Grid item xs={3}>   
+                  </Grid>
+                  <Grid item xs={6}>   
                     <Typography variant="h6" id="tableTitle" align="left" > Gráfico puntos clusterizados </Typography>
                     <ClusterChart cluster_size={this.state.cluster_size} data={this.state.clustered_data} col_x={this.state.col_x} col_y={this.state.col_y} centroids={this.state.centroids} />
                   </Grid>
-                  <Grid item xs={3}>  
+                  <Grid item xs={6}>  
                     <Typography variant="h6" id="tableTitle" align="left" > Centroides </Typography>
                     {this.showCentroids()}
                   </Grid>
-                </Grid>
                 
+                </Grid>
               
             }
             <Grid item xs={6}>
@@ -268,9 +272,6 @@ class ClusterSettings extends Component {
                 <Table data={this.state.cats["y"]} header={["original", "categorized"]} />
               </div>
             }
-            </Grid>
-            <Grid item xs={6}>
-              
             </Grid>
           </Grid>
           <Stats step={2}  {...this.props} />
