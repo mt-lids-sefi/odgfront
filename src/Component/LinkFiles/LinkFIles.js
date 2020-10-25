@@ -71,10 +71,10 @@ export default function LinkFiles(props) {
           </Typography>
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
-            <Grid item xs>
-                                              al que se le quiere agregar información -el conjunto ‘base’-, 
+            <Grid item xs> 
               <Typography>Punto más cercano: para cada punto del conjunto de datos 
-                                              encontrar el punto más cercano del conjunto de datos a sumar. 
+                          al que se le quiere agregar información -el conjunto ‘base’-,
+                          encontrar el punto más cercano del conjunto de datos a sumar. 
               </Typography>
             </Grid>
             <Grid item>
