@@ -13,7 +13,7 @@ const useMenuStyles = makeStyles(theme => ({
       padding: theme.spacing(0, 3),
     },
     paper: {
-      maxWidth: 400,
+      maxWidth: 800,
       margin: `${theme.spacing(1)}px auto`,
       padding: theme.spacing(2),
     },
@@ -72,8 +72,8 @@ export default function LinkFiles(props) {
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item xs>
-              <Typography>Punto más cercano: para cada punto del conjunto de datos 
                                               al que se le quiere agregar información -el conjunto ‘base’-, 
+              <Typography>Punto más cercano: para cada punto del conjunto de datos 
                                               encontrar el punto más cercano del conjunto de datos a sumar. 
               </Typography>
             </Grid>
