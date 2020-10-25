@@ -21,12 +21,12 @@ const Stats = ({
     <div>
         <hr />
         { step > 1 &&
-         <Button variant="contained"  onClick={previousStep}>  Go back </Button>
+         <Button variant="contained"  onClick={previousStep}>  Atrás </Button>
         } 
         { step < totalSteps ?
-            <Button variant="contained"  onClick={nextStep}> Continue </Button>
+            <Button variant="contained"  onClick={nextStep}> Continuar </Button>
             :
-            <Button variant="contained"  onClick={nextStep}>  Finish </Button>
+            <Button variant="contained"  onClick={nextStep}>  Finalizar </Button>
         }
         <hr/>  
     </div>
@@ -75,12 +75,12 @@ class PreviewFiles extends Component {
       else {
       return (     
            <div>
-            <Typography variant="h5" id="tableTitle"> Files preview & settings </Typography>
+            <Typography variant="h4" id="tableTitle"> Previsualización de conjuntos de datos</Typography>
             
           
-                <Table data={this.state.dataMapA.rows} header={this.state.dataMapA.cols}/>
+                <Table data={this.state.dataMapA.rows} title={this.state.dataMapA.name} header={this.state.dataMapA.cols}/>
              
-                <Table data={this.state.dataMapB.rows} header={this.state.dataMapB.cols}/>
+                <Table data={this.state.dataMapB.rows} title={this.state.dataMapB.name} header={this.state.dataMapB.cols}/>
              
           
             <Stats step={1} {...this.props} />

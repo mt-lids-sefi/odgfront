@@ -20,14 +20,14 @@ const Stats = ({
   }) => (
     
     <div>
-        <hr />
+       <hr />
         { step > 1 &&
-         <Button variant="contained"  onClick={previousStep}>  Go back </Button>
+         <Button variant="contained"  onClick={previousStep}>  Atrás </Button>
         } 
         { step < totalSteps ?
-            <Button variant="contained" disabled={!completed} onClick={nextStep}> Continue </Button>
+            <Button variant="contained" disabled={!completed} onClick={nextStep}> Continuar </Button>
             :
-            <Button variant="contained"  onClick={nextStep}>  Finish </Button>
+            <Button variant="contained"  onClick={nextStep}>  Finalizar </Button>
         }
         <hr/>  
     </div>
@@ -72,11 +72,11 @@ class PolygonSettings extends Component {
     render(){
       return (
         <div>
-           <Typography variant="h5" id="tableTitle"> Settings</Typography>
+           <Typography variant="h5" id="tableTitle"> Configuración</Typography>
     
          
               <div>
-                 <label>Max distance </label>
+                 <label>Distancia máxima </label>
                   <input type='number' className='form-control' name='max_distance' placeholder='Max distance'
                       onChange={this.handleInputChange} />
               </div>

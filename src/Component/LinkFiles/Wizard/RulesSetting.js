@@ -25,14 +25,14 @@ const Stats = ({
     <div>
         <hr />
         { step > 1 &&
-         <Button variant="contained"  onClick={previousStep}>Atrás </Button>
+         <Button variant="contained"  onClick={previousStep}>  Atrás </Button>
         } 
         { step < totalSteps ?
             <Button variant="contained"  onClick={nextStep}> Continuar </Button>
             :
             <Button variant="contained"  onClick={nextStep}>  Finalizar </Button>
         }
-        <hr/>  
+        <hr/>   
     </div>
   );
 

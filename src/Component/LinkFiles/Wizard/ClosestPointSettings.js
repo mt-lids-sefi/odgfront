@@ -26,12 +26,12 @@ const Stats = ({
     <div>
         <hr />
         { step > 1 &&
-         <Button variant="contained"  onClick={previousStep}>  Go back </Button>
+         <Button variant="contained"  onClick={previousStep}>  Atrás </Button>
         } 
         { step < totalSteps ?
-            <Button variant="contained" disabled={!completed} onClick={nextStep}> Continue </Button>
+            <Button variant="contained" disabled={!completed} onClick={nextStep}> Continuar </Button>
             :
-            <Button variant="contained"  onClick={nextStep}>  Finish </Button>
+            <Button variant="contained"  onClick={nextStep}>  Finalizar </Button>
         }
         <hr/>  
     </div>
@@ -110,8 +110,8 @@ class ClosestPointSettings extends Component {
     render(){
       return (
         <div>
-           <Typography variant="h5" id="tableTitle"> Settings</Typography>
-           <label>Select the base file </label>
+           <Typography variant="h5" id="tableTitle"> Configuración</Typography>
+           <label>Seleccionar el conjunto de datos base </label>
            
             <RadioGroup aria-label="gender" name="filebase" value={this.state.filebase} onChange={this.handleRadioChange}>
             {this.props.form.data_fileA && <FormControlLabel value="fileA" control={<Radio color="primary"/>} label={this.props.form.data_fileA.name} />}
@@ -119,7 +119,7 @@ class ClosestPointSettings extends Component {
             </RadioGroup>
   
            <hr />
-           <label>Get the closest point by distance </label>
+           <label>Filtrar por distancia</label>
           
            <Checkbox name='distance' checked={this.state.distance} 
                       onChange={this.handleChange} value={this.state.distance} color="primary" />
@@ -127,13 +127,13 @@ class ClosestPointSettings extends Component {
            
            {this.state.distance &&
               <div>
-                 <label>Max distance </label>
+                 <label>Distancia máxima </label>
                   <input type='number' className='form-control' name='max_distance' placeholder='Max distance'
                       onChange={this.handleInputChange} />
               </div>
             }
   
-          <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Preview </Button>
+          <Button variant="contained"  onClick={this.preview} disabled={!this.state.available_preview}>  Previsualizar </Button>
             {this.state.loading ? <Cylon/>
                : this.state.loaded && <Table data={this.state.linked.data} header={this.state.linked.cols} />}
             
