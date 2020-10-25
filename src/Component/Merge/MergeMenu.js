@@ -60,16 +60,18 @@ export default function MergeMenu(props) {
       <div className={classes.root}>
          {renderRedirect()}
          <Typography variant="h6" id="tableTitle" align="center">
-           Merging files: SALUD PBA + UNQ
+           Combinar conjuntos de datos
           </Typography>
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item xs>
-              <Typography>Layers: Visualize both data sources on the map</Typography>
+              <Typography>Capas: Ver ambas fuentes de datos en un solo mapa. Cada conjunto 
+                                        se diferenciará por color en el mapa. Se puede ver 
+                                        de a uno o ambos al mismo tiempo.</Typography>
             </Grid>
             <Grid item>
             <Button variant="contained" className={classes.button} onClick={viewLayers}>
-                View map
+                Ver mapa
             </Button>
             </Grid>
           </Grid>
@@ -77,11 +79,16 @@ export default function MergeMenu(props) {
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item xs>
-              <Typography>Merge data sources</Typography>
+              <Typography>Combinar fuentes de datos: Diferentes diseños para combinar
+                            dos fuentes de datos y crear una nueva fuente de datos en base a criterios
+                            definidor por el usuario o la usuaria.
+              </Typography>
             </Grid>
+            <Grid item>
             <Button variant="contained" className={classes.button} onClick={viewLinker}>
-                Link
+                Combinar
             </Button>
+            </Grid>
           </Grid>
         </Paper>
         

@@ -67,16 +67,19 @@ export default function LinkFiles(props) {
       <div className={classes.root}>
          {renderRedirect()}
          <Typography variant="h6" id="tableTitle" align="center">
-           Merging files: SALUD PBA + UNQ
+           Combinar conjuntos de datos
           </Typography>
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item xs>
-              <Typography>Closest point</Typography>
+              <Typography>Punto más cercano: para cada punto del conjunto de datos 
+                                              al que se le quiere agregar información -el conjunto ‘base’-, 
+                                              encontrar el punto más cercano del conjunto de datos a sumar. 
+              </Typography>
             </Grid>
             <Grid item>
             <Button variant="contained" className={classes.button} onClick={viewClosestPoint}>
-                Link
+                Combinar
             </Button>
             </Grid>
           </Grid>
@@ -84,21 +87,36 @@ export default function LinkFiles(props) {
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item xs>
-              <Typography>Circumference around a point</Typography>
+              <Typography>Circunferencia alrededor de un punto: 
+                          Para cada punto del mapa de un conjunto de datos 
+                          se buscan los puntos en otro conjunto de datos que 
+                          estén a cierta distancia (definida por el usuario
+                           o la usuaria) formando así un círculo de radio 
+                           determinado alrededor de cada punto.
+              </Typography>
             </Grid>
+            <Grid item>
             <Button variant="contained" className={classes.button} onClick={viewNearbyPoints}>
-                Link
+                Combinar
             </Button>
+            </Grid>
           </Grid>
         </Paper>
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item xs>
-              <Typography>Columns similarity</Typography>
+              <Typography>Semejanza de columnas:
+                        Agregar información a un conjunto de datos por semejanza
+                       de alguno de sus atributos. Implica decidir qué columnas
+                        de cada conjunto de datos tienen que tener alguna similitud 
+                        y armar reglas de semejanza para poder realizar la combinación. 
+              </Typography>
             </Grid>
+            <Grid item>
             <Button variant="contained" className={classes.button} onClick={viewSimilCols}>
-                Link
+                Combinar
             </Button>
+            </Grid>
           </Grid>
         </Paper>
       </div>
