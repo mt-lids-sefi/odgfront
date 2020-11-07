@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Styles from './Styles';
+//import Styles from './Styles';
 import Papa from 'papaparse';
 import { Redirect } from 'react-router-dom'
 import Input from '@material-ui/core/Input'; 
@@ -9,18 +9,20 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
+
 const styles = theme => ({
   root: {
-      width: '100%',
-      marginTop: theme.spacing(3),
-    },
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: theme.spacing(0, 3),
+  },
   paper: {
-    maxWidth: 400,
+    maxWidth: 600,
     margin: `${theme.spacing(1)}px auto`,
     padding: theme.spacing(2),
   },
   button: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(1)
   },
   input: {
     display: 'none',
@@ -110,44 +112,52 @@ class FileUploader extends Component {
       return <Redirect to="/files" />
     }
     return (
-      <Styles>
-        <div className={classes.root}>
-        <Typography variant="h4" id="tableTitle">
+      <div>
+      <Paper className={classes.paper}>
+      <div > 
+        <Typography variant="h5" id="tableTitle">
             Carga de conjunto de datos georeferenciados
           </Typography>
+        </div>
+        <hr />
         <form onSubmit={this.handleSubmit}>
         <div><Input type="file" placeholder="Seleccionar archivo" onChange={this.handleUploadFile} /></div>
         <hr />
             <div>
-              <label>Nombre</label>
+              <label>Nombre &nbsp;&nbsp; </label>
               <Input name="name" component="input"  type="text" placeholder="Nombre" value={name} onChange={this.onChange} />
             </div>
+            <hr />
             <div>
-              <label>Descripción</label>
+              <label>Descripción &nbsp;&nbsp; </label>
               <Input name="description" component="textarea" placeholder="Descripción"  value={description} onChange={this.onChange} />
             </div>
+            <hr />
             <div>
           </div>
             <div>
-            <label>Columna de latitud</label>
+            <label>Columna de latitud &nbsp;&nbsp; </label>
             <select name="latCol" onChange={this.onChange}>
                   {this.state.csvCols.map((col) => <option key={col} value={col}>{col}</option>)}
              </select>
           </div>
+          <hr />
           <div>
-            <label>Columna de longitud</label>
+            <label>Columna de longitud &nbsp;&nbsp; </label> 
             <select name="lonCol" onChange={this.onChange}>
                   {this.state.csvCols.map((col) => <option key={col} value={col}>{col}</option>)}
              </select>
           </div>
-            <div className="buttons">
-              <Button variant="contained" color="primary" type="submit" >
+          <hr />
+            <div className="button">
+              <Button variant="contained" className={classes.button} type="submit">
                 Guardar
               </Button>
             </div>
           </form>
-          </div>
-    </Styles>
+          
+          </Paper>
+        </div>
     );
   }
 }

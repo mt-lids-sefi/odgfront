@@ -102,7 +102,7 @@ class MutipleMap extends Component {
         <div className={classes.root}>
         <Paper className={classes.paper}>
           <Typography variant="h6" id="tableTitle" align="left">
-           Layers map: SALUD PBA + UNQ
+           Mapa en capas - {this.state.dataMapA.name} + {this.state.dataMapB.name}
           </Typography>
         </Paper>
           <Row>

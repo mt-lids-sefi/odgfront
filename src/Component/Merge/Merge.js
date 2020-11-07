@@ -136,7 +136,7 @@ const EnhancedTableToolbar = props => {
           </Typography>
         ) : (
           <Typography variant="h6" id="tableTitle">
-            Merge files
+            Combinar archivos
           </Typography>
         )}
       </div>
@@ -146,7 +146,7 @@ const EnhancedTableToolbar = props => {
            <Tooltip title="Merge">
            
            <Button variant="contained" className={classes.button} onClick={redirect}>
-              Merge
+              Combinar
           </Button>
          </Tooltip>
         ) : (
