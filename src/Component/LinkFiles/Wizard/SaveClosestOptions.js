@@ -119,7 +119,7 @@ class SaveClosestOptions extends Component {
       if(!this.state.saved){
         return (
             <div>
-                <Typography variant="h5" id="tableTitle"> Guardar configuración</Typography>
+                <Typography variant="h5" id="tableTitle"> Guardar combinación</Typography>
                 <label>Nombre</label>
                     <input type='text' className='form-control' name='name' placeholder='Name'
                         onChange={this.updateName} required={true}/>
