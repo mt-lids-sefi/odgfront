@@ -4,8 +4,11 @@ import { BrowserRouter as  Route, Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Table from './../DataTable/Table'
 import Cylon from '../LoadingComponents/Cylon';
+import Table from './../DataTable/Table'
+
+
+
 
 const styles = theme => ({
   root: {
@@ -25,22 +28,24 @@ const styles = theme => ({
   }
 });
 
-class File extends Component {
+class DataFiles extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      files: [],
+     files:[],
     };
     this.loadFiles = this.loadFiles.bind(this);
   }
+ 
 
-  componentDidMount() {
+
+  componentWillMount() {
     this.loadFiles();
   }
 
   async loadFiles()
   {
-    const promise = await axios.get("http://localhost:8000/geofiles");
+    const promise = await axios.get("http://localhost:8000/datafiles");
     const status = promise.status;
     if(status===200)
     {
@@ -50,18 +55,17 @@ class File extends Component {
   }
 
   render() {
-    if (this.state.files.length == 0) {
+    if (this.state.files == []) {
       return <Cylon/>
     }
-    else {
+    else{
       let headers = ['name', 'description']
-      let headersDesc = {"name": "Nombre", "description": "Descripción"}
-      let linkColumns = [{"name": "Detalles", "url": "/details"}, {"name": "Clusterizar", "url": "/clusterizer"} ]
+      let linkColumns = [{"name": "Detalles", "url": "//datafile_details"}]
       const { classes } = this.props;
       return(
         <div className={classes.root}>
           <Paper >
-            <Table data={this.state.files} header={headers} links={linkColumns} headersDesc={headersDesc} title={"Conjuntos de datos"} />
+            <Table data={this.state.files} header={headers} links={linkColumns} title={"Conjuntos de datos"} />
           </Paper>
         </div>
       )
@@ -70,8 +74,8 @@ class File extends Component {
 }
 
 
-File.propTypes = {
+DataFiles.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(File);
+export default withStyles(styles)(DataFiles);

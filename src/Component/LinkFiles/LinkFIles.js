@@ -13,7 +13,7 @@ const useMenuStyles = makeStyles(theme => ({
       padding: theme.spacing(0, 3),
     },
     paper: {
-      maxWidth: 400,
+      maxWidth: 800,
       margin: `${theme.spacing(1)}px auto`,
       padding: theme.spacing(2),
     },
@@ -31,7 +31,7 @@ const useMenuStyles = makeStyles(theme => ({
 
 export default function LinkFiles(props) {
     const classes = useMenuStyles();
-    const {selected} = props;
+    const selected = props.location.mapProps.files;
     const [closest, setClosest] = React.useState(false)
     const [nearbyPoints, setNearbyPoints] = React.useState(false)
     const [similCols, setSimilCols] = React.useState(false)
@@ -52,29 +52,34 @@ export default function LinkFiles(props) {
 
     function renderRedirect ()  {
       if (closest) {
-        //return <Redirect to={{pathname: '/multmap', mapProps:{files: selected}}} />
+        return <Redirect to={{pathname: '/closestpoint', mapProps:{files: selected}}} />
       }
       if (nearbyPoints){
-        //return <Redirect to={{pathname: '/linkfiles', mapProps:{files: selected}}} />
+        return <Redirect to={{pathname: '/polygon', mapProps:{files: selected}}} />
       }
       if (similCols){
-        //return <Redirect to={{pathname: '/linkfiles', mapProps:{files: selected}}} />
+        return <Redirect to={{pathname: '/similcols', mapProps:{files: selected}}} />
       }
     }
 
     return (
-      
+    <Paper className={classes.paper}>
       <div className={classes.root}>
          {renderRedirect()}
+         <Typography variant="h6" id="tableTitle" align="center">
+           Combinar conjuntos de datos
+          </Typography>
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
-            
-            <Grid item xs>
-              <Typography>Punto más cercano</Typography>
+            <Grid item xs> 
+              <Typography>Punto más cercano: para cada punto del conjunto de datos 
+                          al que se le quiere agregar información -el conjunto ‘base’-,
+                          encontrar el punto más cercano del conjunto de datos a sumar. 
+              </Typography>
             </Grid>
             <Grid item>
             <Button variant="contained" className={classes.button} onClick={viewClosestPoint}>
-                Link
+                Combinar
             </Button>
             </Grid>
           </Grid>
@@ -82,23 +87,39 @@ export default function LinkFiles(props) {
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item xs>
-              <Typography>Puntos cercanos</Typography>
+              <Typography>Circunferencia alrededor de un punto: 
+                          Para cada punto del mapa de un conjunto de datos 
+                          se buscan los puntos en otro conjunto de datos que 
+                          estén a cierta distancia (definida por el usuario
+                           o la usuaria) formando así un círculo de radio 
+                           determinado alrededor de cada punto.
+              </Typography>
             </Grid>
+            <Grid item>
             <Button variant="contained" className={classes.button} onClick={viewNearbyPoints}>
-                Link
+                Combinar
             </Button>
+            </Grid>
           </Grid>
         </Paper>
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item xs>
-              <Typography>Similitud de columnas</Typography>
+              <Typography>Semejanza de columnas:
+                        Agregar información a un conjunto de datos por semejanza
+                       de alguno de sus atributos. Implica decidir qué columnas
+                        de cada conjunto de datos tienen que tener alguna similitud 
+                        y armar reglas de semejanza para poder realizar la combinación. 
+              </Typography>
             </Grid>
+            <Grid item>
             <Button variant="contained" className={classes.button} onClick={viewSimilCols}>
-                Link
+                Combinar
             </Button>
+            </Grid>
           </Grid>
         </Paper>
       </div>
+      </Paper>
     );
   }

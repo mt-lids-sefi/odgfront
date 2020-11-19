@@ -13,7 +13,7 @@ const useMenuStyles = makeStyles(theme => ({
       padding: theme.spacing(0, 3),
     },
     paper: {
-      maxWidth: 400,
+      maxWidth: 800,
       margin: `${theme.spacing(1)}px auto`,
       padding: theme.spacing(2),
     },
@@ -56,18 +56,22 @@ export default function MergeMenu(props) {
     }
 
     return (
-      
+      <Paper className={classes.paper}>
       <div className={classes.root}>
          {renderRedirect()}
+         <Typography variant="h6" id="tableTitle" align="center">
+           Combinar conjuntos de datos
+          </Typography>
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
-            
             <Grid item xs>
-              <Typography>CAPAS: Visualizar ambas fuentes en el mapa</Typography>
+              <Typography>Capas: Ver ambas fuentes de datos en un solo mapa. Cada conjunto 
+                                        se diferenciará por color en el mapa. Se puede ver 
+                                        de a uno o ambos al mismo tiempo.</Typography>
             </Grid>
             <Grid item>
             <Button variant="contained" className={classes.button} onClick={viewLayers}>
-                View map
+                Ver mapa
             </Button>
             </Grid>
           </Grid>
@@ -75,14 +79,20 @@ export default function MergeMenu(props) {
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item xs>
-              <Typography>Unir ambos archivos según criterios a definir</Typography>
+              <Typography>Combinar fuentes de datos: Diferentes diseños para combinar
+                            dos fuentes de datos y crear una nueva fuente de datos en base a criterios
+                            definidor por el usuario o la usuaria.
+              </Typography>
             </Grid>
+            <Grid item>
             <Button variant="contained" className={classes.button} onClick={viewLinker}>
-                Link
+                Combinar
             </Button>
+            </Grid>
           </Grid>
         </Paper>
         
       </div>
+      </Paper>
     );
   }

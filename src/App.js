@@ -6,14 +6,22 @@ import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-do
 import File from "./Component/File/File";
 import Home from "./Component/Home/Home"
 import About from "./Component/About/About"
-import SimpleMap from './Component/SimpleMap/SimpleMap';
+import FileDetails from './Component/FileDetails/FileDetails';
 import FileUploader from './Component/FileUploader/FileUploader';
+import DataFileUploader from './Component/FileUploader/DataFileUploader';
 import Merge from './Component/Merge/Merge';
 import MutipleMap from './Component/MultipleMap/MultipleMap';
-import {Navbar,  Nav} from 'react-bootstrap'
+import {Navbar,  Nav, NavDropdown} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MergeMenu from './Component/Merge/MergeMenu';
 import LinkFiles from './Component/LinkFiles/LinkFIles';
+import ClosestPoint from './Component/LinkFiles/ClosestPoint';
+import Polygon from './Component/LinkFiles/Polygon';
+import Clusterizer from './Component/Clusterize/Clusterizer';
+import DataFiles from './Component/File/DataFiles';
+import Similarity from './Component/LinkFiles/Similarity';
+import Configurations from './Component/Visualizations/Configurations';
+import ClusterVisualization from './Component/Visualizations/ClusterVisualization';
 
 class App extends Component {
   render() {
@@ -28,10 +36,17 @@ class App extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/files">Files</Nav.Link>
-            <Nav.Link href="/about">About</Nav.Link>
-            <Nav.Link href="/merge">Merge</Nav.Link>
-            <Nav.Link href="/fileuploader">Upload</Nav.Link>
+            <NavDropdown title="Carga" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/fileuploader">Conjunto de datos georeferenciados</NavDropdown.Item>
+              <NavDropdown.Item href="/datafileuploader">Conjunto de datos</NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title="Conjuntos de datos" id="basic-nav-dropdown" href="/files">
+              <NavDropdown.Item href="/files">Datos georeferenciados</NavDropdown.Item>
+              <NavDropdown.Item href="/datafiles">Datos </NavDropdown.Item>
+            </NavDropdown>
+            <Nav.Link href="/merge">Combinar</Nav.Link>
+            <Nav.Link href="/configurations">Configuraciones</Nav.Link>
+            <Nav.Link href="/about">Acerca de...</Nav.Link>
           </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -39,12 +54,20 @@ class App extends Component {
               <Route exact path='/' component={Home} />
               <Route path='/about' component={About} />
               <Route path="/files" exact component={File} />
-              <Route path="/map" exact component={SimpleMap} />
+              <Route path="/datafiles" exact component={DataFiles} />
+              <Route path="/details" exact component={FileDetails} />
               <Route path="/fileuploader" exact component={FileUploader} />
+              <Route path="/datafileuploader" exact component={DataFileUploader} />
               <Route path="/merge" exact component={Merge} />
               <Route path="/mergemenu" exact component={MergeMenu} />
               <Route path="/multmap" exact component={MutipleMap} />
               <Route path="/linkfiles" exact component={LinkFiles} />
+              <Route path="/closestpoint" exact component={ClosestPoint} />
+              <Route path="/polygon" exact component={Polygon} />
+              <Route path="/clusterizer" exact component={Clusterizer} />
+              <Route path="/similcols" exact component={Similarity} />
+              <Route path="/configurations" exact component={Configurations} />
+              <Route path="/view_conf" exact component={ClusterVisualization} />
           </Switch>
         </Router>      
         </div>
@@ -54,56 +77,3 @@ class App extends Component {
 }
 
 export default App;
-/**     <ul className="header">
-            <li><NavLink exact to={'/'}> Home </NavLink></li>
-            <li><NavLink to={'/files'}>Files</NavLink></li>
-            <li><NavLink to={'/about'}>About</NavLink></li>
-            <li><NavLink to={'/fileuploader'}>Upload</NavLink></li>
-            <li><NavLink to={'/merge'}>Merge</NavLink></li>
-          </ul> */
-
-
-          /*
-            <Router>
-          <Switch>
-              <Route exact path='/' component={Home} />
-              <Route path='/about' component={About} />
-              <Route path="/files" exact component={File} />
-              <Route path="/map" exact component={SimpleMap} />
-              <Route path="/fileuploader" exact component={FileUploader} />
-              <Route path="/merge" exact component={Merge} />
-              <Route path="/multmap" exact component={MutipleMap} />
-          </Switch>
-            </Router>
-
-
-
-
-             <Router>
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="/">ODG</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="/files">Files</Nav.Link>
-            <Nav.Link href="/about">About</Nav.Link>
-            <Nav.Link href="/merge">Merge</Nav.Link>
-            <Nav.Link href="/fileuploader">Upload</Nav.Link>
-          </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-     
-          
-          <hr />
-
-          <Switch>
-              <Route exact path='/' component={Home} />
-              <Route path='/about' component={About} />
-              <Route path="/files" exact component={File} />
-              <Route path="/map" exact component={SimpleMap} />
-              <Route path="/fileuploader" exact component={FileUploader} />
-              <Route path="/merge" exact component={Merge} />
-              <Route path="/multmap" exact component={MutipleMap} />
-          </Switch>
-        </Router>     
-          */ 

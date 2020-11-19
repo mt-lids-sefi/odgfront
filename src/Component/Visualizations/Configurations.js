@@ -4,7 +4,7 @@ import { BrowserRouter as  Route, Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Table from './../DataTable/Table'
+import Table from '../DataTable/Table'
 import Cylon from '../LoadingComponents/Cylon';
 
 const styles = theme => ({
@@ -25,43 +25,43 @@ const styles = theme => ({
   }
 });
 
-class File extends Component {
+class Configurations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      files: [],
+      c12s: [],
     };
-    this.loadFiles = this.loadFiles.bind(this);
+    this.loadC12s = this.loadC12s.bind(this);
   }
 
   componentDidMount() {
-    this.loadFiles();
+    this.loadC12s();
   }
 
-  async loadFiles()
+  async loadC12s()
   {
-    const promise = await axios.get("http://localhost:8000/geofiles");
+    const promise = await axios.get("http://localhost:8000/configurations");
     const status = promise.status;
     if(status===200)
     {
       const data = promise.data;
-      this.setState({files:data});
+      this.setState({c12s:data});
     }
   }
 
   render() {
-    if (this.state.files.length == 0) {
+    if (this.state.c12s.length == 0) {
       return <Cylon/>
     }
     else {
       let headers = ['name', 'description']
       let headersDesc = {"name": "Nombre", "description": "Descripción"}
-      let linkColumns = [{"name": "Detalles", "url": "/details"}, {"name": "Clusterizar", "url": "/clusterizer"} ]
+      let linkColumns = [{"name": "Ver", "url": "/view_conf"}]
       const { classes } = this.props;
       return(
         <div className={classes.root}>
           <Paper >
-            <Table data={this.state.files} header={headers} links={linkColumns} headersDesc={headersDesc} title={"Conjuntos de datos"} />
+            <Table data={this.state.c12s} header={headers} links={linkColumns} headersDesc={headersDesc} title={"Configuraciones"} />
           </Paper>
         </div>
       )
@@ -70,8 +70,8 @@ class File extends Component {
 }
 
 
-File.propTypes = {
+Configurations.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(File);
+export default withStyles(styles)(Configurations);

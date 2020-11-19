@@ -136,7 +136,7 @@ const EnhancedTableToolbar = props => {
           </Typography>
         ) : (
           <Typography variant="h6" id="tableTitle">
-            Files
+            Combinar archivos
           </Typography>
         )}
       </div>
@@ -146,7 +146,7 @@ const EnhancedTableToolbar = props => {
            <Tooltip title="Merge">
            
            <Button variant="contained" className={classes.button} onClick={redirect}>
-              Merge
+              Combinar
           </Button>
          </Tooltip>
         ) : (
@@ -234,7 +234,7 @@ export default function Merge() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
-        'http://localhost:8000/file',
+        'http://localhost:8000/geofiles',
       );
       const status = result.status;
       if(status===200)

@@ -2,13 +2,11 @@ import { withStyles } from '@material-ui/core/styles';
 import React,  { Component }  from 'react';
 import PropTypes from 'prop-types';
 import StepWizard from 'react-step-wizard';
-import Merge from '../Merge/Merge';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import PreviewFiles from './Wizard/PreviewFiles'
-import ClosestPointSettings from './Wizard/ClosestPointSettings';
-import SaveClosestOptions from './Wizard/SaveClosestOptions'
-import { Redirect } from 'react-router-dom';
+import PolygonSettings from './Wizard/PolygonSettings'
+import SavePolygonOptions from './Wizard/SavePolygonOptions'
+
 
 const styles = theme => ({
   root: {
@@ -31,12 +29,12 @@ const styles = theme => ({
 
 
 
-class ClosestPoints extends Component {
+class Polygon extends Component {
     
     constructor(props) {
       super(props);
       this.state = {
-        form: {files: this.props.location.mapProps.files , distance:false, filebase:'fileA', saved: false},
+        form: {files: this.props.location.mapProps.files , distance:false,  saved: false},
         files: this.props.location.mapProps.files 
       };
     }
@@ -53,12 +51,11 @@ class ClosestPoints extends Component {
       const { classes } = this.props;
         return(
           <div className={classes.root}>
-            
             <div className={'jumbotron'}>
                     <StepWizard>
                       <PreviewFiles files={this.state.files} update={this.updateForm}/>
-                      <ClosestPointSettings update={this.updateForm}  form={this.state.form}/>
-                      <SaveClosestOptions update={this.updateForm} form={this.state.form}/>
+                      <PolygonSettings update={this.updateForm}  form={this.state.form}/>
+                      <SavePolygonOptions update={this.updateForm} form={this.state.form}/>
                     </StepWizard>
                 </div>
               
@@ -87,40 +84,17 @@ const Stats = ({
          <Button variant="contained"  onClick={previousStep}>  Atrás </Button>
         } 
         { step < totalSteps ?
-            <Button variant="contained"  onClick={nextStep}> Continuar </Button>
+            <Button variant="contained" onClick={nextStep}> Continuar </Button>
             :
             <Button variant="contained"  onClick={nextStep}>  Finalizar </Button>
         }
-        <hr/>   
+        <hr/>  
   </div>
 );
 
 
-ClosestPoints.propTypes = {
+Polygon.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ClosestPoints);
-
-
-/**para actualizar x fuera:
- * 
- * 
- * en el componente que sale: 
-update={this.updateForm}
- *  update = (e) => {
-    this.props.update(e.target.name, e.target.value);
-  }
- * 
-
- <label>First Name</label>
-                <input type='text' className='form-control' name='firstname' placeholder='First Name'
-                    onChange={this.update} />
-
-
-    en el componente que recibe:
-    <PreviewLinkedDataSet  form={this.state.form}/>
-    { this.props.form.distance && <h3>Hey {this.props.form.firstname}!
- */
-
-
+export default withStyles(styles)(Polygon);

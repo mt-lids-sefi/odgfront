@@ -3,13 +3,13 @@ import ReactLoading from "react-loading";
 import { Section, Article, Prop } from "./generic";
 
 
-const Cylon = () => (
+const Balls = () => (
   <Section>
-      <Article key={"cylon"}>
-        <ReactLoading type={"cylon"} color="#fff" />
+      <Article key={"balls"}>
+        <ReactLoading type={"balls"} color="#fff" />
         <Prop>{"Loading"}</Prop>
       </Article>
   </Section>
 );
 
-export default Cylon;
+export default Balls;
